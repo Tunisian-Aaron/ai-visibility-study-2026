@@ -1,0 +1,145 @@
+{
+  "generatedAt": "2026-08-17T10:55:21.994Z",
+  "sampleSize": 120,
+  "audited": 107,
+  "exclusions": {
+    "checker_blocked": 2,
+    "unreachable": 8,
+    "moved": 3
+  },
+  "robots": {
+    "served": 101,
+    "blocksAnyAiExplicit": 3,
+    "blocksAnyAiEffective": 3,
+    "perBot": {
+      "GPTBot": {
+        "explicit": 3,
+        "effective": 3
+      },
+      "OAI-SearchBot": {
+        "explicit": 0,
+        "effective": 0
+      },
+      "ClaudeBot": {
+        "explicit": 3,
+        "effective": 3
+      },
+      "PerplexityBot": {
+        "explicit": 1,
+        "effective": 1
+      },
+      "Google-Extended": {
+        "explicit": 2,
+        "effective": 2
+      },
+      "CCBot": {
+        "explicit": 2,
+        "effective": 2
+      },
+      "Googlebot": {
+        "explicit": 0,
+        "effective": 0
+      },
+      "Bingbot": {
+        "explicit": 0,
+        "effective": 0
+      }
+    },
+    "causeBreakdown": {
+      "robotsExplicitOnly_noWafSignals": 2,
+      "robotsExplicit_plusWafSignals": 1
+    }
+  },
+  "cdn": {
+    "anyWafSignals": 32,
+    "cloudflareFronted": 31,
+    "cloudflareManagedRobotsSignature": 0
+  },
+  "content": {
+    "noJsContentMissing": 3,
+    "whatWeDoStatement": 38
+  },
+  "schema": {
+    "noJsonLdAnywhere": 29,
+    "homepageJsonLd": 75,
+    "jsonLdBeyondHomepage": 69
+  },
+  "llmsTxt": {
+    "present": 27,
+    "unknown": 0
+  },
+  "platforms": [
+    {
+      "platform": "wordpress",
+      "n": 38,
+      "sufficient": true,
+      "blocksAnyAiExplicit": 0,
+      "noSchema": 4
+    },
+    {
+      "platform": "custom/unknown",
+      "n": 34,
+      "sufficient": true,
+      "blocksAnyAiExplicit": 2,
+      "noSchema": 20
+    },
+    {
+      "platform": "squarespace",
+      "n": 16,
+      "sufficient": false,
+      "blocksAnyAiExplicit": null,
+      "noSchema": null
+    },
+    {
+      "platform": "shopify",
+      "n": 8,
+      "sufficient": false,
+      "blocksAnyAiExplicit": null,
+      "noSchema": null
+    },
+    {
+      "platform": "wix",
+      "n": 7,
+      "sufficient": false,
+      "blocksAnyAiExplicit": null,
+      "noSchema": null
+    },
+    {
+      "platform": "other:square",
+      "n": 2,
+      "sufficient": false,
+      "blocksAnyAiExplicit": null,
+      "noSchema": null
+    },
+    {
+      "platform": "other:drupal",
+      "n": 1,
+      "sufficient": false,
+      "blocksAnyAiExplicit": null,
+      "noSchema": null
+    },
+    {
+      "platform": "other:starfield",
+      "n": 1,
+      "sufficient": false,
+      "blocksAnyAiExplicit": null,
+      "noSchema": null
+    }
+  ],
+  "cloudflareSplit": {
+    "cloudflare": {
+      "n": 31,
+      "blocksAnyAiExplicit": 1
+    },
+    "notCloudflare": {
+      "n": 76,
+      "blocksAnyAiExplicit": 2
+    }
+  },
+  "grades": {
+    "D": 38,
+    "B": 6,
+    "F": 25,
+    "C": 38
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "byPlatform": {
+    "wix": 6,
+    "shopify": 8,
+    "wordpress": 6,
+    "custom/unknown": 6,
+    "other:starfield": 1
+  },
+  "signatureClasses": {
+    "markdown-real": 12,
+    "shopify-auto": 8,
+    "other/unclear": 7
+  },
+  "note": "One initial positive was removed after correction (its /llms.txt serves the site's HTML shell \u2014 a soft-404). Classes: shopify-auto = Shopify's default 'Agent Instructions' file; markdown-real = markdown llms.txt (Wix auto-generates these; some hand-made); other/unclear = plugin-generated (All in One SEO signature) or non-markdown."
+}
