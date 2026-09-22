@@ -1,0 +1,1567 @@
+{
+ "chatgpt/acct": {
+  "n": 100,
+  "grounded": 0,
+  "distinct": 13,
+  "per_median": 6.0,
+  "pairJaccard": 0.79,
+  "core90": [
+   "FreshBooks",
+   "QuickBooks",
+   "Wave",
+   "Xero",
+   "Zoho Books"
+  ],
+  "tail20": [
+   "PayPal",
+   "Stripe",
+   "FreeAgent",
+   "Fiverr Workspace",
+   "Kashoo",
+   "Harvest"
+  ],
+  "first": {
+   "brand": "QuickBooks",
+   "share": 0.61,
+   "distinct": 3,
+   "all": {
+    "QuickBooks": 61,
+    "Wave": 32,
+    "FreshBooks": 7
+   }
+  },
+  "rates": [
+   [
+    "QuickBooks",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "FreshBooks",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Wave",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Zoho Books",
+    99,
+    99.0,
+    [
+     95,
+     100
+    ]
+   ],
+   [
+    "Xero",
+    93,
+    93.0,
+    [
+     86,
+     97
+    ]
+   ],
+   [
+    "TurboTax",
+    40,
+    40.0,
+    [
+     31,
+     50
+    ]
+   ],
+   [
+    "Bonsai",
+    20,
+    20.0,
+    [
+     13,
+     29
+    ]
+   ],
+   [
+    "PayPal",
+    9,
+    9.0,
+    [
+     5,
+     16
+    ]
+   ],
+   [
+    "Stripe",
+    8,
+    8.0,
+    [
+     4,
+     15
+    ]
+   ],
+   [
+    "FreeAgent",
+    6,
+    6.0,
+    [
+     3,
+     12
+    ]
+   ],
+   [
+    "Fiverr Workspace",
+    5,
+    5.0,
+    [
+     2,
+     11
+    ]
+   ],
+   [
+    "Kashoo",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ],
+   [
+    "Harvest",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ]
+  ],
+  "nobrand": 0
+ },
+ "chatgpt/crm": {
+  "n": 100,
+  "grounded": 100,
+  "distinct": 7,
+  "per_median": 5.0,
+  "pairJaccard": 0.86,
+  "core90": [
+   "HubSpot",
+   "Pipedrive",
+   "Salesforce",
+   "Zoho CRM"
+  ],
+  "tail20": [
+   "Close",
+   "monday"
+  ],
+  "first": {
+   "brand": "HubSpot",
+   "share": 1.0,
+   "distinct": 1,
+   "all": {
+    "HubSpot": 100
+   }
+  },
+  "rates": [
+   [
+    "HubSpot",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Pipedrive",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Zoho CRM",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Salesforce",
+    92,
+    92.0,
+    [
+     85,
+     96
+    ]
+   ],
+   [
+    "Freshsales",
+    83,
+    83.0,
+    [
+     74,
+     89
+    ]
+   ],
+   [
+    "Close",
+    13,
+    13.0,
+    [
+     8,
+     21
+    ]
+   ],
+   [
+    "monday",
+    12,
+    12.0,
+    [
+     7,
+     20
+    ]
+   ]
+  ],
+  "nobrand": 0
+ },
+ "chatgpt/pm": {
+  "n": 100,
+  "grounded": 100,
+  "distinct": 7,
+  "per_median": 5.0,
+  "pairJaccard": 0.78,
+  "core90": [
+   "Asana",
+   "ClickUp",
+   "Trello"
+  ],
+  "tail20": [
+   "Zoho Projects"
+  ],
+  "first": {
+   "brand": "ClickUp",
+   "share": 0.72,
+   "distinct": 2,
+   "all": {
+    "ClickUp": 72,
+    "Trello": 28
+   }
+  },
+  "rates": [
+   [
+    "ClickUp",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Asana",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Trello",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Notion",
+    77,
+    77.0,
+    [
+     68,
+     84
+    ]
+   ],
+   [
+    "Basecamp",
+    75,
+    75.0,
+    [
+     66,
+     82
+    ]
+   ],
+   [
+    "monday.com",
+    38,
+    38.0,
+    [
+     29,
+     48
+    ]
+   ],
+   [
+    "Zoho Projects",
+    10,
+    10.0,
+    [
+     6,
+     17
+    ]
+   ]
+  ],
+  "nobrand": 0
+ },
+ "chatgpt-nosearch/crm": {
+  "n": 100,
+  "grounded": 0,
+  "distinct": 17,
+  "per_median": 6.0,
+  "pairJaccard": 0.76,
+  "core90": [
+   "Freshsales",
+   "HubSpot",
+   "Pipedrive",
+   "Zoho CRM"
+  ],
+  "tail20": [
+   "Insightly",
+   "Less Annoying CRM",
+   "Streak",
+   "Copper",
+   "Capsule",
+   "Keap",
+   "Nimble",
+   "Mailchimp",
+   "Bitrix24",
+   "Airtable",
+   "Agile CRM"
+  ],
+  "first": {
+   "brand": "HubSpot",
+   "share": 1.0,
+   "distinct": 1,
+   "all": {
+    "HubSpot": 100
+   }
+  },
+  "rates": [
+   [
+    "HubSpot",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Pipedrive",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Zoho CRM",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Freshsales",
+    94,
+    94.0,
+    [
+     88,
+     97
+    ]
+   ],
+   [
+    "Salesforce",
+    87,
+    87.0,
+    [
+     79,
+     92
+    ]
+   ],
+   [
+    "monday",
+    60,
+    60.0,
+    [
+     50,
+     69
+    ]
+   ],
+   [
+    "Insightly",
+    19,
+    19.0,
+    [
+     13,
+     28
+    ]
+   ],
+   [
+    "Less Annoying CRM",
+    15,
+    15.0,
+    [
+     9,
+     23
+    ]
+   ],
+   [
+    "Streak",
+    7,
+    7.0,
+    [
+     3,
+     14
+    ]
+   ],
+   [
+    "Copper",
+    3,
+    3.0,
+    [
+     1,
+     8
+    ]
+   ],
+   [
+    "Capsule",
+    3,
+    3.0,
+    [
+     1,
+     8
+    ]
+   ],
+   [
+    "Keap",
+    2,
+    2.0,
+    [
+     1,
+     7
+    ]
+   ],
+   [
+    "Nimble",
+    2,
+    2.0,
+    [
+     1,
+     7
+    ]
+   ],
+   [
+    "Mailchimp",
+    2,
+    2.0,
+    [
+     1,
+     7
+    ]
+   ],
+   [
+    "Bitrix24",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ],
+   [
+    "Airtable",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ],
+   [
+    "Agile CRM",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ]
+  ],
+  "nobrand": 0
+ },
+ "claude/acct": {
+  "n": 100,
+  "grounded": 0,
+  "distinct": 16,
+  "per_median": 7.0,
+  "pairJaccard": 0.68,
+  "core90": [
+   "FreshBooks",
+   "QuickBooks",
+   "Wave",
+   "Xero"
+  ],
+  "tail20": [
+   "Harvest",
+   "Keeper",
+   "HoneyBook",
+   "Bench",
+   "Everlance",
+   "Invoice Ninja",
+   "GnuCash"
+  ],
+  "first": {
+   "brand": "Wave",
+   "share": 0.85,
+   "distinct": 2,
+   "all": {
+    "Wave": 85,
+    "QuickBooks": 15
+   }
+  },
+  "rates": [
+   [
+    "QuickBooks",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "FreshBooks",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Xero",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Wave",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Bonsai",
+    73,
+    73.0,
+    [
+     64,
+     81
+    ]
+   ],
+   [
+    "Zoho Books",
+    56,
+    56.0,
+    [
+     46,
+     65
+    ]
+   ],
+   [
+    "TurboTax",
+    52,
+    52.0,
+    [
+     42,
+     62
+    ]
+   ],
+   [
+    "PayPal",
+    36,
+    36.0,
+    [
+     27,
+     46
+    ]
+   ],
+   [
+    "Stripe",
+    36,
+    36.0,
+    [
+     27,
+     46
+    ]
+   ],
+   [
+    "Harvest",
+    8,
+    8.0,
+    [
+     4,
+     15
+    ]
+   ],
+   [
+    "Keeper",
+    5,
+    5.0,
+    [
+     2,
+     11
+    ]
+   ],
+   [
+    "HoneyBook",
+    2,
+    2.0,
+    [
+     1,
+     7
+    ]
+   ],
+   [
+    "Bench",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ],
+   [
+    "Everlance",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ],
+   [
+    "Invoice Ninja",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ],
+   [
+    "GnuCash",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ]
+  ],
+  "nobrand": 0
+ },
+ "claude/crm": {
+  "n": 100,
+  "grounded": 0,
+  "distinct": 21,
+  "per_median": 6.0,
+  "pairJaccard": 0.63,
+  "core90": [
+   "HubSpot",
+   "Pipedrive",
+   "Zoho CRM"
+  ],
+  "tail20": [
+   "monday",
+   "Copper",
+   "Notion",
+   "Microsoft Dynamics",
+   "Capsule",
+   "Less Annoying CRM",
+   "Keap",
+   "Bitrix24",
+   "Insightly",
+   "Close",
+   "Nimble",
+   "Bonsai",
+   "ActiveCampaign",
+   "Zendesk Sell"
+  ],
+  "first": {
+   "brand": "HubSpot",
+   "share": 1.0,
+   "distinct": 1,
+   "all": {
+    "HubSpot": 100
+   }
+  },
+  "rates": [
+   [
+    "HubSpot",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Pipedrive",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Zoho CRM",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Salesforce",
+    85,
+    85.0,
+    [
+     77,
+     91
+    ]
+   ],
+   [
+    "Freshsales",
+    67,
+    67.0,
+    [
+     57,
+     75
+    ]
+   ],
+   [
+    "Airtable",
+    26,
+    26.0,
+    [
+     18,
+     35
+    ]
+   ],
+   [
+    "Streak",
+    23,
+    23.0,
+    [
+     16,
+     32
+    ]
+   ],
+   [
+    "monday",
+    17,
+    17.0,
+    [
+     11,
+     26
+    ]
+   ],
+   [
+    "Copper",
+    17,
+    17.0,
+    [
+     11,
+     26
+    ]
+   ],
+   [
+    "Notion",
+    16,
+    16.0,
+    [
+     10,
+     24
+    ]
+   ],
+   [
+    "Microsoft Dynamics",
+    12,
+    12.0,
+    [
+     7,
+     20
+    ]
+   ],
+   [
+    "Capsule",
+    9,
+    9.0,
+    [
+     5,
+     16
+    ]
+   ],
+   [
+    "Less Annoying CRM",
+    7,
+    7.0,
+    [
+     3,
+     14
+    ]
+   ],
+   [
+    "Keap",
+    5,
+    5.0,
+    [
+     2,
+     11
+    ]
+   ],
+   [
+    "Bitrix24",
+    4,
+    4.0,
+    [
+     2,
+     10
+    ]
+   ],
+   [
+    "Insightly",
+    3,
+    3.0,
+    [
+     1,
+     8
+    ]
+   ],
+   [
+    "Close",
+    2,
+    2.0,
+    [
+     1,
+     7
+    ]
+   ],
+   [
+    "Nimble",
+    2,
+    2.0,
+    [
+     1,
+     7
+    ]
+   ],
+   [
+    "Bonsai",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ],
+   [
+    "ActiveCampaign",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ],
+   [
+    "Zendesk Sell",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ]
+  ],
+  "nobrand": 0
+ },
+ "claude/pm": {
+  "n": 100,
+  "grounded": 0,
+  "distinct": 14,
+  "per_median": 8.0,
+  "pairJaccard": 0.7,
+  "core90": [
+   "Asana",
+   "ClickUp",
+   "Linear",
+   "Notion",
+   "Trello"
+  ],
+  "tail20": [
+   "Microsoft Planner",
+   "GitHub Projects",
+   "Basecamp",
+   "Todoist",
+   "Backlog"
+  ],
+  "first": {
+   "brand": "Trello",
+   "share": 1.0,
+   "distinct": 1,
+   "all": {
+    "Trello": 100
+   }
+  },
+  "rates": [
+   [
+    "ClickUp",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Asana",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Notion",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Trello",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Linear",
+    94,
+    94.0,
+    [
+     88,
+     97
+    ]
+   ],
+   [
+    "monday.com",
+    66,
+    66.0,
+    [
+     56,
+     75
+    ]
+   ],
+   [
+    "Google Workspace",
+    63,
+    63.0,
+    [
+     53,
+     72
+    ]
+   ],
+   [
+    "Slack",
+    61,
+    61.0,
+    [
+     51,
+     70
+    ]
+   ],
+   [
+    "Jira",
+    23,
+    23.0,
+    [
+     16,
+     32
+    ]
+   ],
+   [
+    "Microsoft Planner",
+    18,
+    18.0,
+    [
+     12,
+     27
+    ]
+   ],
+   [
+    "GitHub Projects",
+    15,
+    15.0,
+    [
+     9,
+     23
+    ]
+   ],
+   [
+    "Basecamp",
+    11,
+    11.0,
+    [
+     6,
+     19
+    ]
+   ],
+   [
+    "Todoist",
+    9,
+    9.0,
+    [
+     5,
+     16
+    ]
+   ],
+   [
+    "Backlog",
+    2,
+    2.0,
+    [
+     1,
+     7
+    ]
+   ]
+  ],
+  "nobrand": 0
+ },
+ "gemini/acct": {
+  "n": 100,
+  "grounded": 1,
+  "distinct": 12,
+  "per_median": 6.0,
+  "pairJaccard": 0.75,
+  "core90": [
+   "Bonsai",
+   "FreshBooks",
+   "QuickBooks",
+   "Wave"
+  ],
+  "tail20": [
+   "PayPal",
+   "Stripe",
+   "Expensify",
+   "Found"
+  ],
+  "first": {
+   "brand": "FreshBooks",
+   "share": 0.55,
+   "distinct": 3,
+   "all": {
+    "FreshBooks": 55,
+    "Wave": 43,
+    "QuickBooks": 2
+   }
+  },
+  "rates": [
+   [
+    "QuickBooks",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "FreshBooks",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Wave",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Bonsai",
+    99,
+    99.0,
+    [
+     95,
+     100
+    ]
+   ],
+   [
+    "Zoho Books",
+    86,
+    86.0,
+    [
+     78,
+     91
+    ]
+   ],
+   [
+    "TurboTax",
+    51,
+    51.0,
+    [
+     41,
+     61
+    ]
+   ],
+   [
+    "Xero",
+    49,
+    49.0,
+    [
+     39,
+     59
+    ]
+   ],
+   [
+    "HoneyBook",
+    42,
+    42.0,
+    [
+     33,
+     52
+    ]
+   ],
+   [
+    "PayPal",
+    4,
+    4.0,
+    [
+     2,
+     10
+    ]
+   ],
+   [
+    "Stripe",
+    4,
+    4.0,
+    [
+     2,
+     10
+    ]
+   ],
+   [
+    "Expensify",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ],
+   [
+    "Found",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ]
+  ],
+  "nobrand": 0
+ },
+ "gemini/crm": {
+  "n": 100,
+  "grounded": 1,
+  "distinct": 17,
+  "per_median": 5.5,
+  "pairJaccard": 0.68,
+  "core90": [
+   "HubSpot",
+   "Pipedrive",
+   "Zoho CRM",
+   "monday"
+  ],
+  "tail20": [
+   "Streak",
+   "Salesforce",
+   "Less Annoying CRM",
+   "Mailchimp",
+   "HoneyBook",
+   "Bonsai",
+   "ActiveCampaign",
+   "folk",
+   "Airtable",
+   "Keap"
+  ],
+  "first": {
+   "brand": "HubSpot",
+   "share": 1.0,
+   "distinct": 1,
+   "all": {
+    "HubSpot": 100
+   }
+  },
+  "rates": [
+   [
+    "HubSpot",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Pipedrive",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Zoho CRM",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "monday",
+    97,
+    97.0,
+    [
+     92,
+     99
+    ]
+   ],
+   [
+    "Copper",
+    62,
+    62.0,
+    [
+     52,
+     71
+    ]
+   ],
+   [
+    "Freshsales",
+    21,
+    21.0,
+    [
+     14,
+     30
+    ]
+   ],
+   [
+    "Close",
+    20,
+    20.0,
+    [
+     13,
+     29
+    ]
+   ],
+   [
+    "Streak",
+    18,
+    18.0,
+    [
+     12,
+     27
+    ]
+   ],
+   [
+    "Salesforce",
+    18,
+    18.0,
+    [
+     12,
+     27
+    ]
+   ],
+   [
+    "Less Annoying CRM",
+    16,
+    16.0,
+    [
+     10,
+     24
+    ]
+   ],
+   [
+    "Mailchimp",
+    3,
+    3.0,
+    [
+     1,
+     8
+    ]
+   ],
+   [
+    "HoneyBook",
+    3,
+    3.0,
+    [
+     1,
+     8
+    ]
+   ],
+   [
+    "Bonsai",
+    2,
+    2.0,
+    [
+     1,
+     7
+    ]
+   ],
+   [
+    "ActiveCampaign",
+    2,
+    2.0,
+    [
+     1,
+     7
+    ]
+   ],
+   [
+    "folk",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ],
+   [
+    "Airtable",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ],
+   [
+    "Keap",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ]
+  ],
+  "nobrand": 0
+ },
+ "gemini/pm": {
+  "n": 100,
+  "grounded": 0,
+  "distinct": 13,
+  "per_median": 7.0,
+  "pairJaccard": 0.72,
+  "core90": [
+   "Asana",
+   "ClickUp",
+   "Linear",
+   "Notion",
+   "Trello"
+  ],
+  "tail20": [
+   "Toggl Plan",
+   "Confluence",
+   "Backlog",
+   "Google Workspace"
+  ],
+  "first": {
+   "brand": "Asana",
+   "share": 0.91,
+   "distinct": 2,
+   "all": {
+    "Asana": 91,
+    "Trello": 9
+   }
+  },
+  "rates": [
+   [
+    "Asana",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Notion",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "Trello",
+    100,
+    100.0,
+    [
+     96,
+     100
+    ]
+   ],
+   [
+    "ClickUp",
+    99,
+    99.0,
+    [
+     95,
+     100
+    ]
+   ],
+   [
+    "Linear",
+    94,
+    94.0,
+    [
+     88,
+     97
+    ]
+   ],
+   [
+    "Basecamp",
+    64,
+    64.0,
+    [
+     54,
+     73
+    ]
+   ],
+   [
+    "Jira",
+    59,
+    59.0,
+    [
+     49,
+     68
+    ]
+   ],
+   [
+    "monday.com",
+    51,
+    51.0,
+    [
+     41,
+     61
+    ]
+   ],
+   [
+    "Slack",
+    23,
+    23.0,
+    [
+     16,
+     32
+    ]
+   ],
+   [
+    "Toggl Plan",
+    16,
+    16.0,
+    [
+     10,
+     24
+    ]
+   ],
+   [
+    "Confluence",
+    7,
+    7.0,
+    [
+     3,
+     14
+    ]
+   ],
+   [
+    "Backlog",
+    2,
+    2.0,
+    [
+     1,
+     7
+    ]
+   ],
+   [
+    "Google Workspace",
+    1,
+    1.0,
+    [
+     0,
+     5
+    ]
+   ]
+  ],
+  "nobrand": 0
+ }
+}

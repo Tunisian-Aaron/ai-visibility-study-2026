@@ -41,3 +41,7 @@ describes these 107 sites only, not "the web".
 Data released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 — cite "SeeGeo 107-site AI visibility study, August 2026" with a link to
 the study.
+
+## Second dataset: the repeated-question study (2026-09-22)
+
+The same three buying questions asked 100 times each to ChatGPT, Gemini and Claude (1,000 answers), with per-brand recommendation rates, Wilson intervals, answer-to-answer overlap and the domains ChatGPT read. See **repeated-question-2026-09/** and the write-up at https://see-geo.com/blog/same-question-100-times.

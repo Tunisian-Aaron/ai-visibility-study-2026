@@ -1,0 +1,425 @@
+{
+ "crm": {
+  "HubSpot": [
+   "hubspot"
+  ],
+  "Zoho CRM": [
+   "zoho(?: crm)?",
+   "bigin"
+  ],
+  "Pipedrive": [
+   "pipedrive"
+  ],
+  "Freshsales": [
+   "freshsales",
+   "freshworks"
+  ],
+  "Salesforce": [
+   "salesforce"
+  ],
+  "monday": [
+   "monday(?:\\.com| sales crm| crm)?"
+  ],
+  "Close": [
+   "\\bclose(?: crm|\\.com| \\(close\\.io\\))?\\b(?! to)"
+  ],
+  "Copper": [
+   "\\bcopper(?: crm)?"
+  ],
+  "Streak": [
+   "\\bstreak\\b"
+  ],
+  "Less Annoying CRM": [
+   "less annoying crm",
+   "\\blacrm\\b"
+  ],
+  "Insightly": [
+   "insightly"
+  ],
+  "Keap": [
+   "\\bkeap\\b",
+   "infusionsoft"
+  ],
+  "Nimble": [
+   "\\bnimble\\b"
+  ],
+  "Capsule": [
+   "capsule crm",
+   "\\bcapsule\\b"
+  ],
+  "Agile CRM": [
+   "agile crm"
+  ],
+  "Bitrix24": [
+   "bitrix24"
+  ],
+  "Nutshell": [
+   "nutshell"
+  ],
+  "ActiveCampaign": [
+   "activecampaign"
+  ],
+  "EngageBay": [
+   "engagebay"
+  ],
+  "Salesflare": [
+   "salesflare"
+  ],
+  "folk": [
+   "\\bfolk\\b"
+  ],
+  "Attio": [
+   "\\battio\\b"
+  ],
+  "Notion": [
+   "\\bnotion\\b"
+  ],
+  "Brevo": [
+   "\\bbrevo\\b",
+   "sendinblue"
+  ],
+  "Mailchimp": [
+   "mailchimp"
+  ],
+  "Microsoft Dynamics": [
+   "dynamics 365",
+   "microsoft dynamics"
+  ],
+  "SugarCRM": [
+   "sugarcrm",
+   "sugar crm"
+  ],
+  "Vtiger": [
+   "vtiger"
+  ],
+  "Airtable": [
+   "airtable"
+  ],
+  "Odoo": [
+   "\\bodoo\\b"
+  ],
+  "Apptivo": [
+   "apptivo"
+  ],
+  "Method CRM": [
+   "method crm",
+   "method:crm"
+  ],
+  "Kommo": [
+   "\\bkommo\\b",
+   "amocrm"
+  ],
+  "Zendesk Sell": [
+   "zendesk sell"
+  ],
+  "GoHighLevel": [
+   "gohighlevel",
+   "highlevel"
+  ],
+  "Thryv": [
+   "\\bthryv\\b"
+  ],
+  "HoneyBook": [
+   "honeybook"
+  ],
+  "Bonsai": [
+   "\\bbonsai\\b"
+  ]
+ },
+ "pm": {
+  "Asana": [
+   "\\basana\\b"
+  ],
+  "Trello": [
+   "\\btrello\\b"
+  ],
+  "ClickUp": [
+   "clickup"
+  ],
+  "monday.com": [
+   "monday(?:\\.com| work management)?"
+  ],
+  "Notion": [
+   "\\bnotion\\b"
+  ],
+  "Basecamp": [
+   "basecamp"
+  ],
+  "Jira": [
+   "\\bjira\\b"
+  ],
+  "Wrike": [
+   "\\bwrike\\b"
+  ],
+  "Smartsheet": [
+   "smartsheet"
+  ],
+  "Teamwork": [
+   "\\bteamwork(?:\\.com)?\\b"
+  ],
+  "Todoist": [
+   "todoist"
+  ],
+  "Airtable": [
+   "airtable"
+  ],
+  "Linear": [
+   "\\blinear\\b(?!ly)"
+  ],
+  "Height": [
+   "\\bheight\\.app\\b"
+  ],
+  "Zoho Projects": [
+   "zoho projects",
+   "\\bzoho\\b"
+  ],
+  "MeisterTask": [
+   "meistertask"
+  ],
+  "Nifty": [
+   "\\bnifty\\b"
+  ],
+  "Hive": [
+   "\\bhive\\b"
+  ],
+  "Plaky": [
+   "\\bplaky\\b"
+  ],
+  "Freedcamp": [
+   "freedcamp"
+  ],
+  "Motion": [
+   "\\bmotion\\b(?! to)"
+  ],
+  "Coda": [
+   "\\bcoda\\b"
+  ],
+  "Microsoft Planner": [
+   "microsoft planner",
+   "ms planner",
+   "\\bplanner\\b"
+  ],
+  "GitHub Projects": [
+   "github projects"
+  ],
+  "Paymo": [
+   "\\bpaymo\\b"
+  ],
+  "ProofHub": [
+   "proofhub"
+  ],
+  "Microsoft Project": [
+   "microsoft project\\b",
+   "ms project"
+  ],
+  "Toggl Plan": [
+   "toggl"
+  ],
+  "nTask": [
+   "\\bntask\\b"
+  ],
+  "Teamhood": [
+   "teamhood"
+  ],
+  "Podio": [
+   "\\bpodio\\b"
+  ],
+  "Workzone": [
+   "workzone"
+  ],
+  "Zenkit": [
+   "zenkit"
+  ],
+  "Taskade": [
+   "taskade"
+  ],
+  "Any.do": [
+   "any\\.do"
+  ],
+  "Slack": [
+   "\\bslack\\b"
+  ],
+  "Google Workspace": [
+   "google (?:workspace|tasks|sheets)"
+  ],
+  "Miro": [
+   "\\bmiro\\b"
+  ],
+  "Confluence": [
+   "confluence"
+  ],
+  "Backlog": [
+   "\\bbacklog\\b(?! of| item)"
+  ],
+  "Kanbanize": [
+   "kanbanize",
+   "businessmap"
+  ],
+  "Float": [
+   "\\bfloat\\b"
+  ],
+  "Fibery": [
+   "\\bfibery\\b"
+  ],
+  "Quire": [
+   "\\bquire\\b"
+  ],
+  "Ora": [
+   "\\bora\\.pm\\b"
+  ]
+ },
+ "acct": {
+  "QuickBooks": [
+   "quickbooks",
+   "\\bqbo\\b"
+  ],
+  "FreshBooks": [
+   "freshbooks"
+  ],
+  "Xero": [
+   "\\bxero\\b"
+  ],
+  "Wave": [
+   "\\bwave(?: accounting| apps| financial)?\\b"
+  ],
+  "Zoho Books": [
+   "zoho books",
+   "\\bzoho\\b"
+  ],
+  "FreeAgent": [
+   "freeagent"
+  ],
+  "Sage": [
+   "\\bsage\\b"
+  ],
+  "Bonsai": [
+   "\\bbonsai\\b"
+  ],
+  "Kashoo": [
+   "kashoo"
+  ],
+  "Lili": [
+   "\\blili\\b"
+  ],
+  "Found": [
+   "\\bfound\\b(?! (?:it|that|in|on|the|this|to|a|out))"
+  ],
+  "Hurdlr": [
+   "hurdlr"
+  ],
+  "Keeper": [
+   "keeper tax",
+   "\\bkeeper\\b"
+  ],
+  "TurboTax": [
+   "turbotax"
+  ],
+  "Bench": [
+   "\\bbench\\b"
+  ],
+  "ZipBooks": [
+   "zipbooks"
+  ],
+  "Invoice Ninja": [
+   "invoice ninja"
+  ],
+  "Moxie": [
+   "\\bmoxie\\b"
+  ],
+  "HoneyBook": [
+   "honeybook"
+  ],
+  "Harvest": [
+   "\\bharvest\\b"
+  ],
+  "Fiverr Workspace": [
+   "fiverr workspace",
+   "and\\.co"
+  ],
+  "Akaunting": [
+   "akaunting"
+  ],
+  "GnuCash": [
+   "gnucash"
+  ],
+  "Manager": [
+   "manager\\.io",
+   "\\bmanager\\b(?= \\()"
+  ],
+  "Brightbook": [
+   "brightbook"
+  ],
+  "Sunrise": [
+   "\\bsunrise\\b"
+  ],
+  "Countingup": [
+   "countingup"
+  ],
+  "Coconut": [
+   "\\bcoconut\\b"
+  ],
+  "Tide": [
+   "\\btide\\b"
+  ],
+  "ANNA": [
+   "\\banna\\b"
+  ],
+  "Crunch": [
+   "\\bcrunch\\b"
+  ],
+  "Hnry": [
+   "\\bhnry\\b"
+  ],
+  "Rounded": [
+   "\\brounded\\b"
+  ],
+  "Pandle": [
+   "\\bpandle\\b"
+  ],
+  "Quaderno": [
+   "quaderno"
+  ],
+  "Bookipi": [
+   "bookipi"
+  ],
+  "Indy": [
+   "\\bindy\\b"
+  ],
+  "Collective": [
+   "\\bcollective\\b"
+  ],
+  "Expensify": [
+   "expensify"
+  ],
+  "Mint": [
+   "\\bmint\\b"
+  ],
+  "Everlance": [
+   "everlance"
+  ],
+  "Stripe": [
+   "\\bstripe\\b"
+  ],
+  "PayPal": [
+   "paypal"
+  ],
+  "Square": [
+   "\\bsquare\\b(?! foot)"
+  ],
+  "Dext": [
+   "\\bdext\\b"
+  ],
+  "Xolo": [
+   "\\bxolo\\b"
+  ],
+  "Holded": [
+   "\\bholded\\b"
+  ],
+  "Debitoor": [
+   "debitoor"
+  ],
+  "SumUp": [
+   "sumup"
+  ]
+ }
+}
