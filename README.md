@@ -45,3 +45,7 @@ the study.
 ## Second dataset: the repeated-question study (2026-09-22)
 
 The same three buying questions asked 100 times each to ChatGPT, Gemini and Claude (1,000 answers), with per-brand recommendation rates, Wilson intervals, answer-to-answer overlap and the domains ChatGPT read. See **repeated-question-2026-09/** and the write-up at https://see-geo.com/blog/same-question-100-times.
+
+## Third dataset: local favourites (2026-09-22/23)
+
+"Who's the best plumber / dentist / bakery in {city}?" asked 25 times each in 20 cities to ChatGPT and Gemini — 3,000 answers, per-city named-business rates, the card-format and Google-Maps-link shares behind ChatGPT's local answers, and the domains Gemini reads. See **local-favourites-2026-09/** and https://see-geo.com/blog/chatgpt-local-favourite.

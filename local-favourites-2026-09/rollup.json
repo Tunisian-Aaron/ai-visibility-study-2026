@@ -1,0 +1,1545 @@
+{
+ "chatgpt/plumber": {
+  "cells": 20,
+  "n": 500,
+  "median_distinct": 9.5,
+  "median_per_answer": 5.0,
+  "median_top_share": 100,
+  "cells_top_ge90": 17,
+  "cells_top_ge75": 19,
+  "cells_top_lt50": 0,
+  "names_ge50_median": 5.0,
+  "median_first_share": 70,
+  "mean_pair": 59,
+  "no_name_answers": 0,
+  "grounded": 500
+ },
+ "chatgpt/dentist": {
+  "cells": 20,
+  "n": 500,
+  "median_distinct": 11.5,
+  "median_per_answer": 4.0,
+  "median_top_share": 98,
+  "cells_top_ge90": 14,
+  "cells_top_ge75": 19,
+  "cells_top_lt50": 0,
+  "names_ge50_median": 4.0,
+  "median_first_share": 72,
+  "mean_pair": 54,
+  "no_name_answers": 0,
+  "grounded": 500
+ },
+ "chatgpt/bakery": {
+  "cells": 20,
+  "n": 500,
+  "median_distinct": 14.0,
+  "median_per_answer": 5.0,
+  "median_top_share": 100,
+  "cells_top_ge90": 18,
+  "cells_top_ge75": 20,
+  "cells_top_lt50": 0,
+  "names_ge50_median": 5.0,
+  "median_first_share": 78,
+  "mean_pair": 59,
+  "no_name_answers": 0,
+  "grounded": 500
+ },
+ "chatgpt/all": {
+  "cells": 60,
+  "n": 1500,
+  "median_distinct": 11.0,
+  "median_per_answer": 5.0,
+  "median_top_share": 100,
+  "cells_top_ge90": 49,
+  "cells_top_ge75": 58,
+  "cells_top_lt50": 0,
+  "names_ge50_median": 4.0,
+  "median_first_share": 72,
+  "mean_pair": 58,
+  "no_name_answers": 0,
+  "grounded": 1500
+ },
+ "gemini/plumber": {
+  "cells": 20,
+  "n": 500,
+  "median_distinct": 49.5,
+  "median_per_answer": 6.0,
+  "median_top_share": 66,
+  "cells_top_ge90": 2,
+  "cells_top_ge75": 5,
+  "cells_top_lt50": 6,
+  "names_ge50_median": 2.0,
+  "median_first_share": 36,
+  "mean_pair": 15,
+  "no_name_answers": 32,
+  "grounded": 493
+ },
+ "gemini/dentist": {
+  "cells": 20,
+  "n": 500,
+  "median_distinct": 69.5,
+  "median_per_answer": 8.5,
+  "median_top_share": 80,
+  "cells_top_ge90": 3,
+  "cells_top_ge75": 13,
+  "cells_top_lt50": 1,
+  "names_ge50_median": 3.0,
+  "median_first_share": 44,
+  "mean_pair": 16,
+  "no_name_answers": 5,
+  "grounded": 496
+ },
+ "gemini/bakery": {
+  "cells": 20,
+  "n": 500,
+  "median_distinct": 22.0,
+  "median_per_answer": 2.0,
+  "median_top_share": 42,
+  "cells_top_ge90": 0,
+  "cells_top_ge75": 0,
+  "cells_top_lt50": 13,
+  "names_ge50_median": 0.0,
+  "median_first_share": 34,
+  "mean_pair": 15,
+  "no_name_answers": 87,
+  "grounded": 367
+ },
+ "gemini/all": {
+  "cells": 60,
+  "n": 1500,
+  "median_distinct": 45.0,
+  "median_per_answer": 6.0,
+  "median_top_share": 60,
+  "cells_top_ge90": 5,
+  "cells_top_ge75": 18,
+  "cells_top_lt50": 20,
+  "names_ge50_median": 1.5,
+  "median_first_share": 36,
+  "mean_pair": 15,
+  "no_name_answers": 124,
+  "grounded": 1356
+ },
+ "chatgpt/sources": {
+  "grounded": 1500,
+  "distinct_domains": 568,
+  "median_per_answer": 4.0,
+  "pct_with_directory": 44,
+  "pct_with_own_site": 84,
+  "pct_only_own_sites": 56,
+  "top_directories": [
+   [
+    "google.com",
+    231
+   ],
+   [
+    "facebook.com",
+    40
+   ],
+   [
+    "abacusplumbing.com",
+    25
+   ],
+   [
+    "pipelineplumbing.net",
+    25
+   ],
+   [
+    "proficientplumbingservice.com",
+    25
+   ],
+   [
+    "brothersplumbing.com",
+    24
+   ],
+   [
+    "mortonplumbing.net",
+    24
+   ],
+   [
+    "jetstreamplumbing.com",
+    24
+   ],
+   [
+    "mountaintimeplumbing.com",
+    24
+   ],
+   [
+    "backlundplumbing.com",
+    24
+   ],
+   [
+    "theplumbingspecialist.com",
+    24
+   ],
+   [
+    "butlerplumbing.com.au",
+    24
+   ]
+  ],
+  "top_any": [
+   [
+    "google.com",
+    231
+   ],
+   [
+    "facebook.com",
+    40
+   ],
+   [
+    "abacusplumbing.com",
+    25
+   ],
+   [
+    "pdxplumber.com",
+    25
+   ],
+   [
+    "pipelineplumbing.net",
+    25
+   ],
+   [
+    "proficientplumbingservice.com",
+    25
+   ],
+   [
+    "thecleanplumbers.com",
+    25
+   ],
+   [
+    "plumbers-dublin.co",
+    25
+   ],
+   [
+    "sylo.ie",
+    25
+   ],
+   [
+    "thedublinplumber.com",
+    25
+   ],
+   [
+    "boise-dentists.com",
+    25
+   ],
+   [
+    "kissdental.co.uk",
+    25
+   ]
+  ]
+ },
+ "chatgpt/links": {
+  "total": 7581,
+  "with_gmb_utm": 527,
+  "with_openai_utm": 7581
+ },
+ "gemini/sources": {
+  "grounded": 1356,
+  "distinct_domains": 887,
+  "median_per_answer": 6.0,
+  "pct_with_directory": 91,
+  "pct_with_own_site": 99,
+  "pct_only_own_sites": 9,
+  "top_directories": [
+   [
+    "reddit.com",
+    1059
+   ],
+   [
+    "facebook.com",
+    315
+   ],
+   [
+    "forbes.com",
+    129
+   ],
+   [
+    "healthgrades.com",
+    106
+   ],
+   [
+    "bbb.org",
+    92
+   ],
+   [
+    "angi.com",
+    82
+   ],
+   [
+    "homeadvisor.com",
+    75
+   ],
+   [
+    "zocdoc.com",
+    61
+   ],
+   [
+    "threebestrated.com",
+    53
+   ],
+   [
+    "trustpilot.com",
+    39
+   ],
+   [
+    "checkatrade.com",
+    36
+   ],
+   [
+    "virtuance.com",
+    25
+   ]
+  ],
+  "top_any": [
+   [
+    "reddit.com",
+    1059
+   ],
+   [
+    "facebook.com",
+    315
+   ],
+   [
+    "consumeraffairs.com",
+    220
+   ],
+   [
+    "deltadental.com",
+    192
+   ],
+   [
+    "youtube.com",
+    131
+   ],
+   [
+    "forbes.com",
+    129
+   ],
+   [
+    "serviceagent.ai",
+    118
+   ],
+   [
+    "healthgrades.com",
+    106
+   ],
+   [
+    "toprateddentist.com",
+    95
+   ],
+   [
+    "bbb.org",
+    92
+   ],
+   [
+    "opencare.com",
+    83
+   ],
+   [
+    "angi.com",
+    82
+   ]
+  ]
+ },
+ "cells": [
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "austin",
+   "top": "russells bakery & coffee hancock",
+   "top_share": 92,
+   "distinct": 21,
+   "first_share": 52,
+   "pair": 50
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "boise",
+   "top": "gastons bakery",
+   "top_share": 100,
+   "distinct": 9,
+   "first_share": 88,
+   "pair": 76
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "charlotte",
+   "top": "krumb bakery",
+   "top_share": 88,
+   "distinct": 16,
+   "first_share": 64,
+   "pair": 41
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "columbus",
+   "top": "frenchis deli & bakery",
+   "top_share": 96,
+   "distinct": 16,
+   "first_share": 64,
+   "pair": 71
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "denver",
+   "top": "trompeau bakery cafe",
+   "top_share": 96,
+   "distinct": 19,
+   "first_share": 32,
+   "pair": 47
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "dublin",
+   "top": "bread 41",
+   "top_share": 88,
+   "distinct": 20,
+   "first_share": 72,
+   "pair": 32
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "kansas-city",
+   "top": "mclains bakery",
+   "top_share": 100,
+   "distinct": 9,
+   "first_share": 88,
+   "pair": 71
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "madison",
+   "top": "lanes bakery & coffee",
+   "top_share": 100,
+   "distinct": 7,
+   "first_share": 60,
+   "pair": 70
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "manchester",
+   "top": "companio bakery nq",
+   "top_share": 100,
+   "distinct": 9,
+   "first_share": 88,
+   "pair": 51
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "melbourne",
+   "top": "bakemono bakers",
+   "top_share": 92,
+   "distinct": 14,
+   "first_share": 80,
+   "pair": 41
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "minneapolis",
+   "top": "bellecour",
+   "top_share": 100,
+   "distinct": 14,
+   "first_share": 92,
+   "pair": 64
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "nashville",
+   "top": "dandrews bakery & cafe",
+   "top_share": 100,
+   "distinct": 9,
+   "first_share": 96,
+   "pair": 69
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "omaha",
+   "top": "reis bakery omaha",
+   "top_share": 100,
+   "distinct": 14,
+   "first_share": 64,
+   "pair": 47
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "pittsburgh",
+   "top": "prantls bakery",
+   "top_share": 100,
+   "distinct": 7,
+   "first_share": 76,
+   "pair": 67
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "portland",
+   "top": "kens artisan bakery",
+   "top_share": 100,
+   "distinct": 15,
+   "first_share": 92,
+   "pair": 60
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "richmond",
+   "top": "rva bakehouse",
+   "top_share": 96,
+   "distinct": 14,
+   "first_share": 52,
+   "pair": 67
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "sacramento",
+   "top": "starbread",
+   "top_share": 96,
+   "distinct": 11,
+   "first_share": 84,
+   "pair": 56
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "tampa",
+   "top": "la segunda bakery and cafe",
+   "top_share": 100,
+   "distinct": 12,
+   "first_share": 88,
+   "pair": 71
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "toronto",
+   "top": "sanremo bakery",
+   "top_share": 96,
+   "distinct": 20,
+   "first_share": 48,
+   "pair": 41
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "bakery",
+   "city": "tucson",
+   "top": "village bakehouse",
+   "top_share": 100,
+   "distinct": 7,
+   "first_share": 84,
+   "pair": 95
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "austin",
+   "top": "breeze dental",
+   "top_share": 68,
+   "distinct": 17,
+   "first_share": 44,
+   "pair": 22
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "boise",
+   "top": "summit dental group",
+   "top_share": 100,
+   "distinct": 9,
+   "first_share": 88,
+   "pair": 75
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "charlotte",
+   "top": "charlotte dentistry",
+   "top_share": 84,
+   "distinct": 14,
+   "first_share": 64,
+   "pair": 37
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "columbus",
+   "top": "grandview dental care",
+   "top_share": 88,
+   "distinct": 9,
+   "first_share": 68,
+   "pair": 49
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "denver",
+   "top": "metropolitan dental care",
+   "top_share": 100,
+   "distinct": 15,
+   "first_share": 40,
+   "pair": 37
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "dublin",
+   "top": "truly dental",
+   "top_share": 92,
+   "distinct": 13,
+   "first_share": 56,
+   "pair": 59
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "kansas-city",
+   "top": "nkc dental",
+   "top_share": 100,
+   "distinct": 11,
+   "first_share": 76,
+   "pair": 52
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "madison",
+   "top": "affiliated dentists s c",
+   "top_share": 96,
+   "distinct": 17,
+   "first_share": 72,
+   "pair": 44
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "manchester",
+   "top": "kissdental manchester",
+   "top_share": 100,
+   "distinct": 9,
+   "first_share": 68,
+   "pair": 62
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "melbourne",
+   "top": "smile solutions",
+   "top_share": 96,
+   "distinct": 9,
+   "first_share": 68,
+   "pair": 60
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "minneapolis",
+   "top": "j & d dental",
+   "top_share": 100,
+   "distinct": 8,
+   "first_share": 80,
+   "pair": 68
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "nashville",
+   "top": "thomas nabors",
+   "top_share": 100,
+   "distinct": 12,
+   "first_share": 80,
+   "pair": 50
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "omaha",
+   "top": "thomsen dental group",
+   "top_share": 100,
+   "distinct": 8,
+   "first_share": 80,
+   "pair": 65
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "pittsburgh",
+   "top": "oakland aesthetic dentistry",
+   "top_share": 100,
+   "distinct": 11,
+   "first_share": 100,
+   "pair": 86
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "portland",
+   "top": "pdx dental care",
+   "top_share": 100,
+   "distinct": 7,
+   "first_share": 88,
+   "pair": 75
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "richmond",
+   "top": "river run dental",
+   "top_share": 80,
+   "distinct": 29,
+   "first_share": 72,
+   "pair": 32
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "sacramento",
+   "top": "midtown dental",
+   "top_share": 100,
+   "distinct": 10,
+   "first_share": 92,
+   "pair": 60
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "tampa",
+   "top": "tampa palms dentistry",
+   "top_share": 96,
+   "distinct": 12,
+   "first_share": 68,
+   "pair": 66
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "toronto",
+   "top": "toronto beach dental",
+   "top_share": 88,
+   "distinct": 18,
+   "first_share": 32,
+   "pair": 41
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "dentist",
+   "city": "tucson",
+   "top": "casas adobes dentistry",
+   "top_share": 88,
+   "distinct": 22,
+   "first_share": 72,
+   "pair": 46
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "austin",
+   "top": "abacus plumbing air conditioning & electrical",
+   "top_share": 100,
+   "distinct": 8,
+   "first_share": 96,
+   "pair": 45
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "boise",
+   "top": "proficient plumbing service",
+   "top_share": 100,
+   "distinct": 12,
+   "first_share": 84,
+   "pair": 85
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "charlotte",
+   "top": "queen city plumbing",
+   "top_share": 100,
+   "distinct": 13,
+   "first_share": 52,
+   "pair": 45
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "columbus",
+   "top": "allegiant plumbing",
+   "top_share": 60,
+   "distinct": 19,
+   "first_share": 56,
+   "pair": 32
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "denver",
+   "top": "brothers plumbing heating & electric",
+   "top_share": 96,
+   "distinct": 8,
+   "first_share": 40,
+   "pair": 49
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "dublin",
+   "top": "sylo plumbing heating & electrical",
+   "top_share": 100,
+   "distinct": 5,
+   "first_share": 88,
+   "pair": 77
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "kansas-city",
+   "top": "a 1 sewer & septic",
+   "top_share": 96,
+   "distinct": 11,
+   "first_share": 76,
+   "pair": 51
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "madison",
+   "top": "bartow plumbing",
+   "top_share": 100,
+   "distinct": 11,
+   "first_share": 68,
+   "pair": 61
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "manchester",
+   "top": "manchester plumbers",
+   "top_share": 92,
+   "distinct": 15,
+   "first_share": 76,
+   "pair": 62
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "melbourne",
+   "top": "butler plumbing pty",
+   "top_share": 100,
+   "distinct": 8,
+   "first_share": 68,
+   "pair": 68
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "minneapolis",
+   "top": "gray duck plumbing",
+   "top_share": 88,
+   "distinct": 9,
+   "first_share": 56,
+   "pair": 51
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "nashville",
+   "top": "morton plumbing heating & cooling",
+   "top_share": 100,
+   "distinct": 7,
+   "first_share": 76,
+   "pair": 74
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "omaha",
+   "top": "plumbrite",
+   "top_share": 100,
+   "distinct": 9,
+   "first_share": 60,
+   "pair": 83
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "pittsburgh",
+   "top": "restano heating cooling & plumbing",
+   "top_share": 88,
+   "distinct": 14,
+   "first_share": 56,
+   "pair": 38
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "portland",
+   "top": "pipeline plumbing & drains",
+   "top_share": 100,
+   "distinct": 6,
+   "first_share": 72,
+   "pair": 88
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "richmond",
+   "top": "plumbers r us",
+   "top_share": 92,
+   "distinct": 20,
+   "first_share": 32,
+   "pair": 39
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "sacramento",
+   "top": "millennium plumbing specialist",
+   "top_share": 100,
+   "distinct": 19,
+   "first_share": 76,
+   "pair": 47
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "tampa",
+   "top": "true plumbers & ac",
+   "top_share": 96,
+   "distinct": 8,
+   "first_share": 72,
+   "pair": 77
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "toronto",
+   "top": "drainworks plumbing",
+   "top_share": 96,
+   "distinct": 10,
+   "first_share": 40,
+   "pair": 51
+  },
+  {
+   "surface": "chatgpt",
+   "trade": "plumber",
+   "city": "tucson",
+   "top": "imperial plumbing",
+   "top_share": 100,
+   "distinct": 9,
+   "first_share": 72,
+   "pair": 68
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "austin",
+   "top": "upper crust bakery",
+   "top_share": 64,
+   "distinct": 39,
+   "first_share": 24,
+   "pair": 13
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "boise",
+   "top": "must try",
+   "top_share": 40,
+   "distinct": 14,
+   "first_share": 36,
+   "pair": 18
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "charlotte",
+   "top": "must try",
+   "top_share": 68,
+   "distinct": 17,
+   "first_share": 56,
+   "pair": 26
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "columbus",
+   "top": "must try",
+   "top_share": 64,
+   "distinct": 31,
+   "first_share": 36,
+   "pair": 14
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "denver",
+   "top": "getrights bakery & plant shop",
+   "top_share": 36,
+   "distinct": 32,
+   "first_share": 12,
+   "pair": 8
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "dublin",
+   "top": "sc al bakery",
+   "top_share": 28,
+   "distinct": 22,
+   "first_share": 16,
+   "pair": 10
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "kansas-city",
+   "top": "must try",
+   "top_share": 44,
+   "distinct": 34,
+   "first_share": 40,
+   "pair": 15
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "madison",
+   "top": "must try",
+   "top_share": 28,
+   "distinct": 17,
+   "first_share": 24,
+   "pair": 13
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "manchester",
+   "top": "barbakan delicatessen",
+   "top_share": 28,
+   "distinct": 31,
+   "first_share": 12,
+   "pair": 8
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "melbourne",
+   "top": "must try",
+   "top_share": 68,
+   "distinct": 22,
+   "first_share": 56,
+   "pair": 22
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "minneapolis",
+   "top": "isles bun & coffee",
+   "top_share": 52,
+   "distinct": 33,
+   "first_share": 44,
+   "pair": 18
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "nashville",
+   "top": "must try",
+   "top_share": 32,
+   "distinct": 15,
+   "first_share": 28,
+   "pair": 11
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "omaha",
+   "top": "pettits pastry",
+   "top_share": 40,
+   "distinct": 14,
+   "first_share": 28,
+   "pair": 13
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "pittsburgh",
+   "top": "la gourmandine",
+   "top_share": 32,
+   "distinct": 28,
+   "first_share": 16,
+   "pair": 9
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "portland",
+   "top": "must try",
+   "top_share": 52,
+   "distinct": 41,
+   "first_share": 52,
+   "pair": 9
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "richmond",
+   "top": "must try",
+   "top_share": 56,
+   "distinct": 22,
+   "first_share": 52,
+   "pair": 17
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "sacramento",
+   "top": "must try",
+   "top_share": 48,
+   "distinct": 22,
+   "first_share": 48,
+   "pair": 18
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "tampa",
+   "top": "must try",
+   "top_share": 36,
+   "distinct": 13,
+   "first_share": 16,
+   "pair": 26
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "toronto",
+   "top": "must try",
+   "top_share": 40,
+   "distinct": 34,
+   "first_share": 32,
+   "pair": 10
+  },
+  {
+   "surface": "gemini",
+   "trade": "bakery",
+   "city": "tucson",
+   "top": "must try",
+   "top_share": 48,
+   "distinct": 19,
+   "first_share": 40,
+   "pair": 18
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "austin",
+   "top": "toothbar",
+   "top_share": 84,
+   "distinct": 46,
+   "first_share": 60,
+   "pair": 30
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "boise",
+   "top": "summit dental group",
+   "top_share": 76,
+   "distinct": 50,
+   "first_share": 48,
+   "pair": 18
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "charlotte",
+   "top": "caldwell bills petrilli & west",
+   "top_share": 96,
+   "distinct": 99,
+   "first_share": 44,
+   "pair": 15
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "columbus",
+   "top": "firouzian dentistry",
+   "top_share": 76,
+   "distinct": 67,
+   "first_share": 32,
+   "pair": 15
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "denver",
+   "top": "metropolitan dental care",
+   "top_share": 88,
+   "distinct": 77,
+   "first_share": 56,
+   "pair": 16
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "dublin",
+   "top": "seapoint clinic",
+   "top_share": 84,
+   "distinct": 65,
+   "first_share": 44,
+   "pair": 20
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "kansas-city",
+   "top": "evers & gardner dental",
+   "top_share": 88,
+   "distinct": 111,
+   "first_share": 16,
+   "pair": 14
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "madison",
+   "top": "total care dental",
+   "top_share": 28,
+   "distinct": 44,
+   "first_share": 20,
+   "pair": 5
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "manchester",
+   "top": "nhs vs private",
+   "top_share": 80,
+   "distinct": 62,
+   "first_share": 24,
+   "pair": 18
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "melbourne",
+   "top": "mc dental",
+   "top_share": 60,
+   "distinct": 68,
+   "first_share": 52,
+   "pair": 12
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "minneapolis",
+   "top": "park dental",
+   "top_share": 88,
+   "distinct": 81,
+   "first_share": 20,
+   "pair": 17
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "nashville",
+   "top": "belle meade family dentistry",
+   "top_share": 80,
+   "distinct": 77,
+   "first_share": 44,
+   "pair": 19
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "omaha",
+   "top": "premier dental",
+   "top_share": 60,
+   "distinct": 56,
+   "first_share": 48,
+   "pair": 12
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "pittsburgh",
+   "top": "atlas dental specialists",
+   "top_share": 96,
+   "distinct": 71,
+   "first_share": 44,
+   "pair": 20
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "portland",
+   "top": "belmont family dentistry",
+   "top_share": 88,
+   "distinct": 94,
+   "first_share": 24,
+   "pair": 15
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "richmond",
+   "top": "virginia family dentistry",
+   "top_share": 60,
+   "distinct": 55,
+   "first_share": 24,
+   "pair": 15
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "sacramento",
+   "top": "midtown dental",
+   "top_share": 56,
+   "distinct": 67,
+   "first_share": 44,
+   "pair": 14
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "tampa",
+   "top": "mcilwain dental specialists",
+   "top_share": 52,
+   "distinct": 91,
+   "first_share": 20,
+   "pair": 11
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "toronto",
+   "top": "dr judy sturm & associates",
+   "top_share": 96,
+   "distinct": 95,
+   "first_share": 52,
+   "pair": 16
+  },
+  {
+   "surface": "gemini",
+   "trade": "dentist",
+   "city": "tucson",
+   "top": "martin taylor dentistry",
+   "top_share": 60,
+   "distinct": 94,
+   "first_share": 20,
+   "pair": 11
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "austin",
+   "top": "clarke kent plumbing",
+   "top_share": 84,
+   "distinct": 50,
+   "first_share": 52,
+   "pair": 21
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "boise",
+   "top": "goodson plumbing services",
+   "top_share": 40,
+   "distinct": 44,
+   "first_share": 20,
+   "pair": 9
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "charlotte",
+   "top": "wyattworks plumbing",
+   "top_share": 60,
+   "distinct": 50,
+   "first_share": 36,
+   "pair": 13
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "columbus",
+   "top": "drainmaster",
+   "top_share": 72,
+   "distinct": 31,
+   "first_share": 24,
+   "pair": 20
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "denver",
+   "top": "hyper flow service company",
+   "top_share": 72,
+   "distinct": 54,
+   "first_share": 56,
+   "pair": 19
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "dublin",
+   "top": "dublin plumbing services",
+   "top_share": 92,
+   "distinct": 42,
+   "first_share": 68,
+   "pair": 33
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "kansas-city",
+   "top": "poor johns plumbing",
+   "top_share": 72,
+   "distinct": 42,
+   "first_share": 36,
+   "pair": 21
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "madison",
+   "top": "reputation",
+   "top_share": 44,
+   "distinct": 35,
+   "first_share": 32,
+   "pair": 11
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "manchester",
+   "top": "aquarius plumbing",
+   "top_share": 92,
+   "distinct": 68,
+   "first_share": 40,
+   "pair": 19
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "melbourne",
+   "top": "fix it right plumbing",
+   "top_share": 68,
+   "distinct": 93,
+   "first_share": 60,
+   "pair": 13
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "minneapolis",
+   "top": "ron the sewer rat",
+   "top_share": 48,
+   "distinct": 49,
+   "first_share": 36,
+   "pair": 11
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "nashville",
+   "top": "hiller plumbing heating cooling & electrical",
+   "top_share": 64,
+   "distinct": 40,
+   "first_share": 28,
+   "pair": 17
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "omaha",
+   "top": "big birge plumbing",
+   "top_share": 44,
+   "distinct": 37,
+   "first_share": 36,
+   "pair": 11
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "pittsburgh",
+   "top": "chris driscoll plumbing",
+   "top_share": 68,
+   "distinct": 70,
+   "first_share": 16,
+   "pair": 12
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "portland",
+   "top": "meticulous plumbing",
+   "top_share": 76,
+   "distinct": 52,
+   "first_share": 56,
+   "pair": 17
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "richmond",
+   "top": "robinsons plumbing service",
+   "top_share": 84,
+   "distinct": 53,
+   "first_share": 40,
+   "pair": 22
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "sacramento",
+   "top": "sacramento plumbing solutions",
+   "top_share": 60,
+   "distinct": 55,
+   "first_share": 24,
+   "pair": 9
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "tampa",
+   "top": "everydayplumber com",
+   "top_share": 40,
+   "distinct": 36,
+   "first_share": 24,
+   "pair": 9
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "toronto",
+   "top": "leaside plumbing and heating",
+   "top_share": 48,
+   "distinct": 54,
+   "first_share": 12,
+   "pair": 9
+  },
+  {
+   "surface": "gemini",
+   "trade": "plumber",
+   "city": "tucson",
+   "top": "cals plumbing",
+   "top_share": 64,
+   "distinct": 44,
+   "first_share": 24,
+   "pair": 12
+  }
+ ]
+}
