@@ -16,7 +16,8 @@ def names(answer):
         raw=m.group(1).strip()
         if len(raw)<3 or STOP.match(raw) or raw.lower() in ("plumber","dentist","bakery"): continue
         if len(raw.split())>7: continue
-        if re.match(r"^(tips?|how|questions?|things|factors|what|final|choosing|considerations?|availability|licens|pricing|response|experience|emergency|specialt|insurance|warranty|guarantee|hours|location|contact|about|overview|summary|verdict|conclusion|note|source|sources|references?|methodology|criteria|red flags?|pro tip|bonus|honou?rable|runner|also|other|more|additional|nearby|neighbou?rhood|downtown|north|south|east|west|central)\b", raw, re.I): continue
+        if re.match(r"^(tips?|how|questions?|things|factors|what|final|choosing|considerations?|availability|licens|pricing|response|experience|emergency|specialt|insurance|warranty|guarantee|hours|location|contact|about|overview|summary|verdict|conclusion|note|source|sources|references?|methodology|criteria|red flags?|pro tip|bonus|honou?rable|runner|also|other|more|additional|nearby|neighbou?rhood|downtown|north|south|east|west|central|reputation|nhs|private|public|cost|budget|quality|speed|trust|value|verified|reviews?|ratings?|online|word of mouth|community|customer)\b", raw, re.I): continue
+        if re.search(r"\b(vs\.?|versus)\b", raw, re.I): continue
         if re.search(r"\b(for hiring|to consider|to ask|to look|to avoid|before you|when choosing|how to|checklist|comparison)\b", raw, re.I): continue
         n=norm(raw)
         if not n or n in seen: continue

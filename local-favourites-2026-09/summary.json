@@ -111,7 +111,7 @@
     ]
    ],
    [
-    "joes bakery & coffee shop",
+    "heavens bistro bakery",
     1,
     4,
     [
@@ -120,7 +120,7 @@
     ]
    ],
    [
-    "heavens bistro bakery",
+    "joes bakery & coffee shop",
     1,
     4,
     [
@@ -238,7 +238,7 @@
     ]
    ],
    [
-    "caff sorrento",
+    "granny cs bakery",
     4,
     16,
     [
@@ -247,7 +247,7 @@
     ]
    ],
    [
-    "granny cs bakery",
+    "caff sorrento",
     4,
     16,
     [
@@ -590,15 +590,6 @@
     ]
    ],
    [
-    "herttys bake shop",
-    3,
-    12,
-    [
-     4,
-     30
-    ]
-   ],
-   [
     "debbys bakery",
     3,
     12,
@@ -608,7 +599,16 @@
     ]
    ],
    [
-    "reschs bakery",
+    "herttys bake shop",
+    3,
+    12,
+    [
+     4,
+     30
+    ]
+   ],
+   [
+    "pistacia vera",
     1,
     4,
     [
@@ -626,7 +626,7 @@
     ]
    ],
    [
-    "belles bread",
+    "reschs bakery",
     1,
     4,
     [
@@ -942,7 +942,7 @@
     ]
    ],
    [
-    "una",
+    "twist",
     7,
     28,
     [
@@ -951,7 +951,7 @@
     ]
    ],
    [
-    "twist",
+    "una",
     7,
     28,
     [
@@ -1031,7 +1031,7 @@
   "per_median": 4,
   "none": 0,
   "top": [
-   "mclains bakery",
+   "messenger coffee ibis bakery",
    25
   ],
   "top_share": 1.0,
@@ -1055,7 +1055,7 @@
   "pair": 0.7128888888888889,
   "rates": [
    [
-    "mclains bakery",
+    "messenger coffee ibis bakery",
     25,
     100,
     [
@@ -1064,7 +1064,7 @@
     ]
    ],
    [
-    "messenger coffee ibis bakery",
+    "mclains bakery",
     25,
     100,
     [
@@ -1180,7 +1180,7 @@
   "per_median": 5,
   "none": 0,
   "top": [
-   "lanes bakery & coffee",
+   "greenbush bakery",
    25
   ],
   "top_share": 1.0,
@@ -1200,7 +1200,7 @@
   "pair": 0.7004126984126984,
   "rates": [
    [
-    "lanes bakery & coffee",
+    "greenbush bakery",
     25,
     100,
     [
@@ -1209,7 +1209,7 @@
     ]
    ],
    [
-    "greenbush bakery",
+    "lanes bakery & coffee",
     25,
     100,
     [
@@ -1624,7 +1624,7 @@
   "per_median": 7,
   "none": 0,
   "top": [
-   "bellecour",
+   "patisserie 46",
    25
   ],
   "top_share": 1.0,
@@ -1648,7 +1648,7 @@
   "pair": 0.6356796536796536,
   "rates": [
    [
-    "bellecour",
+    "patisserie 46",
     25,
     100,
     [
@@ -1657,7 +1657,7 @@
     ]
    ],
    [
-    "patisserie 46",
+    "bellecour",
     25,
     100,
     [
@@ -1800,7 +1800,7 @@
   "per_median": 5,
   "none": 0,
   "top": [
-   "dandrews bakery & cafe",
+   "dozen bakery",
    25
   ],
   "top_share": 1.0,
@@ -1820,15 +1820,6 @@
   "pair": 0.6945912698412698,
   "rates": [
    [
-    "dandrews bakery & cafe",
-    25,
-    100,
-    [
-     87,
-     100
-    ]
-   ],
-   [
     "dozen bakery",
     25,
     100,
@@ -1839,6 +1830,15 @@
    ],
    [
     "brightside bakeshop",
+    25,
+    100,
+    [
+     87,
+     100
+    ]
+   ],
+   [
+    "dandrews bakery & cafe",
     25,
     100,
     [
@@ -2068,7 +2068,7 @@
     ]
    ],
    [
-    "blue otter bakery",
+    "gigis cupcakes omaha",
     3,
     12,
     [
@@ -2330,7 +2330,7 @@
     ]
    ],
    [
-    "oyatsupan bakers",
+    "crema coffee bakery",
     7,
     28,
     [
@@ -2339,7 +2339,7 @@
     ]
    ],
    [
-    "crema coffee bakery",
+    "oyatsupan bakers",
     7,
     28,
     [
@@ -2428,7 +2428,7 @@
   "per_median": 6,
   "none": 0,
   "top": [
-   "rva bakehouse",
+   "westhampton pastry shop",
    24
   ],
   "top_share": 0.96,
@@ -2452,7 +2452,7 @@
   "pair": 0.6714390146890147,
   "rates": [
    [
-    "rva bakehouse",
+    "westhampton pastry shop",
     24,
     96,
     [
@@ -2461,7 +2461,7 @@
     ]
    ],
    [
-    "westhampton pastry shop",
+    "rva bakehouse",
     24,
     96,
     [
@@ -2533,6 +2533,15 @@
     ]
    ],
    [
+    "sugar & crumb home bakery",
+    1,
+    4,
+    [
+     1,
+     20
+    ]
+   ],
+   [
     "fat rabbit bakery",
     1,
     4,
@@ -2543,15 +2552,6 @@
    ],
    [
     "sweet continent",
-    1,
-    4,
-    [
-     1,
-     20
-    ]
-   ],
-   [
-    "sugar & crumb home bakery",
     1,
     4,
     [
@@ -2604,7 +2604,7 @@
   "per_median": 5,
   "none": 0,
   "top": [
-   "starbread",
+   "forgotten bakery",
    24
   ],
   "top_share": 0.96,
@@ -2628,7 +2628,7 @@
   "pair": 0.5616481481481481,
   "rates": [
    [
-    "starbread",
+    "forgotten bakery",
     24,
     96,
     [
@@ -2637,7 +2637,7 @@
     ]
    ],
    [
-    "forgotten bakery",
+    "starbread",
     24,
     96,
     [
@@ -2700,6 +2700,15 @@
     ]
    ],
    [
+    "ettores bakery & caf",
+    1,
+    4,
+    [
+     1,
+     20
+    ]
+   ],
+   [
     "starbread bakery",
     1,
     4,
@@ -2710,15 +2719,6 @@
    ],
    [
     "estelles baking company",
-    1,
-    4,
-    [
-     1,
-     20
-    ]
-   ],
-   [
-    "ettores bakery & caf",
     1,
     4,
     [
@@ -2809,7 +2809,7 @@
     ]
    ],
    [
-    "ticos bakery",
+    "enas secret bake",
     23,
     92,
     [
@@ -2818,7 +2818,7 @@
     ]
    ],
    [
-    "enas secret bake",
+    "ticos bakery",
     23,
     92,
     [
@@ -2863,15 +2863,6 @@
     ]
    ],
    [
-    "sweeteas",
-    1,
-    4,
-    [
-     1,
-     20
-    ]
-   ],
-   [
     "ticos bakery tampa",
     1,
     4,
@@ -2882,6 +2873,15 @@
    ],
    [
     "alessi bakery",
+    1,
+    4,
+    [
+     1,
+     20
+    ]
+   ],
+   [
+    "sweeteas",
     1,
     4,
     [
@@ -3021,7 +3021,7 @@
     ]
    ],
    [
-    "dough bakeshop",
+    "blackbird baking",
     11,
     44,
     [
@@ -3030,7 +3030,7 @@
     ]
    ],
    [
-    "blackbird baking",
+    "dough bakeshop",
     11,
     44,
     [
@@ -3161,7 +3161,7 @@
     ]
    ],
    [
-    "monas danish bakery",
+    "el triunfo bakery",
     25,
     100,
     [
@@ -3170,7 +3170,7 @@
     ]
    ],
    [
-    "el triunfo bakery",
+    "monas danish bakery",
     25,
     100,
     [
@@ -3338,7 +3338,7 @@
     ]
    ],
    [
-    "enamel dentistry",
+    "forest family dentistry",
     4,
     16,
     [
@@ -3347,7 +3347,7 @@
     ]
    ],
    [
-    "forest family dentistry",
+    "enamel dentistry",
     4,
     16,
     [
@@ -3505,7 +3505,7 @@
     ]
    ],
    [
-    "centennial dental",
+    "victory dental",
     1,
     4,
     [
@@ -3514,7 +3514,7 @@
     ]
    ],
    [
-    "victory dental",
+    "centennial dental",
     1,
     4,
     [
@@ -3966,7 +3966,7 @@
     ]
    ],
    [
-    "dr bryan paul savage",
+    "dr gary radz",
     5,
     20,
     [
@@ -3975,7 +3975,7 @@
     ]
    ],
    [
-    "dr gary radz",
+    "dr bryan paul savage",
     5,
     20,
     [
@@ -4011,7 +4011,7 @@
     ]
    ],
    [
-    "dr john mark flanigan",
+    "dr kenneth m burson",
     3,
     12,
     [
@@ -4093,7 +4093,7 @@
     ]
    ],
    [
-    "beechwood dental & implant centre",
+    "portobello dental clinic",
     23,
     92,
     [
@@ -4102,7 +4102,7 @@
     ]
    ],
    [
-    "portobello dental clinic",
+    "beechwood dental & implant centre",
     23,
     92,
     [
@@ -4156,7 +4156,7 @@
     ]
    ],
    [
-    "dental care ireland kimmage",
+    "annes lane dental",
     1,
     4,
     [
@@ -4165,7 +4165,7 @@
     ]
    ],
    [
-    "annes lane dental",
+    "dental care ireland kimmage",
     1,
     4,
     [
@@ -4183,7 +4183,7 @@
     ]
    ],
    [
-    "harcourt dental clinic",
+    "dame street dental hospital",
     1,
     4,
     [
@@ -4490,6 +4490,15 @@
     ]
    ],
    [
+    "dr nicole andersen",
+    4,
+    16,
+    [
+     6,
+     35
+    ]
+   ],
+   [
     "madison no fear dentistry",
     4,
     16,
@@ -4500,15 +4509,6 @@
    ],
    [
     "dr rambod fard",
-    4,
-    16,
-    [
-     6,
-     35
-    ]
-   ],
-   [
-    "dr nicole andersen",
     4,
     16,
     [
@@ -4621,7 +4621,7 @@
     ]
    ],
    [
-    "manchester dental practice",
+    "arndale dental & implant clinic",
     20,
     80,
     [
@@ -4630,7 +4630,7 @@
     ]
    ],
    [
-    "arndale dental & implant clinic",
+    "manchester dental practice",
     20,
     80,
     [
@@ -5127,7 +5127,7 @@
     ]
    ],
    [
-    "miller family dentistry",
+    "sullivan dental partners",
     1,
     4,
     [
@@ -5136,7 +5136,7 @@
     ]
    ],
    [
-    "sullivan dental partners",
+    "miller family dentistry",
     1,
     4,
     [
@@ -5189,7 +5189,7 @@
   "per_median": 5,
   "none": 0,
   "top": [
-   "thomsen dental group",
+   "premier dental",
    25
   ],
   "top_share": 1.0,
@@ -5213,7 +5213,7 @@
   "pair": 0.6505912698412698,
   "rates": [
    [
-    "thomsen dental group",
+    "premier dental",
     25,
     100,
     [
@@ -5222,7 +5222,7 @@
     ]
    ],
    [
-    "premier dental",
+    "thomsen dental group",
     25,
     100,
     [
@@ -5329,7 +5329,7 @@
   "per_median": 8,
   "none": 0,
   "top": [
-   "oakland aesthetic dentistry",
+   "edgewood dental",
    25
   ],
   "top_share": 1.0,
@@ -5345,7 +5345,7 @@
   "pair": 0.858473063973064,
   "rates": [
    [
-    "oakland aesthetic dentistry",
+    "edgewood dental",
     25,
     100,
     [
@@ -5363,6 +5363,15 @@
     ]
    ],
    [
+    "oakland aesthetic dentistry",
+    25,
+    100,
+    [
+     87,
+     100
+    ]
+   ],
+   [
     "warwick dentistry",
     25,
     100,
@@ -5372,16 +5381,7 @@
     ]
    ],
    [
-    "edgewood dental",
-    25,
-    100,
-    [
-     87,
-     100
-    ]
-   ],
-   [
-    "polished dental group",
+    "john r bush",
     23,
     92,
     [
@@ -5390,7 +5390,7 @@
     ]
    ],
    [
-    "john r bush",
+    "polished dental group",
     23,
     92,
     [
@@ -5460,7 +5460,7 @@
   "per_median": 4,
   "none": 0,
   "top": [
-   "pdx dental care",
+   "cedar creek dental",
    25
   ],
   "top_share": 1.0,
@@ -5484,15 +5484,6 @@
   "pair": 0.7473968253968254,
   "rates": [
    [
-    "pdx dental care",
-    25,
-    100,
-    [
-     87,
-     100
-    ]
-   ],
-   [
     "cedar creek dental",
     25,
     100,
@@ -5503,6 +5494,15 @@
    ],
    [
     "dougherty laybourn menashe dental",
+    25,
+    100,
+    [
+     87,
+     100
+    ]
+   ],
+   [
+    "pdx dental care",
     25,
     100,
     [
@@ -5845,7 +5845,16 @@
     ]
    ],
    [
-    "dr kristine balcom",
+    "dr ayat elsherif",
+    1,
+    4,
+    [
+     1,
+     20
+    ]
+   ],
+   [
+    "dr terry adair",
     1,
     4,
     [
@@ -5863,16 +5872,7 @@
     ]
    ],
    [
-    "dr ayat elsherif",
-    1,
-    4,
-    [
-     1,
-     20
-    ]
-   ],
-   [
-    "dr terry adair",
+    "dr kristine balcom",
     1,
     4,
     [
@@ -6012,7 +6012,7 @@
     ]
    ],
    [
-    "habana dental care",
+    "pearl dentist",
     1,
     4,
     [
@@ -6030,15 +6030,6 @@
     ]
    ],
    [
-    "dr robert michaud",
-    1,
-    4,
-    [
-     1,
-     20
-    ]
-   ],
-   [
     "patterson dental supply",
     1,
     4,
@@ -6048,7 +6039,16 @@
     ]
    ],
    [
-    "pearl dentist",
+    "dr robert michaud",
+    1,
+    4,
+    [
+     1,
+     20
+    ]
+   ],
+   [
+    "habana dental care",
     1,
     4,
     [
@@ -6134,7 +6134,7 @@
     ]
    ],
    [
-    "t dot dental",
+    "danforth dental",
     19,
     76,
     [
@@ -6143,7 +6143,7 @@
     ]
    ],
    [
-    "danforth dental",
+    "t dot dental",
     19,
     76,
     [
@@ -6224,7 +6224,7 @@
     ]
    ],
    [
-    "dr judy sturm & associates",
+    "dr feisel haji at soho dental",
     3,
     12,
     [
@@ -6319,7 +6319,7 @@
     ]
    ],
    [
-    "advanced family dentistry",
+    "orange grove dental",
     18,
     72,
     [
@@ -6328,7 +6328,7 @@
     ]
    ],
    [
-    "orange grove dental",
+    "mesquite dental",
     18,
     72,
     [
@@ -6355,7 +6355,7 @@
     ]
    ],
    [
-    "mesquite dental",
+    "advanced family dentistry",
     18,
     72,
     [
@@ -6445,7 +6445,7 @@
  "chatgpt/plumber-austin": {
   "n": 25,
   "grounded": 25,
-  "distinct": 8,
+  "distinct": 7,
   "per_median": 3,
   "none": 0,
   "top": [
@@ -6466,7 +6466,7 @@
    ]
   ],
   "first_share": 0.96,
-  "pair": 0.4503333333333333,
+  "pair": 0.47688888888888886,
   "rates": [
    [
     "abacus plumbing air conditioning & electrical",
@@ -6487,7 +6487,7 @@
     ]
    ],
    [
-    "ez flow plumbing",
+    "stans heating air plumbing & electrical",
     11,
     44,
     [
@@ -6496,7 +6496,7 @@
     ]
    ],
    [
-    "stans heating air plumbing & electrical",
+    "ez flow plumbing",
     11,
     44,
     [
@@ -6520,15 +6520,6 @@
     [
      17,
      52
-    ]
-   ],
-   [
-    "customer reviews",
-    7,
-    28,
-    [
-     14,
-     48
     ]
    ],
    [
@@ -6651,7 +6642,7 @@
     ]
    ],
    [
-    "pico plumbing",
+    "howe plumbing",
     1,
     4,
     [
@@ -6660,7 +6651,7 @@
     ]
    ],
    [
-    "rooted plumbing",
+    "pico plumbing",
     1,
     4,
     [
@@ -6678,7 +6669,7 @@
     ]
    ],
    [
-    "howe plumbing",
+    "rooted plumbing",
     1,
     4,
     [
@@ -6818,7 +6809,7 @@
     ]
    ],
    [
-    "benjamin franklin plumbing of charlotte",
+    "almonte plumbing",
     14,
     56,
     [
@@ -6827,7 +6818,7 @@
     ]
    ],
    [
-    "almonte plumbing",
+    "benjamin franklin plumbing of charlotte",
     14,
     56,
     [
@@ -6921,11 +6912,11 @@
  "chatgpt/plumber-columbus": {
   "n": 25,
   "grounded": 25,
-  "distinct": 19,
+  "distinct": 18,
   "per_median": 7,
   "none": 0,
   "top": [
-   "allegiant plumbing",
+   "parson plumbing and drains",
    15
   ],
   "top_share": 0.6,
@@ -6946,17 +6937,8 @@
    ]
   ],
   "first_share": 0.56,
-  "pair": 0.32316682391682394,
+  "pair": 0.32512533762533763,
   "rates": [
-   [
-    "allegiant plumbing",
-    15,
-    60,
-    [
-     41,
-     77
-    ]
-   ],
    [
     "parson plumbing and drains",
     15,
@@ -6967,7 +6949,16 @@
     ]
    ],
    [
-    "affordable professional plumbing",
+    "allegiant plumbing",
+    15,
+    60,
+    [
+     41,
+     77
+    ]
+   ],
+   [
+    "plumbing one",
     14,
     56,
     [
@@ -6976,7 +6967,7 @@
     ]
    ],
    [
-    "plumbing one",
+    "affordable professional plumbing",
     14,
     56,
     [
@@ -7241,7 +7232,7 @@
   "per_median": 4,
   "none": 0,
   "top": [
-   "sylo plumbing heating & electrical",
+   "plumbers dublin",
    25
   ],
   "top_share": 1.0,
@@ -7261,7 +7252,7 @@
   "pair": 0.7716666666666667,
   "rates": [
    [
-    "sylo plumbing heating & electrical",
+    "plumbers dublin",
     25,
     100,
     [
@@ -7270,7 +7261,7 @@
     ]
    ],
    [
-    "plumbers dublin",
+    "sylo plumbing heating & electrical",
     25,
     100,
     [
@@ -7342,8 +7333,8 @@
  "chatgpt/plumber-kansas-city": {
   "n": 25,
   "grounded": 25,
-  "distinct": 11,
-  "per_median": 6,
+  "distinct": 10,
+  "per_median": 5,
   "none": 0,
   "top": [
    "a 1 sewer & septic",
@@ -7351,7 +7342,7 @@
   ],
   "top_share": 0.96,
   "ge90": 1,
-  "ge50": 6,
+  "ge50": 5,
   "first": [
    [
     "inception plumbing",
@@ -7367,7 +7358,7 @@
    ]
   ],
   "first_share": 0.76,
-  "pair": 0.5084708994708994,
+  "pair": 0.49590608465608466,
   "rates": [
    [
     "a 1 sewer & septic",
@@ -7379,7 +7370,7 @@
     ]
    ],
    [
-    "quality plumbing",
+    "inception plumbing",
     19,
     76,
     [
@@ -7388,12 +7379,12 @@
     ]
    ],
    [
-    "inception plumbing",
-    19,
-    76,
+    "dick ray master plumber heating and cooling",
+    15,
+    60,
     [
-     57,
-     89
+     41,
+     77
     ]
    ],
    [
@@ -7407,15 +7398,6 @@
    ],
    [
     "rod o matic plumbing",
-    15,
-    60,
-    [
-     41,
-     77
-    ]
-   ],
-   [
-    "dick ray master plumber heating and cooling",
     15,
     60,
     [
@@ -7597,6 +7579,15 @@
     ]
    ],
    [
+    "madison plumbing pros",
+    3,
+    12,
+    [
+     4,
+     30
+    ]
+   ],
+   [
     "fredrick plumbing",
     3,
     12,
@@ -7607,15 +7598,6 @@
    ],
    [
     "metro plumbing & drain cleaning",
-    3,
-    12,
-    [
-     4,
-     30
-    ]
-   ],
-   [
-    "madison plumbing pros",
     3,
     12,
     [
@@ -7664,7 +7646,7 @@
  "chatgpt/plumber-manchester": {
   "n": 25,
   "grounded": 25,
-  "distinct": 15,
+  "distinct": 14,
   "per_median": 6,
   "none": 0,
   "top": [
@@ -7689,7 +7671,7 @@
    ]
   ],
   "first_share": 0.76,
-  "pair": 0.6163435545935546,
+  "pair": 0.6305103415103415,
   "rates": [
    [
     "manchester plumbers",
@@ -7773,16 +7755,7 @@
     ]
    ],
    [
-    "customer reviews",
-    3,
-    12,
-    [
-     4,
-     30
-    ]
-   ],
-   [
-    "m j siddle plumbing & heating",
+    "manchester plumbers 24 hour service",
     2,
     8,
     [
@@ -7791,7 +7764,16 @@
     ]
    ],
    [
-    "manchester plumbers 24 hour service",
+    "daniel plumbing and heating",
+    2,
+    8,
+    [
+     2,
+     25
+    ]
+   ],
+   [
+    "m j siddle plumbing & heating",
     2,
     8,
     [
@@ -8009,7 +7991,7 @@
     ]
    ],
    [
-    "erik nelson plumbing",
+    "soderlin plumbing heating & air conditioning",
     19,
     76,
     [
@@ -8018,7 +8000,7 @@
     ]
    ],
    [
-    "soderlin plumbing heating & air conditioning",
+    "erik nelson plumbing",
     19,
     76,
     [
@@ -8326,7 +8308,7 @@
     ]
    ],
    [
-    "pink panther plumbing",
+    "big birge plumbing",
     1,
     4,
     [
@@ -8335,7 +8317,7 @@
     ]
    ],
    [
-    "big birge plumbing",
+    "pink panther plumbing",
     1,
     4,
     [
@@ -8520,7 +8502,7 @@
     ]
    ],
    [
-    "shelton plumbing",
+    "frew plumbing heating & air conditioning",
     2,
     8,
     [
@@ -8679,11 +8661,11 @@
  "chatgpt/plumber-richmond": {
   "n": 25,
   "grounded": 25,
-  "distinct": 20,
+  "distinct": 19,
   "per_median": 4,
   "none": 0,
   "top": [
-   "plumbers r us",
+   "harrys plumbing",
    23
   ],
   "top_share": 0.92,
@@ -8704,10 +8686,10 @@
    ]
   ],
   "first_share": 0.32,
-  "pair": 0.39261439486439487,
+  "pair": 0.39821155696155697,
   "rates": [
    [
-    "plumbers r us",
+    "harrys plumbing",
     23,
     92,
     [
@@ -8716,7 +8698,7 @@
     ]
    ],
    [
-    "harrys plumbing",
+    "plumbers r us",
     23,
     92,
     [
@@ -8855,8 +8837,8 @@
  "chatgpt/plumber-sacramento": {
   "n": 25,
   "grounded": 25,
-  "distinct": 19,
-  "per_median": 5,
+  "distinct": 18,
+  "per_median": 4,
   "none": 0,
   "top": [
    "millennium plumbing specialist",
@@ -8880,7 +8862,7 @@
    ]
   ],
   "first_share": 0.76,
-  "pair": 0.46870645095645097,
+  "pair": 0.4879786047286047,
   "rates": [
    [
     "millennium plumbing specialist",
@@ -8946,12 +8928,12 @@
     ]
    ],
    [
-    "customer reviews",
-    6,
-    24,
+    "new flow plumbing roseville",
+    2,
+    8,
     [
-     11,
-     43
+     2,
+     25
     ]
    ],
    [
@@ -8973,7 +8955,7 @@
     ]
    ],
    [
-    "new flow plumbing roseville",
+    "bonney plumbing heating & air",
     2,
     8,
     [
@@ -8982,7 +8964,7 @@
     ]
    ],
    [
-    "bonney plumbing heating & air",
+    "bilingual staff",
     2,
     8,
     [
@@ -9542,7 +9524,7 @@
     ]
    ],
    [
-    "sour duck market",
+    "comadre panader a",
     7,
     28,
     [
@@ -9551,7 +9533,7 @@
     ]
    ],
    [
-    "comadre panader a",
+    "sour duck market",
     7,
     28,
     [
@@ -9569,15 +9551,6 @@
     ]
    ],
    [
-    "must try",
-    5,
-    20,
-    [
-     9,
-     39
-    ]
-   ],
-   [
     "texas french bread",
     5,
     20,
@@ -9588,6 +9561,15 @@
    ],
    [
     "mi tradici n",
+    5,
+    20,
+    [
+     9,
+     39
+    ]
+   ],
+   [
+    "must try",
     5,
     20,
     [
@@ -9772,7 +9754,7 @@
     ]
    ],
    [
-    "highlights",
+    "sunshine spice bakery & cafe",
     1,
     4,
     [
@@ -9781,7 +9763,7 @@
     ]
    ],
    [
-    "certified kitchen bakery",
+    "yeast & west",
     1,
     4,
     [
@@ -9930,7 +9912,7 @@
     ]
    ],
    [
-    "craving",
+    "want",
     1,
     4,
     [
@@ -9939,7 +9921,7 @@
     ]
    ],
    [
-    "want",
+    "craving",
     1,
     4,
     [
@@ -10070,7 +10052,7 @@
     ]
    ],
    [
-    "fox in the snow cafe",
+    "pistacia vera",
     4,
     16,
     [
@@ -10088,7 +10070,7 @@
     ]
    ],
    [
-    "pistacia vera",
+    "dan the baker",
     4,
     16,
     [
@@ -10097,7 +10079,7 @@
     ]
    ],
    [
-    "dan the baker",
+    "fox in the snow cafe",
     4,
     16,
     [
@@ -10358,7 +10340,7 @@
  "gemini/bakery-dublin": {
   "n": 25,
   "grounded": 25,
-  "distinct": 22,
+  "distinct": 21,
   "per_median": 2,
   "none": 5,
   "top": [
@@ -10616,7 +10598,7 @@
     ]
    ],
    [
-    "yoli tortilleria",
+    "bloom baking",
     2,
     8,
     [
@@ -10625,7 +10607,7 @@
     ]
    ],
    [
-    "bloom baking",
+    "yoli tortilleria",
     2,
     8,
     [
@@ -10652,7 +10634,7 @@
     ]
    ],
    [
-    "mochi donuts",
+    "house made pop tarts",
     1,
     4,
     [
@@ -10661,7 +10643,7 @@
     ]
    ],
    [
-    "savory cheddar chive drop biscuits",
+    "mochi donuts",
     1,
     4,
     [
@@ -10765,7 +10747,16 @@
     ]
    ],
    [
-    "far breton bakery",
+    "clasens european bakery",
+    5,
+    20,
+    [
+     9,
+     39
+    ]
+   ],
+   [
+    "madison sourdough",
     5,
     20,
     [
@@ -10783,16 +10774,7 @@
     ]
    ],
    [
-    "clasens european bakery",
-    5,
-    20,
-    [
-     9,
-     39
-    ]
-   ],
-   [
-    "madison sourdough",
+    "far breton bakery",
     5,
     20,
     [
@@ -11117,7 +11099,7 @@
     ]
    ],
    [
-    "baker d chirico",
+    "monforte viennoiserie",
     6,
     24,
     [
@@ -11126,7 +11108,7 @@
     ]
    ],
    [
-    "monforte viennoiserie",
+    "baker d chirico",
     6,
     24,
     [
@@ -11275,6 +11257,15 @@
     ]
    ],
    [
+    "black walnut bakery",
+    13,
+    52,
+    [
+     33,
+     70
+    ]
+   ],
+   [
     "rustica bakery",
     13,
     52,
@@ -11285,15 +11276,6 @@
    ],
    [
     "patisserie 46",
-    13,
-    52,
-    [
-     33,
-     70
-    ]
-   ],
-   [
-    "black walnut bakery",
     13,
     52,
     [
@@ -11496,7 +11478,7 @@
     ]
    ],
    [
-    "little gourmand",
+    "recommendation",
     2,
     8,
     [
@@ -11505,7 +11487,7 @@
     ]
    ],
    [
-    "recommendation",
+    "little gourmand",
     2,
     8,
     [
@@ -12034,7 +12016,7 @@
     ]
    ],
    [
-    "twisted croissant",
+    "founded by james beard award",
     2,
     8,
     [
@@ -12043,7 +12025,7 @@
     ]
    ],
    [
-    "founded by james beard award",
+    "twisted croissant",
     2,
     8,
     [
@@ -12147,7 +12129,7 @@
     ]
    ],
    [
-    "westhampton pastry shop",
+    "up all night bakery",
     4,
     16,
     [
@@ -12156,7 +12138,7 @@
     ]
    ],
    [
-    "up all night bakery",
+    "westhampton pastry shop",
     4,
     16,
     [
@@ -12323,7 +12305,7 @@
     ]
    ],
    [
-    "mahoroba japanese bakery",
+    "starbread bakery",
     7,
     28,
     [
@@ -12332,7 +12314,7 @@
     ]
    ],
    [
-    "starbread bakery",
+    "mahoroba japanese bakery",
     7,
     28,
     [
@@ -12377,7 +12359,7 @@
     ]
    ],
    [
-    "freeport bakery",
+    "faria bakery",
     2,
     8,
     [
@@ -12386,7 +12368,7 @@
     ]
    ],
    [
-    "faria bakery",
+    "freeport bakery",
     2,
     8,
     [
@@ -12553,6 +12535,15 @@
     ]
    ],
    [
+    "state flour bakery",
+    1,
+    4,
+    [
+     1,
+     20
+    ]
+   ],
+   [
     "wrights gourmet house",
     1,
     4,
@@ -12571,16 +12562,7 @@
     ]
    ],
    [
-    "jamison b breadhouse bakes",
-    1,
-    4,
-    [
-     1,
-     20
-    ]
-   ],
-   [
-    "state flour bakery",
+    "la segunda central bakery",
     1,
     4,
     [
@@ -12684,7 +12666,7 @@
     ]
    ],
    [
-    "mon k patisserie",
+    "le beau croissanterie",
     6,
     24,
     [
@@ -12693,7 +12675,7 @@
     ]
    ],
    [
-    "le beau croissanterie",
+    "mon k patisserie",
     6,
     24,
     [
@@ -12747,7 +12729,7 @@
     ]
    ],
    [
-    "brodflour",
+    "le gourmand",
     3,
     12,
     [
@@ -12756,7 +12738,7 @@
     ]
    ],
    [
-    "le gourmand",
+    "brodflour",
     3,
     12,
     [
@@ -12990,7 +12972,7 @@
  "gemini/dentist-austin": {
   "n": 25,
   "grounded": 23,
-  "distinct": 46,
+  "distinct": 41,
   "per_median": 8,
   "none": 0,
   "top": [
@@ -13015,7 +12997,7 @@
    ]
   ],
   "first_share": 0.6,
-  "pair": 0.2986748961822491,
+  "pair": 0.323089357809946,
   "rates": [
    [
     "toothbar",
@@ -13036,7 +13018,7 @@
     ]
    ],
    [
-    "balcones family dental",
+    "forest family dentistry",
     17,
     68,
     [
@@ -13045,7 +13027,7 @@
     ]
    ],
    [
-    "forest family dentistry",
+    "balcones family dental",
     17,
     68,
     [
@@ -13166,8 +13148,8 @@
  "gemini/dentist-boise": {
   "n": 25,
   "grounded": 24,
-  "distinct": 50,
-  "per_median": 8,
+  "distinct": 48,
+  "per_median": 7,
   "none": 0,
   "top": [
    "summit dental group",
@@ -13191,7 +13173,7 @@
    ]
   ],
   "first_share": 0.48,
-  "pair": 0.18111535855498703,
+  "pair": 0.18564874531786296,
   "rates": [
    [
     "summit dental group",
@@ -13275,7 +13257,7 @@
     ]
    ],
    [
-    "grant dental",
+    "all about you dental",
     5,
     20,
     [
@@ -13284,7 +13266,7 @@
     ]
    ],
    [
-    "all about you dental",
+    "grant dental",
     5,
     20,
     [
@@ -13342,7 +13324,7 @@
  "gemini/dentist-charlotte": {
   "n": 25,
   "grounded": 25,
-  "distinct": 99,
+  "distinct": 91,
   "per_median": 10,
   "none": 0,
   "top": [
@@ -13367,7 +13349,7 @@
    ]
   ],
   "first_share": 0.44,
-  "pair": 0.15009964175082044,
+  "pair": 0.15576827188022366,
   "rates": [
    [
     "caldwell bills petrilli & west",
@@ -13388,7 +13370,7 @@
     ]
    ],
    [
-    "plaza midwood dentistry",
+    "charlotte dental arts",
     11,
     44,
     [
@@ -13397,7 +13379,7 @@
     ]
    ],
    [
-    "charlotte dental arts",
+    "plaza midwood dentistry",
     11,
     44,
     [
@@ -13433,7 +13415,7 @@
     ]
    ],
    [
-    "southpark dental and oral care",
+    "pearl dentistry reimagined",
     8,
     32,
     [
@@ -13442,7 +13424,7 @@
     ]
    ],
    [
-    "pearl dentistry reimagined",
+    "southpark dental and oral care",
     8,
     32,
     [
@@ -13518,7 +13500,7 @@
  "gemini/dentist-columbus": {
   "n": 25,
   "grounded": 25,
-  "distinct": 67,
+  "distinct": 63,
   "per_median": 8,
   "none": 1,
   "top": [
@@ -13543,7 +13525,7 @@
    ]
   ],
   "first_share": 0.32,
-  "pair": 0.15326592638178987,
+  "pair": 0.1572293344147564,
   "rates": [
    [
     "firouzian dentistry",
@@ -13694,7 +13676,7 @@
  "gemini/dentist-denver": {
   "n": 25,
   "grounded": 25,
-  "distinct": 77,
+  "distinct": 69,
   "per_median": 8,
   "none": 0,
   "top": [
@@ -13719,7 +13701,7 @@
    ]
   ],
   "first_share": 0.56,
-  "pair": 0.15859769063639031,
+  "pair": 0.1665562068220737,
   "rates": [
    [
     "metropolitan dental care",
@@ -13870,7 +13852,7 @@
  "gemini/dentist-dublin": {
   "n": 25,
   "grounded": 25,
-  "distinct": 65,
+  "distinct": 64,
   "per_median": 9,
   "none": 0,
   "top": [
@@ -13895,7 +13877,7 @@
    ]
   ],
   "first_share": 0.44,
-  "pair": 0.19572459933141048,
+  "pair": 0.19637824056748204,
   "rates": [
    [
     "seapoint clinic",
@@ -13925,7 +13907,7 @@
     ]
    ],
    [
-    "harcourt dental clinic",
+    "portobello dental clinic",
     15,
     60,
     [
@@ -13934,7 +13916,7 @@
     ]
    ],
    [
-    "portobello dental clinic",
+    "harcourt dental clinic",
     15,
     60,
     [
@@ -14046,7 +14028,7 @@
  "gemini/dentist-kansas-city": {
   "n": 25,
   "grounded": 25,
-  "distinct": 111,
+  "distinct": 106,
   "per_median": 11,
   "none": 1,
   "top": [
@@ -14071,7 +14053,7 @@
    ]
   ],
   "first_share": 0.16,
-  "pair": 0.13866438711666648,
+  "pair": 0.1432048790312453,
   "rates": [
    [
     "evers & gardner dental",
@@ -14173,7 +14155,7 @@
     ]
    ],
    [
-    "conservative vs aggressive treatment",
+    "careswell dental dr holli careswell",
     5,
     20,
     [
@@ -14222,7 +14204,7 @@
  "gemini/dentist-madison": {
   "n": 25,
   "grounded": 25,
-  "distinct": 44,
+  "distinct": 42,
   "per_median": 3,
   "none": 1,
   "top": [
@@ -14242,12 +14224,12 @@
     3
    ],
    [
-    "reputation",
+    "lead dentists",
     3
    ]
   ],
   "first_share": 0.2,
-  "pair": 0.048537744662744665,
+  "pair": 0.04985676823176823,
   "rates": [
    [
     "total care dental",
@@ -14256,15 +14238,6 @@
     [
      14,
      48
-    ]
-   ],
-   [
-    "known for",
-    6,
-    24,
-    [
-     11,
-     43
     ]
    ],
    [
@@ -14277,7 +14250,16 @@
     ]
    ],
    [
-    "highlights",
+    "known for",
+    6,
+    24,
+    [
+     11,
+     43
+    ]
+   ],
+   [
+    "artisan dental",
     5,
     20,
     [
@@ -14286,7 +14268,7 @@
     ]
    ],
    [
-    "artisan dental",
+    "highlights",
     5,
     20,
     [
@@ -14398,16 +14380,16 @@
  "gemini/dentist-manchester": {
   "n": 25,
   "grounded": 25,
-  "distinct": 62,
-  "per_median": 8,
-  "none": 0,
+  "distinct": 54,
+  "per_median": 7,
+  "none": 1,
   "top": [
-   "nhs vs private",
-   20
+   "ringway dental",
+   19
   ],
-  "top_share": 0.8,
+  "top_share": 0.76,
   "ge90": 0,
-  "ge50": 3,
+  "ge50": 2,
   "first": [
    [
     "ringway dental",
@@ -14423,17 +14405,8 @@
    ]
   ],
   "first_share": 0.24,
-  "pair": 0.18407055007829,
+  "pair": 0.14935862966010024,
   "rates": [
-   [
-    "nhs vs private",
-    20,
-    80,
-    [
-     61,
-     91
-    ]
-   ],
    [
     "ringway dental",
     19,
@@ -14532,6 +14505,15 @@
      9,
      39
     ]
+   ],
+   [
+    "night and day emergency dentist",
+    5,
+    20,
+    [
+     9,
+     39
+    ]
    ]
   ],
   "domains": [
@@ -14574,11 +14556,11 @@
  "gemini/dentist-melbourne": {
   "n": 25,
   "grounded": 25,
-  "distinct": 68,
-  "per_median": 8,
+  "distinct": 61,
+  "per_median": 7,
   "none": 0,
   "top": [
-   "mc dental",
+   "smile solutions",
    15
   ],
   "top_share": 0.6,
@@ -14599,10 +14581,10 @@
    ]
   ],
   "first_share": 0.52,
-  "pair": 0.11504692307749584,
+  "pair": 0.12087291445224882,
   "rates": [
    [
-    "mc dental",
+    "smile solutions",
     15,
     60,
     [
@@ -14611,7 +14593,7 @@
     ]
    ],
    [
-    "smile solutions",
+    "mc dental",
     15,
     60,
     [
@@ -14635,15 +14617,6 @@
     [
      17,
      52
-    ]
-   ],
-   [
-    "private health insurance",
-    7,
-    28,
-    [
-     14,
-     48
     ]
    ],
    [
@@ -14708,6 +14681,15 @@
      6,
      35
     ]
+   ],
+   [
+    "melbourne dental group",
+    4,
+    16,
+    [
+     6,
+     35
+    ]
    ]
   ],
   "domains": [
@@ -14750,7 +14732,7 @@
  "gemini/dentist-minneapolis": {
   "n": 25,
   "grounded": 25,
-  "distinct": 81,
+  "distinct": 78,
   "per_median": 9,
   "none": 0,
   "top": [
@@ -14775,7 +14757,7 @@
    ]
   ],
   "first_share": 0.2,
-  "pair": 0.16661378979064737,
+  "pair": 0.1690610418849583,
   "rates": [
    [
     "park dental",
@@ -14926,7 +14908,7 @@
  "gemini/dentist-nashville": {
   "n": 25,
   "grounded": 25,
-  "distinct": 77,
+  "distinct": 74,
   "per_median": 10,
   "none": 0,
   "top": [
@@ -14951,7 +14933,7 @@
    ]
   ],
   "first_share": 0.44,
-  "pair": 0.18787750755847404,
+  "pair": 0.19095395360834855,
   "rates": [
    [
     "belle meade family dentistry",
@@ -15102,7 +15084,7 @@
  "gemini/dentist-omaha": {
   "n": 25,
   "grounded": 25,
-  "distinct": 56,
+  "distinct": 54,
   "per_median": 7,
   "none": 1,
   "top": [
@@ -15127,7 +15109,7 @@
    ]
   ],
   "first_share": 0.48,
-  "pair": 0.1241529304029304,
+  "pair": 0.12614071114071115,
   "rates": [
    [
     "premier dental",
@@ -15229,7 +15211,7 @@
     ]
    ],
    [
-    "reputation",
+    "dr amber m allen",
     3,
     12,
     [
@@ -15278,7 +15260,7 @@
  "gemini/dentist-pittsburgh": {
   "n": 25,
   "grounded": 25,
-  "distinct": 71,
+  "distinct": 68,
   "per_median": 8,
   "none": 0,
   "top": [
@@ -15303,7 +15285,7 @@
    ]
   ],
   "first_share": 0.44,
-  "pair": 0.1969557939766918,
+  "pair": 0.1999965345112404,
   "rates": [
    [
     "atlas dental specialists",
@@ -15454,7 +15436,7 @@
  "gemini/dentist-portland": {
   "n": 25,
   "grounded": 25,
-  "distinct": 94,
+  "distinct": 90,
   "per_median": 10,
   "none": 0,
   "top": [
@@ -15479,7 +15461,7 @@
    ]
   ],
   "first_share": 0.24,
-  "pair": 0.15017322223127177,
+  "pair": 0.15304797470045148,
   "rates": [
    [
     "belmont family dentistry",
@@ -15630,7 +15612,7 @@
  "gemini/dentist-richmond": {
   "n": 25,
   "grounded": 25,
-  "distinct": 55,
+  "distinct": 52,
   "per_median": 7,
   "none": 0,
   "top": [
@@ -15655,7 +15637,7 @@
    ]
   ],
   "first_share": 0.24,
-  "pair": 0.1501276514163511,
+  "pair": 0.15521501075177546,
   "rates": [
    [
     "virginia family dentistry",
@@ -15806,8 +15788,8 @@
  "gemini/dentist-sacramento": {
   "n": 25,
   "grounded": 25,
-  "distinct": 67,
-  "per_median": 9,
+  "distinct": 63,
+  "per_median": 8,
   "none": 0,
   "top": [
    "midtown dental",
@@ -15831,7 +15813,7 @@
    ]
   ],
   "first_share": 0.44,
-  "pair": 0.1397980484427853,
+  "pair": 0.14476202186186707,
   "rates": [
    [
     "midtown dental",
@@ -15843,7 +15825,7 @@
     ]
    ],
    [
-    "dentistry of east sacramento",
+    "miyasaki dental",
     13,
     52,
     [
@@ -15852,7 +15834,7 @@
     ]
    ],
    [
-    "miyasaki dental",
+    "dentistry of east sacramento",
     13,
     52,
     [
@@ -15924,7 +15906,7 @@
     ]
    ],
    [
-    "reputation",
+    "oak family dental",
     5,
     20,
     [
@@ -15933,12 +15915,12 @@
     ]
    ],
    [
-    "oak family dental",
-    5,
-    20,
+    "dr jenny apekian",
+    4,
+    16,
     [
-     9,
-     39
+     6,
+     35
     ]
    ]
   ],
@@ -15982,7 +15964,7 @@
  "gemini/dentist-tampa": {
   "n": 25,
   "grounded": 25,
-  "distinct": 91,
+  "distinct": 83,
   "per_median": 9,
   "none": 0,
   "top": [
@@ -16007,7 +15989,7 @@
    ]
   ],
   "first_share": 0.2,
-  "pair": 0.10544060959966532,
+  "pair": 0.11099239872614486,
   "rates": [
    [
     "mcilwain dental specialists",
@@ -16158,7 +16140,7 @@
  "gemini/dentist-toronto": {
   "n": 25,
   "grounded": 24,
-  "distinct": 95,
+  "distinct": 93,
   "per_median": 9,
   "none": 0,
   "top": [
@@ -16183,7 +16165,7 @@
    ]
   ],
   "first_share": 0.52,
-  "pair": 0.16141344374019365,
+  "pair": 0.16387810071914594,
   "rates": [
    [
     "dr judy sturm & associates",
@@ -16334,7 +16316,7 @@
  "gemini/dentist-tucson": {
   "n": 25,
   "grounded": 25,
-  "distinct": 94,
+  "distinct": 91,
   "per_median": 9,
   "none": 1,
   "top": [
@@ -16359,7 +16341,7 @@
    ]
   ],
   "first_share": 0.2,
-  "pair": 0.10770821112090126,
+  "pair": 0.10931712671511097,
   "rates": [
    [
     "martin taylor dentistry",
@@ -16371,7 +16353,7 @@
     ]
    ],
    [
-    "dr adam dalesandro",
+    "known for",
     12,
     48,
     [
@@ -16380,7 +16362,7 @@
     ]
    ],
    [
-    "known for",
+    "dr adam dalesandro",
     12,
     48,
     [
@@ -16510,7 +16492,7 @@
  "gemini/plumber-austin": {
   "n": 25,
   "grounded": 25,
-  "distinct": 50,
+  "distinct": 49,
   "per_median": 7,
   "none": 0,
   "top": [
@@ -16535,7 +16517,7 @@
    ]
   ],
   "first_share": 0.52,
-  "pair": 0.20839468686914508,
+  "pair": 0.2123660632596391,
   "rates": [
    [
     "clarke kent plumbing",
@@ -16619,12 +16601,12 @@
     ]
    ],
    [
-    "reputation",
-    5,
-    20,
+    "everest plumbing",
+    4,
+    16,
     [
-     9,
-     39
+     6,
+     35
     ]
    ],
    [
@@ -16637,7 +16619,7 @@
     ]
    ],
    [
-    "everest plumbing",
+    "known for",
     4,
     16,
     [
@@ -16686,7 +16668,7 @@
  "gemini/plumber-boise": {
   "n": 25,
   "grounded": 25,
-  "distinct": 44,
+  "distinct": 43,
   "per_median": 4,
   "none": 2,
   "top": [
@@ -16711,7 +16693,7 @@
    ]
   ],
   "first_share": 0.2,
-  "pair": 0.09457607615695851,
+  "pair": 0.0955896630602513,
   "rates": [
    [
     "goodson plumbing services",
@@ -16862,7 +16844,7 @@
  "gemini/plumber-charlotte": {
   "n": 25,
   "grounded": 25,
-  "distinct": 50,
+  "distinct": 48,
   "per_median": 6,
   "none": 4,
   "top": [
@@ -16887,7 +16869,7 @@
    ]
   ],
   "first_share": 0.36,
-  "pair": 0.1327832910553499,
+  "pair": 0.13426246656393714,
   "rates": [
    [
     "wyattworks plumbing",
@@ -16935,15 +16917,6 @@
     ]
    ],
    [
-    "mq plumbing",
-    6,
-    24,
-    [
-     11,
-     43
-    ]
-   ],
-   [
     "e r services",
     6,
     24,
@@ -16953,7 +16926,16 @@
     ]
    ],
    [
-    "precision plumbing company",
+    "mq plumbing",
+    6,
+    24,
+    [
+     11,
+     43
+    ]
+   ],
+   [
+    "queen city heating air & plumbing",
     4,
     16,
     [
@@ -16962,7 +16944,7 @@
     ]
    ],
    [
-    "queen city heating air & plumbing",
+    "precision plumbing company",
     4,
     16,
     [
@@ -17038,7 +17020,7 @@
  "gemini/plumber-columbus": {
   "n": 25,
   "grounded": 25,
-  "distinct": 31,
+  "distinct": 30,
   "per_median": 4,
   "none": 2,
   "top": [
@@ -17058,12 +17040,12 @@
     6
    ],
    [
-    "reputation",
-    3
+    "apex plumbing heating and air pros",
+    4
    ]
   ],
   "first_share": 0.24,
-  "pair": 0.20219252044252045,
+  "pair": 0.2075648148148148,
   "rates": [
    [
     "drainmaster",
@@ -17099,15 +17081,6 @@
     [
      27,
      63
-    ]
-   ],
-   [
-    "reputation",
-    4,
-    16,
-    [
-     6,
-     35
     ]
    ],
    [
@@ -17172,6 +17145,15 @@
      2,
      25
     ]
+   ],
+   [
+    "affordable professional plumbing",
+    2,
+    8,
+    [
+     2,
+     25
+    ]
    ]
   ],
   "domains": [
@@ -17214,7 +17196,7 @@
  "gemini/plumber-denver": {
   "n": 25,
   "grounded": 25,
-  "distinct": 54,
+  "distinct": 52,
   "per_median": 6,
   "none": 1,
   "top": [
@@ -17239,7 +17221,7 @@
    ]
   ],
   "first_share": 0.56,
-  "pair": 0.18559450734450733,
+  "pair": 0.19088570688570689,
   "rates": [
    [
     "hyper flow service company",
@@ -17275,15 +17257,6 @@
     [
      23,
      59
-    ]
-   ],
-   [
-    "reputation",
-    6,
-    24,
-    [
-     11,
-     43
     ]
    ],
    [
@@ -17348,6 +17321,15 @@
      2,
      25
     ]
+   ],
+   [
+    "older denver infrastructure",
+    2,
+    8,
+    [
+     2,
+     25
+    ]
    ]
   ],
   "domains": [
@@ -17390,11 +17372,11 @@
  "gemini/plumber-dublin": {
   "n": 25,
   "grounded": 25,
-  "distinct": 42,
+  "distinct": 38,
   "per_median": 6,
   "none": 0,
   "top": [
-   "dublin plumbing services",
+   "dublin area plumbers",
    23
   ],
   "top_share": 0.92,
@@ -17415,10 +17397,10 @@
    ]
   ],
   "first_share": 0.68,
-  "pair": 0.33397144930233164,
+  "pair": 0.34878188015688016,
   "rates": [
    [
-    "dublin plumbing services",
+    "dublin area plumbers",
     23,
     92,
     [
@@ -17427,7 +17409,7 @@
     ]
    ],
    [
-    "dublin area plumbers",
+    "dublin plumbing services",
     23,
     92,
     [
@@ -17566,7 +17548,7 @@
  "gemini/plumber-kansas-city": {
   "n": 25,
   "grounded": 25,
-  "distinct": 42,
+  "distinct": 39,
   "per_median": 7,
   "none": 1,
   "top": [
@@ -17591,7 +17573,7 @@
    ]
   ],
   "first_share": 0.36,
-  "pair": 0.21425211906829553,
+  "pair": 0.22334577214724274,
   "rates": [
    [
     "poor johns plumbing",
@@ -17684,7 +17666,7 @@
     ]
    ],
    [
-    "quality plumbing",
+    "snake n rooter plumbing company",
     4,
     16,
     [
@@ -17693,12 +17675,12 @@
     ]
    ],
    [
-    "snake n rooter plumbing company",
-    4,
-    16,
+    "sewer surgeon",
+    3,
+    12,
     [
-     6,
-     35
+     4,
+     30
     ]
    ]
   ],
@@ -17742,21 +17724,17 @@
  "gemini/plumber-madison": {
   "n": 25,
   "grounded": 25,
-  "distinct": 35,
-  "per_median": 2,
-  "none": 4,
+  "distinct": 33,
+  "per_median": 1,
+  "none": 7,
   "top": [
-   "reputation",
-   11
+   "triggs plumbing",
+   8
   ],
-  "top_share": 0.44,
+  "top_share": 0.32,
   "ge90": 0,
   "ge50": 0,
   "first": [
-   [
-    "reputation",
-    8
-   ],
    [
     "dave jones",
     4
@@ -17764,20 +17742,15 @@
    [
     "avid plumbing",
     3
+   ],
+   [
+    "older homes",
+    2
    ]
   ],
-  "first_share": 0.32,
-  "pair": 0.10741226366226367,
+  "first_share": 0.16,
+  "pair": 0.12302311577311577,
   "rates": [
-   [
-    "reputation",
-    11,
-    44,
-    [
-     27,
-     63
-    ]
-   ],
    [
     "triggs plumbing",
     8,
@@ -17806,6 +17779,15 @@
     ]
    ],
    [
+    "dave jones",
+    6,
+    24,
+    [
+     11,
+     43
+    ]
+   ],
+   [
     "h j pertzborn plumbing & fire protection",
     6,
     24,
@@ -17816,15 +17798,6 @@
    ],
    [
     "marks reddi rooter & plumbing",
-    6,
-    24,
-    [
-     11,
-     43
-    ]
-   ],
-   [
-    "dave jones",
     6,
     24,
     [
@@ -17876,6 +17849,15 @@
      2,
      25
     ]
+   ],
+   [
+    "rhd plumbing & remodeling",
+    2,
+    8,
+    [
+     2,
+     25
+    ]
    ]
   ],
   "domains": [
@@ -17918,7 +17900,7 @@
  "gemini/plumber-manchester": {
   "n": 25,
   "grounded": 25,
-  "distinct": 68,
+  "distinct": 63,
   "per_median": 7,
   "none": 0,
   "top": [
@@ -17943,7 +17925,7 @@
    ]
   ],
   "first_share": 0.4,
-  "pair": 0.18662232674732673,
+  "pair": 0.18901714489214488,
   "rates": [
    [
     "aquarius plumbing",
@@ -17970,15 +17952,6 @@
     [
      30,
      67
-    ]
-   ],
-   [
-    "reputation",
-    10,
-    40,
-    [
-     23,
-     59
     ]
    ],
    [
@@ -18052,6 +18025,15 @@
      9,
      39
     ]
+   ],
+   [
+    "devine plumbing & heating services",
+    4,
+    16,
+    [
+     6,
+     35
+    ]
    ]
   ],
   "domains": [
@@ -18094,7 +18076,7 @@
  "gemini/plumber-melbourne": {
   "n": 25,
   "grounded": 24,
-  "distinct": 93,
+  "distinct": 91,
   "per_median": 8,
   "none": 0,
   "top": [
@@ -18119,7 +18101,7 @@
    ]
   ],
   "first_share": 0.6,
-  "pair": 0.13014342180730834,
+  "pair": 0.13000409697793602,
   "rates": [
    [
     "fix it right plumbing",
@@ -18140,15 +18122,6 @@
     ]
    ],
    [
-    "zebra plumbing",
-    9,
-    36,
-    [
-     20,
-     55
-    ]
-   ],
-   [
     "compliance certificate",
     9,
     36,
@@ -18158,16 +18131,16 @@
     ]
    ],
    [
-    "gallant plumbing",
-    8,
-    32,
+    "zebra plumbing",
+    9,
+    36,
     [
-     17,
-     52
+     20,
+     55
     ]
    ],
    [
-    "reputation",
+    "gallant plumbing",
     8,
     32,
     [
@@ -18194,6 +18167,15 @@
     ]
    ],
    [
+    "heritage plumbing group",
+    6,
+    24,
+    [
+     11,
+     43
+    ]
+   ],
+   [
     "inner city plumbing",
     6,
     24,
@@ -18203,12 +18185,12 @@
     ]
    ],
    [
-    "heritage plumbing group",
-    6,
-    24,
+    "melbourne plumbing",
+    5,
+    20,
     [
-     11,
-     43
+     9,
+     39
     ]
    ],
    [
@@ -18221,7 +18203,7 @@
     ]
    ],
    [
-    "melbourne plumbing",
+    "master plumbers association",
     5,
     20,
     [
@@ -18270,9 +18252,9 @@
  "gemini/plumber-minneapolis": {
   "n": 25,
   "grounded": 24,
-  "distinct": 49,
+  "distinct": 44,
   "per_median": 6,
-  "none": 1,
+  "none": 2,
   "top": [
    "ron the sewer rat",
    12
@@ -18295,7 +18277,7 @@
    ]
   ],
   "first_share": 0.36,
-  "pair": 0.10817680005180005,
+  "pair": 0.11614896677396677,
   "rates": [
    [
     "ron the sewer rat",
@@ -18307,7 +18289,7 @@
     ]
    ],
    [
-    "erik nelson plumbing",
+    "paul bunyan plumbing & drains",
     11,
     44,
     [
@@ -18316,7 +18298,7 @@
     ]
    ],
    [
-    "paul bunyan plumbing & drains",
+    "erik nelson plumbing",
     11,
     44,
     [
@@ -18446,9 +18428,9 @@
  "gemini/plumber-nashville": {
   "n": 25,
   "grounded": 25,
-  "distinct": 40,
+  "distinct": 39,
   "per_median": 7,
-  "none": 2,
+  "none": 3,
   "top": [
    "hiller plumbing heating cooling & electrical",
    16
@@ -18471,7 +18453,7 @@
    ]
   ],
   "first_share": 0.28,
-  "pair": 0.17067274392274392,
+  "pair": 0.17733941058941058,
   "rates": [
    [
     "hiller plumbing heating cooling & electrical",
@@ -18501,7 +18483,7 @@
     ]
    ],
    [
-    "hoffmann brothers",
+    "morton plumbing heating & cooling",
     10,
     40,
     [
@@ -18510,7 +18492,7 @@
     ]
    ],
    [
-    "morton plumbing heating & cooling",
+    "hoffmann brothers",
     10,
     40,
     [
@@ -18573,7 +18555,7 @@
     ]
    ],
    [
-    "don wood plumbing",
+    "champion plumbing",
     2,
     8,
     [
@@ -18622,9 +18604,9 @@
  "gemini/plumber-omaha": {
   "n": 25,
   "grounded": 24,
-  "distinct": 37,
+  "distinct": 35,
   "per_median": 4,
-  "none": 5,
+  "none": 7,
   "top": [
    "big birge plumbing",
    11
@@ -18638,16 +18620,16 @@
     9
    ],
    [
-    "reputation",
-    4
-   ],
-   [
     "red d plumbing",
     2
+   ],
+   [
+    "plumbrite",
+    1
    ]
   ],
   "first_share": 0.36,
-  "pair": 0.10874213286713287,
+  "pair": 0.13116430791430791,
   "rates": [
    [
     "big birge plumbing",
@@ -18665,15 +18647,6 @@
     [
      20,
      55
-    ]
-   ],
-   [
-    "reputation",
-    8,
-    32,
-    [
-     17,
-     52
     ]
    ],
    [
@@ -18756,6 +18729,15 @@
      4,
      30
     ]
+   ],
+   [
+    "serviceone",
+    3,
+    12,
+    [
+     4,
+     30
+    ]
    ]
   ],
   "domains": [
@@ -18798,7 +18780,7 @@
  "gemini/plumber-pittsburgh": {
   "n": 25,
   "grounded": 23,
-  "distinct": 70,
+  "distinct": 69,
   "per_median": 7,
   "none": 0,
   "top": [
@@ -18823,7 +18805,7 @@
    ]
   ],
   "first_share": 0.16,
-  "pair": 0.1199437566933697,
+  "pair": 0.12016298473341817,
   "rates": [
    [
     "chris driscoll plumbing",
@@ -18880,15 +18862,6 @@
     ]
    ],
    [
-    "reputation",
-    7,
-    28,
-    [
-     14,
-     48
-    ]
-   ],
-   [
     "greater pittsburgh plumbing",
     6,
     24,
@@ -18926,6 +18899,15 @@
    ],
    [
     "sullivan super service",
+    4,
+    16,
+    [
+     6,
+     35
+    ]
+   ],
+   [
+    "allegheny county licensing",
     4,
     16,
     [
@@ -18974,7 +18956,7 @@
  "gemini/plumber-portland": {
   "n": 25,
   "grounded": 25,
-  "distinct": 52,
+  "distinct": 50,
   "per_median": 6,
   "none": 1,
   "top": [
@@ -18999,7 +18981,7 @@
    ]
   ],
   "first_share": 0.56,
-  "pair": 0.17060973884503297,
+  "pair": 0.17451137424666835,
   "rates": [
    [
     "meticulous plumbing",
@@ -19150,7 +19132,7 @@
  "gemini/plumber-richmond": {
   "n": 25,
   "grounded": 25,
-  "distinct": 53,
+  "distinct": 50,
   "per_median": 7,
   "none": 1,
   "top": [
@@ -19175,7 +19157,7 @@
    ]
   ],
   "first_share": 0.4,
-  "pair": 0.21604824136132186,
+  "pair": 0.2206343053661165,
   "rates": [
    [
     "robinsons plumbing service",
@@ -19326,7 +19308,7 @@
  "gemini/plumber-sacramento": {
   "n": 25,
   "grounded": 24,
-  "distinct": 55,
+  "distinct": 54,
   "per_median": 6,
   "none": 0,
   "top": [
@@ -19351,7 +19333,7 @@
    ]
   ],
   "first_share": 0.24,
-  "pair": 0.09431787792817205,
+  "pair": 0.09539669127169127,
   "rates": [
    [
     "sacramento plumbing solutions",
@@ -19444,7 +19426,7 @@
     ]
    ],
    [
-    "reputation",
+    "honest sewer & drain",
     4,
     16,
     [
@@ -19453,12 +19435,12 @@
     ]
    ],
    [
-    "honest sewer & drain",
-    4,
-    16,
+    "hd plumbing repair",
+    3,
+    12,
     [
-     6,
-     35
+     4,
+     30
     ]
    ]
   ],
@@ -19502,9 +19484,9 @@
  "gemini/plumber-tampa": {
   "n": 25,
   "grounded": 24,
-  "distinct": 36,
-  "per_median": 3,
-  "none": 5,
+  "distinct": 33,
+  "per_median": 2,
+  "none": 7,
   "top": [
    "everydayplumber com",
    10
@@ -19518,16 +19500,16 @@
     6
    ],
    [
-    "reputation",
-    4
-   ],
-   [
     "everydayplumber com",
     3
+   ],
+   [
+    "total plumbing solutions",
+    2
    ]
   ],
   "first_share": 0.24,
-  "pair": 0.09308769933769934,
+  "pair": 0.12600139675139674,
   "rates": [
    [
     "everydayplumber com",
@@ -19539,7 +19521,7 @@
     ]
    ],
    [
-    "olin plumbing",
+    "cass plumbing",
     8,
     32,
     [
@@ -19548,7 +19530,7 @@
     ]
    ],
    [
-    "cass plumbing",
+    "olin plumbing",
     8,
     32,
     [
@@ -19576,15 +19558,6 @@
    ],
    [
     "mcnatt plumbing company",
-    4,
-    16,
-    [
-     6,
-     35
-    ]
-   ],
-   [
-    "reputation",
     4,
     16,
     [
@@ -19636,6 +19609,15 @@
      2,
      25
     ]
+   ],
+   [
+    "abc plumbing",
+    2,
+    8,
+    [
+     2,
+     25
+    ]
    ]
   ],
   "domains": [
@@ -19678,7 +19660,7 @@
  "gemini/plumber-toronto": {
   "n": 25,
   "grounded": 25,
-  "distinct": 54,
+  "distinct": 52,
   "per_median": 4,
   "none": 0,
   "top": [
@@ -19703,7 +19685,7 @@
    ]
   ],
   "first_share": 0.12,
-  "pair": 0.09177801909419557,
+  "pair": 0.09459010434010434,
   "rates": [
    [
     "leaside plumbing and heating",
@@ -19712,15 +19694,6 @@
     [
      30,
      67
-    ]
-   ],
-   [
-    "waterworks plumbing & drains",
-    10,
-    40,
-    [
-     23,
-     59
     ]
    ],
    [
@@ -19734,6 +19707,15 @@
    ],
    [
     "priority plumbing & drains",
+    10,
+    40,
+    [
+     23,
+     59
+    ]
+   ],
+   [
+    "waterworks plumbing & drains",
     10,
     40,
     [
@@ -19760,7 +19742,7 @@
     ]
    ],
    [
-    "city subsidies",
+    "licensing",
     4,
     16,
     [
@@ -19769,7 +19751,7 @@
     ]
    ],
    [
-    "licensing",
+    "city subsidies",
     4,
     16,
     [
@@ -19854,7 +19836,7 @@
  "gemini/plumber-tucson": {
   "n": 25,
   "grounded": 25,
-  "distinct": 44,
+  "distinct": 43,
   "per_median": 7,
   "none": 3,
   "top": [
@@ -19879,7 +19861,7 @@
    ]
   ],
   "first_share": 0.24,
-  "pair": 0.12420561818355937,
+  "pair": 0.125347790825732,
   "rates": [
    [
     "cals plumbing",
@@ -19927,7 +19909,7 @@
     ]
    ],
    [
-    "rite way heating cooling & plumbing",
+    "hard water experience",
     6,
     24,
     [
@@ -19936,7 +19918,7 @@
     ]
    ],
    [
-    "hard water experience",
+    "rite way heating cooling & plumbing",
     6,
     24,
     [
@@ -19981,7 +19963,7 @@
     ]
    ],
    [
-    "right now plumbing and heating",
+    "cummings plumbing heating and cooling",
     4,
     16,
     [
