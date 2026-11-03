@@ -26,6 +26,30 @@ Needs Python 3.9+. `autosend` also needs Playwright
 (`pip install playwright && playwright install chromium`), and the optional
 `--ai` flag needs `pip install anthropic`.
 
+## Easiest: the web page
+
+```bash
+pip install playwright && playwright install chromium   # once
+python webapp.py
+```
+
+This opens a page in your browser at http://127.0.0.1:8765 with four tabs:
+
+1. **Contacts:** import `Connections.csv` and filter who to message.
+2. **Write:** write or pick a template, fill in your details, preview, and
+   create the drafts.
+3. **Review:** edit or skip individual messages, mark replies, and requeue
+   failures.
+4. **Send:** log in to LinkedIn once, do a test run, then **Start sending**.
+   You can watch progress live and press Stop at any time.
+
+The page and everything it stores stay on your computer. The server only
+listens on 127.0.0.1, rejects requests coming from other websites, and uses the
+same `outreach.db` as the command-line tool, so you can switch between the two.
+Keep the terminal window open while it's sending; closing it stops the run.
+
+The rest of this README covers the command-line version.
+
 ## 1. Get your connections
 
 LinkedIn → **Settings → Data privacy → Get a copy of your data** → choose

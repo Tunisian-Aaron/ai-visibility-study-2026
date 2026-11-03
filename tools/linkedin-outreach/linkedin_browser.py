@@ -140,8 +140,13 @@ class LinkedInSender:
         box = self._first_visible(COMPOSER, "message box")
         box.click()
         self._clear_focused()
-        # insert_text sends no key events, so newlines can't trigger LinkedIn's Enter-to-send.
-        self.page.keyboard.insert_text(body)
+        # Type line breaks as Shift+Enter, like a person: it never triggers LinkedIn's
+        # Enter-to-send, and keeps blank lines exact (inserting "\n" adds extra ones).
+        for i, line in enumerate(body.split("\n")):
+            if i:
+                self.page.keyboard.press("Shift+Enter")
+            if line:
+                self.page.keyboard.insert_text(line)
 
         if dry_run:
             self._clear_focused()

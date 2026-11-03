@@ -259,8 +259,27 @@ def personalize_with_claude(client, base: str, contact, brief: str) -> str:
     return text or base
 
 
+def draft_candidates(db, args):
+    """Contacts matching the filters who aren't in this campaign and weren't messaged recently."""
+    cutoff = (dt.datetime.now() - dt.timedelta(days=args.cooldown_days)).isoformat(timespec="seconds")
+    extra = ("id NOT IN (SELECT contact_id FROM messages m JOIN campaigns c ON c.id=m.campaign_id "
+             "WHERE c.name=?) AND id NOT IN (SELECT contact_id FROM messages WHERE sent_at >= ?)")
+    return select_contacts(db, args, extra, (args.campaign, cutoff))
+
+
+def sender_values(args) -> dict:
+    sender = {"name": args.sender_name or os.environ.get("OUTREACH_SENDER_NAME", "")}
+    for kv in args.var:
+        k, sep, v = kv.partition("=")
+        if not sep:
+            raise SystemExit(f"--var expects key=value, got {kv!r}")
+        sender[k.strip()] = v.strip()
+    return sender
+
+
 def cmd_draft(db, args):
-    template = Path(args.template).read_text(encoding="utf-8") if args.template else None
+    template = getattr(args, "template_text", None) or (
+        Path(args.template).read_text(encoding="utf-8") if args.template else None)
     camp = db.execute("SELECT * FROM campaigns WHERE name=?", (args.campaign,)).fetchone()
     if camp is None:
         if template is None:
@@ -272,11 +291,7 @@ def cmd_draft(db, args):
     template = template or camp["template"]
     brief = args.brief or (camp["brief"] if camp else None) or ""
 
-    # Skip people already in this campaign and anyone messaged in any campaign recently.
-    cutoff = (dt.datetime.now() - dt.timedelta(days=args.cooldown_days)).isoformat(timespec="seconds")
-    extra = ("id NOT IN (SELECT contact_id FROM messages m JOIN campaigns c ON c.id=m.campaign_id "
-             "WHERE c.name=?) AND id NOT IN (SELECT contact_id FROM messages WHERE sent_at >= ?)")
-    contacts = select_contacts(db, args, extra, (args.campaign, cutoff))
+    contacts = draft_candidates(db, args)
     if not contacts:
         print("No new contacts match these filters.")
         return
@@ -291,12 +306,7 @@ def cmd_draft(db, args):
         if not brief:
             raise SystemExit("--ai needs --brief describing the goal of the campaign.")
 
-    sender = {"name": args.sender_name or os.environ.get("OUTREACH_SENDER_NAME", "")}
-    for kv in args.var:
-        k, sep, v = kv.partition("=")
-        if not sep:
-            raise SystemExit(f"--var expects key=value, got {kv!r}")
-        sender[k.strip()] = v.strip()
+    sender = sender_values(args)
     shown = 0
     for i, c in enumerate(contacts, 1):
         try:

@@ -129,7 +129,9 @@ class AutosendTest(unittest.TestCase):
         self.autosend(db)
         self.assertEqual([s["who"] for s in Handler.sent], ["ok1", "ok2"])
         self.assertIn("Hi ", Handler.sent[0]["text"])
-        self.assertIn("\n", Handler.sent[0]["text"])  # multi-line body survived, not split into sends
+        # multi-line body arrives exactly as drafted, in one message
+        expected = outreach.campaign_messages(db, "c", "sent")[0]["body"]
+        self.assertEqual(Handler.sent[0]["text"], expected)
         st = self.statuses(db)
         self.assertEqual([st[i] for i in ids[:3]], ["sent", "failed", "sent"])
         err = db.execute("SELECT error FROM messages WHERE contact_id=?", (ids[1],)).fetchone()[0]
