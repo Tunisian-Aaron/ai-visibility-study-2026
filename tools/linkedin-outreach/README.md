@@ -6,16 +6,25 @@ tedious parts: importing your connections, picking who to contact, drafting a
 personal message for each person, tracking who you've messaged and who replied,
 and moving you through the queue quickly.
 
-**You press Send yourself.** For each message the tool copies the text to your
-clipboard and opens the person's profile. You click *Message*, paste, send, and
-press Enter in the terminal. This takes about 10 seconds a person. The tool
-doesn't log in to LinkedIn or send for you: LinkedIn's User Agreement prohibits
-bots and automated messaging, and it restricts accounts that send in bulk. A
-daily cap (25 by default) and a 30-day cooldown keep you under the levels that
-trigger those restrictions.
+There are two ways to send:
 
-Needs Python 3.9+ and nothing else. `pip install anthropic` is only needed for
-the optional `--ai` flag.
+- **`autosend`, fully automated.** Drives a browser that's logged in to your
+  LinkedIn account. For each message it opens the profile, clicks *Message*,
+  types the text and clicks *Send*, then waits 1-3 minutes before the next one.
+  It stops at a daily cap.
+- **`send`, assisted.** Copies each message to your clipboard and opens the
+  profile, and you press Send yourself (about 10 seconds a person).
+
+> **Account risk with `autosend`:** LinkedIn's User Agreement prohibits
+> automated messaging. LinkedIn can warn, restrict, or ban accounts it catches.
+> The defaults (20 messages a day, 60-180 seconds apart) are conservative.
+> Raising them increases the risk. The tool stops immediately if LinkedIn shows
+> a login wall, a security check or a restriction notice. It makes no attempt
+> to hide that it's automated and doesn't solve CAPTCHAs.
+
+Needs Python 3.9+. `autosend` also needs Playwright
+(`pip install playwright && playwright install chromium`), and the optional
+`--ai` flag needs `pip install anthropic`.
 
 ## 1. Get your connections
 
@@ -93,13 +102,62 @@ specific to the person:
 
 ## 4. Send
 
+### Fully automated: `autosend`
+
+One-time setup. This opens a browser window; log in to LinkedIn yourself,
+including 2FA. The session is saved in `~/.outreach-linkedin-profile`. The tool
+never sees your password. Keep that folder private, because anyone who has it
+can use your LinkedIn session.
+
+```bash
+python outreach.py login                 # add --channel chrome to use your installed Chrome
+```
+
+Do a dry run first. It opens each profile and types the message but never
+clicks Send:
+
+```bash
+python outreach.py autosend beta-oct --dry-run --max 3
+```
+
+Then send for real:
+
+```bash
+python outreach.py autosend beta-oct     # asks you to type 'send' to confirm
+```
+
+It sends up to `--daily-cap` messages (default 20 per rolling 24 hours, across
+all campaigns), waits a random 60-180 seconds between messages
+(`--min-delay`/`--max-delay`), and marks each one sent as it goes. Stop it any
+time with Ctrl-C, and the next run picks up where it left off.
+
+| What happens | Result |
+|---|---|
+| Login wall, security check, "unusual activity" or restriction notice | Stops the whole run and saves a screenshot |
+| No Message button (not 1st-degree, or messaging off) | That message is marked `failed`; the run continues |
+| Clicked Send but couldn't confirm it went out | Marked `failed`, never retried automatically, so nobody gets it twice |
+| 3 failures in a row | Stops; LinkedIn's layout has probably changed (selectors are at the top of `linkedin_browser.py`) |
+
+Failure screenshots go to `failures/`. Look at failures with
+`review beta-oct --status failed`. Requeue them after checking with
+`mark beta-oct 12,40 draft`.
+
+**Running it every day without you there:** schedule it with cron or Task
+Scheduler, using `--yes` to skip the confirmation prompt. The computer has to
+be on, and the saved login has to still be valid. For example, weekdays at 10:15:
+
+```
+15 10 * * 1-5  cd /path/to/linkedin-outreach && python outreach.py autosend beta-oct --yes >> autosend.log 2>&1
+```
+
+### Assisted: `send`
+
 ```bash
 python outreach.py send beta-oct
 ```
 
-For each draft, the message is copied to your clipboard and the profile opens
-in your browser. In LinkedIn, click **Message**, paste and send. Then answer in
-the terminal:
+The message is copied to your clipboard and the profile opens. In LinkedIn,
+click **Message**, paste and send. Then answer in the terminal:
 
 | Key | Action |
 |---|---|
@@ -108,9 +166,6 @@ the terminal:
 | `e` | edit the message (uses `$EDITOR` if set) |
 | `x` | never contact this person |
 | `q` | quit; pick up where you left off next time |
-
-The loop stops at `--daily-cap` (default 25 a day across all campaigns). New
-accounts, or accounts that don't usually send many messages, should stay lower.
 
 ## 5. Track replies
 
@@ -137,3 +192,7 @@ securities in the first message. Check with your counsel.
 ```bash
 python -m unittest discover -s tests
 ```
+
+`tests/test_autosend.py` runs the real automation in a headless browser against
+a local mock of LinkedIn's profile and messaging UI. It's skipped if Playwright
+isn't installed. It never contacts LinkedIn.

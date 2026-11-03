@@ -7,9 +7,13 @@ walks you through sending them one at a time: the message is copied to your
 clipboard and the person's profile opens in your browser, you paste and press
 Send in LinkedIn yourself, and the tool records the result.
 
-It deliberately does NOT log in to LinkedIn or click Send for you: LinkedIn's
-User Agreement prohibits bots and automated messaging, and accounts that send
-in bulk get restricted. Run `python outreach.py --help` for usage.
+Two ways to send:
+  send      assisted - you press Send in LinkedIn yourself (no automation)
+  autosend  fully automated - drives your logged-in browser and clicks Send,
+            with a daily cap, pacing between messages, and a hard stop on any
+            LinkedIn security check. Automated messaging is against LinkedIn's
+            User Agreement and can get your account restricted.
+Run `python outreach.py --help` for usage.
 """
 
 from __future__ import annotations
@@ -19,12 +23,14 @@ import csv
 import datetime as dt
 import io
 import os
+import random
 import re
 import shutil
 import sqlite3
 import subprocess
 import sys
 import tempfile
+import time
 import webbrowser
 from pathlib import Path
 
@@ -53,14 +59,15 @@ CREATE TABLE IF NOT EXISTS messages (
     campaign_id INTEGER NOT NULL REFERENCES campaigns(id),
     contact_id INTEGER NOT NULL REFERENCES contacts(id),
     body TEXT NOT NULL,
-    status TEXT NOT NULL DEFAULT 'draft',  -- draft | sent | skipped | replied
+    status TEXT NOT NULL DEFAULT 'draft',  -- draft | sent | skipped | replied | failed
     sent_at TEXT,
+    error TEXT,
     updated_at TEXT NOT NULL,
     UNIQUE (campaign_id, contact_id)
 );
 """
 
-STATUSES = ("draft", "sent", "skipped", "replied")
+STATUSES = ("draft", "sent", "skipped", "replied", "failed")
 
 
 def now() -> str:
@@ -71,6 +78,9 @@ def connect(path: str) -> sqlite3.Connection:
     db = sqlite3.connect(path)
     db.row_factory = sqlite3.Row
     db.executescript(SCHEMA)
+    cols = {r[1] for r in db.execute("PRAGMA table_info(messages)")}
+    if "error" not in cols:  # databases created before autosend existed
+        db.execute("ALTER TABLE messages ADD COLUMN error TEXT")
     return db
 
 
@@ -483,6 +493,93 @@ def cmd_send(db, args, prompt=input, clipboard=copy_to_clipboard, opener=webbrow
 
 
 # --------------------------------------------------------------------------
+# Fully automated sending
+# --------------------------------------------------------------------------
+
+def cmd_login(db, args):
+    import linkedin_browser as lb
+    lb.interactive_login(args.profile_dir, channel=args.channel)
+
+
+def cmd_autosend(db, args, sender_factory=None, sleep=time.sleep, prompt=input):
+    import linkedin_browser as lb
+    if args.min_delay > args.max_delay:
+        raise SystemExit("--min-delay must be <= --max-delay")
+    queue = campaign_messages(db, args.campaign, "draft")
+    room = args.daily_cap - sent_last_24h(db)
+    if not queue:
+        print("Nothing left to send in this campaign.")
+        return
+    if room <= 0 and not args.dry_run:
+        print(f"Daily cap of {args.daily_cap} already reached - try again later.")
+        return
+    batch = queue[:max(room, 0) if not args.dry_run else len(queue)]
+    if args.max:
+        batch = batch[:args.max]
+    avg = (args.min_delay + args.max_delay) / 2
+    print(f"{'DRY RUN - nothing will be sent. ' if args.dry_run else ''}"
+          f"{len(batch)} of {len(queue)} draft(s) in '{args.campaign}' this run "
+          f"(cap {args.daily_cap}/24h, {sent_last_24h(db)} already sent). "
+          f"Pacing {args.min_delay:.0f}-{args.max_delay:.0f}s between messages, "
+          f"about {len(batch) * avg / 60:.0f} min total.")
+    if not args.dry_run and not args.yes:
+        if prompt("Type 'send' to start sending from your LinkedIn account: ").strip().lower() != "send":
+            print("Aborted.")
+            return
+
+    if sender_factory is None:
+        def sender_factory():
+            return lb.browser(args.profile_dir, headless=args.headless, channel=args.channel)
+
+    sent = failed = consecutive = 0
+    shots = Path(args.screenshots)
+    with sender_factory() as page:
+        sender = lb.LinkedInSender(page)
+        for i, m in enumerate(batch):
+            if i:
+                delay = random.uniform(args.min_delay, args.max_delay)
+                print(f"  waiting {delay:.0f}s...")
+                sleep(delay)
+            who = f"{m['first_name']} {m['last_name']}"
+            try:
+                sender.send(m["url"], m["body"], dry_run=args.dry_run)
+            except lb.StopRun as e:
+                print(f"STOPPED: {e}")
+                sender.screenshot(str(shots / f"stopped-{m['contact_id']}.png"))
+                break
+            except Exception as e:  # one bad profile shouldn't kill the run
+                failed += 1
+                consecutive += 1
+                msg = f"{type(e).__name__}: {e}"
+                print(f"  x {who}: {msg}")
+                sender.screenshot(str(shots / f"failed-{m['contact_id']}.png"))
+                if not args.dry_run:
+                    db.execute("UPDATE messages SET status='failed', error=?, updated_at=? WHERE id=?",
+                               (msg, now(), m["id"]))
+                    db.commit()
+                if consecutive >= 3:
+                    print("STOPPED: 3 failures in a row - LinkedIn's page layout may have changed. "
+                          f"See screenshots in {shots}/.")
+                    break
+                continue
+            consecutive = 0
+            sent += 1
+            if args.dry_run:
+                print(f"  ok {who} (dry run - typed, not sent)")
+            else:
+                db.execute("UPDATE messages SET status='sent', sent_at=?, error=NULL, updated_at=? WHERE id=?",
+                           (now(), now(), m["id"]))
+                db.commit()
+                print(f"  sent {who}")
+    verb = "checked" if args.dry_run else "sent"
+    print(f"\nDone: {sent} {verb}, {failed} failed. "
+          f"{len(campaign_messages(db, args.campaign, 'draft'))} draft(s) remaining.")
+    if failed and not args.dry_run:
+        print(f"Failed messages are marked 'failed' (see `review {args.campaign} --status failed`); "
+              f"requeue with `mark {args.campaign} <ids> draft`.")
+
+
+# --------------------------------------------------------------------------
 # CLI
 # --------------------------------------------------------------------------
 
@@ -536,6 +633,31 @@ def build_parser():
     s.add_argument("--no-open", action="store_true", help="don't open profiles in the browser")
     s.set_defaults(func=cmd_send)
 
+    def browser_args(sp):
+        sp.add_argument("--profile-dir", default=None,
+                        help="browser profile holding your LinkedIn login (default ~/.outreach-linkedin-profile)")
+        sp.add_argument("--channel", choices=["chrome", "msedge"],
+                        help="use your installed Chrome/Edge instead of Playwright's Chromium")
+
+    s = sub.add_parser("login", help="log in to LinkedIn once in the automation browser")
+    browser_args(s)
+    s.set_defaults(func=cmd_login)
+
+    s = sub.add_parser("autosend", help="FULLY AUTOMATED: send drafts from your browser session")
+    s.add_argument("campaign")
+    browser_args(s)
+    s.add_argument("--daily-cap", type=int, default=20,
+                   help="max messages per rolling 24h across campaigns (default 20)")
+    s.add_argument("--max", type=int, help="max messages this run")
+    s.add_argument("--min-delay", type=float, default=60, help="min seconds between messages (default 60)")
+    s.add_argument("--max-delay", type=float, default=180, help="max seconds between messages (default 180)")
+    s.add_argument("--dry-run", action="store_true",
+                   help="open each profile and type the message, but don't press Send")
+    s.add_argument("--headless", action="store_true", help="hide the browser window")
+    s.add_argument("--yes", action="store_true", help="skip the confirmation prompt (for scheduled runs)")
+    s.add_argument("--screenshots", default="failures", help="where to save failure screenshots")
+    s.set_defaults(func=cmd_autosend)
+
     s = sub.add_parser("mark", help="set message status, e.g. when someone replies")
     s.add_argument("campaign")
     s.add_argument("contact_ids", help="comma-separated contact ids")
@@ -554,6 +676,9 @@ def build_parser():
 
 def main(argv=None):
     args = build_parser().parse_args(argv)
+    if getattr(args, "profile_dir", "unset") is None:
+        import linkedin_browser as lb
+        args.profile_dir = lb.DEFAULT_PROFILE_DIR
     db = connect(args.db)
     try:
         args.func(db, args)

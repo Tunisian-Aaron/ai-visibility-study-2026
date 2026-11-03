@@ -1,3 +1,4 @@
 *.db
 Connections.csv
 exports/
+failures/
