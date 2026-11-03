@@ -437,6 +437,8 @@ $('r-list').onclick = async (e) => {
 // ---------- send ----------
 ['s-cap', 's-max', 's-min', 's-maxd'].forEach(id => { $(id).value = store.get(id, $(id).value); $(id).oninput = () => store.set(id, $(id).value); });
 $('s-campaign').onchange = () => { store.set('s-campaign', $('s-campaign').value); updateQueue(); };
+$('s-headless').checked = store.get('s-headless', false);
+$('s-headless').onchange = () => store.set('s-headless', $('s-headless').checked);
 function updateQueue() {
   const c = state && state.campaigns.find(c => c.name === $('s-campaign').value);
   $('s-queue').textContent = c ? `${c.counts.draft} waiting in this campaign` : '';

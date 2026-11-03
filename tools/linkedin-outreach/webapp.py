@@ -147,7 +147,13 @@ class App:
             except SystemExit as e:
                 job.log.append(f"\n{e}\n")
             except Exception as e:
-                job.log.append(f"\nError: {type(e).__name__}: {e}\n")
+                first = str(e).strip().splitlines()[0] if str(e).strip() else type(e).__name__
+                hint = ""
+                if "Executable doesn't exist" in str(e):
+                    hint = "\nRun: playwright install chromium\n"
+                elif "Missing X server" in str(e) or "$DISPLAY" in str(e):
+                    hint = "\nThis computer has no display - tick 'Hide the browser window' and try again.\n"
+                job.log.append(f"\nError: {first}{hint}")
             finally:
                 ROUTER.targets.pop(threading.get_ident(), None)
                 job.running = False
@@ -385,7 +391,11 @@ def main(argv=None):
 
     sys.stdout = ROUTER
     app = App(args.db, args.profile_dir, args.channel)
-    server = ThreadingHTTPServer(("127.0.0.1", args.port), make_handler(app, args.port))
+    try:
+        server = ThreadingHTTPServer(("127.0.0.1", args.port), make_handler(app, args.port))
+    except OSError as e:
+        raise SystemExit(f"Can't listen on port {args.port} ({e.strerror}). Is the app already running? "
+                         f"Open http://127.0.0.1:{args.port}, or start this one with --port {args.port + 1}.")
     url = f"http://127.0.0.1:{args.port}"
     print(f"Outreach is running at {url}  (Ctrl-C to quit)\nDatabase: {Path(args.db).resolve()}")
     if not args.no_browser:
