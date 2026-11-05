@@ -113,16 +113,27 @@
 <section id="tab-contacts" class="active">
   <div class="card">
     <h2>Import your LinkedIn connections</h2>
-    <ol class="steps hint">
-      <li>On LinkedIn: <b>Settings → Data privacy → Get a copy of your data</b>, tick <b>Connections</b>, request the archive.</li>
-      <li>LinkedIn emails you a download link (usually within about 10 minutes). Unzip it to find <code>Connections.csv</code>.</li>
-      <li>Choose that file below. You can import again any time to refresh.</li>
-    </ol>
+    <p class="hint">Opens a browser window on your connections page and scrolls through it (read-only, nothing is clicked or sent). If LinkedIn asks you to log in, do it in that window and the import carries on by itself; the login is remembered on this computer. You get name, profile link, connection date and headline. Run it again any time to pick up new connections.</p>
     <div class="row">
-      <input type="file" id="csv-file" accept=".csv" style="max-width:340px">
-      <button class="btn primary" id="btn-import">Import</button>
+      <button class="btn primary" id="btn-import-li">Import from LinkedIn</button>
+      <input id="li-max" type="number" min="1" placeholder="max people (optional)" style="max-width:200px">
+      <button class="btn danger" id="btn-import-li-stop" style="display:none">Stop</button>
     </div>
-    <div class="msg" id="import-msg"></div>
+    <div class="msg" id="import-li-msg"></div>
+    <pre class="log" id="import-log" style="display:none"></pre>
+    <details style="margin-top:14px">
+      <summary class="hint" style="cursor:pointer">Want exact titles and companies? Import LinkedIn's Connections.csv export</summary>
+      <ol class="steps hint">
+        <li>On LinkedIn: <b>Settings → Data privacy → Get a copy of your data</b>, tick <b>Connections</b>, request the archive.</li>
+        <li>LinkedIn emails you a download link (usually within about 10 minutes). Unzip it to find <code>Connections.csv</code>.</li>
+        <li>Choose that file below. It fills in titles and companies for people already imported.</li>
+      </ol>
+      <div class="row">
+        <input type="file" id="csv-file" accept=".csv" style="max-width:340px">
+        <button class="btn" id="btn-import">Import CSV</button>
+      </div>
+      <div class="msg" id="import-msg"></div>
+    </details>
   </div>
 
   <div class="card">
@@ -188,22 +199,28 @@
     </div>
     <div id="r-list"></div>
   </div>
+
+  <div class="card">
+    <h2>Make each message personal</h2>
+    <p class="hint">Reads each person's LinkedIn profile (About, Experience, Education) in the browser window, then has Claude rewrite their waiting draft around one or two real details from it: same structure, ask and links, no invented facts. You still read every message before sending. <span id="ai-status"></span></p>
+    <div class="grid">
+      <div style="grid-column:1/-1"><label>What this campaign is for (Claude reads this)</label><input id="p-brief" placeholder="e.g. Get honest product feedback on Navoy from founders and investors, and open the door to a call"></div>
+    </div>
+    <div class="row">
+      <button class="btn primary" id="btn-personalize">Personalize waiting messages</button>
+      <label style="display:flex;gap:6px;align-items:center;margin:0"><input type="checkbox" id="p-redo"> Redo ones already personalized</label>
+      <button class="btn danger" id="btn-personalize-stop" style="display:none">Stop</button>
+    </div>
+    <div class="msg" id="personalize-msg"></div>
+    <pre class="log" id="personalize-log" style="display:none"></pre>
+  </div>
 </section>
 
 <!-- ======================= SEND ======================= -->
 <section id="tab-send">
   <div class="card">
-    <h2>Step 1 - Log in to LinkedIn (once)</h2>
-    <p class="hint">Opens a separate browser window. Log in there yourself; this tool never sees your password. The login is remembered on this computer.</p>
-    <p class="hint" id="login-status"></p>
-    <div class="row">
-      <button class="btn" id="btn-login">Open LinkedIn login</button>
-      <button class="btn primary" id="btn-login-done" style="display:none">I'm logged in</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Step 2 - Send automatically</h2>
+    <h2>Send automatically</h2>
+    <p class="hint">Sending opens a browser window. If LinkedIn asks you to log in there, do it (this tool never sees your password) and the run carries on by itself. <span id="login-status"></span> <a href="#" id="btn-login">Log in again</a></p>
     <div class="warnbox">Automated messaging is against LinkedIn's User Agreement and can get an account restricted. The defaults are cautious; sending stops by itself if LinkedIn shows a security check or warning.</div>
     <div class="grid">
       <div><label>Campaign</label><select id="s-campaign"></select></div>
@@ -266,7 +283,7 @@ function openTab(name) {
   document.querySelectorAll('section').forEach(s => s.classList.toggle('active', s.id === 'tab-' + name));
   store.set('tab', name);
   if (name === 'write') updateAudience();
-  if (name === 'review') loadMessages();
+  if (name === 'review') { loadMessages(); loadBrief(); }
 }
 
 // ---------- state ----------
@@ -289,9 +306,7 @@ async function refresh() {
       Object.keys(state.templates).map(n => `<option>${esc(n)}</option>`).join('');
   }
   renderStats(); renderJob(); updateQueue();
-  $('login-status').textContent = state.logged_in_before
-    ? 'A saved login exists on this computer. Log in again only if sending reports a login problem.'
-    : 'Not logged in yet.';
+  $('login-status').textContent = state.logged_in_before ? 'A saved login exists on this computer.' : 'Not logged in yet.';
 }
 
 function renderStats() {
@@ -315,6 +330,11 @@ $('btn-import').onclick = () => guard($('btn-import'), async () => {
   const r = await api('import', { csv_text: await file.text() });
   show('import-msg', r.message, 'ok'); await refresh(); await search();
 }, 'import-msg');
+
+$('btn-import-li').onclick = () => guard($('btn-import-li'), async () => {
+  hide('import-li-msg'); await api('import/linkedin', { max: $('li-max').value }); startPolling();
+}, 'import-li-msg');
+$('btn-import-li-stop').onclick = () => api('stop');
 
 async function search() {
   const r = await api('contacts', { filters: filters() });
@@ -401,7 +421,17 @@ $('btn-draft').onclick = () => guard($('btn-draft'), async () => {
 }, 'write-msg');
 
 // ---------- review ----------
-$('r-campaign').onchange = () => { store.set('r-campaign', $('r-campaign').value); loadMessages(); };
+$('r-campaign').onchange = () => { store.set('r-campaign', $('r-campaign').value); loadMessages(); loadBrief(); };
+function loadBrief() {
+  const c = state && state.campaigns.find(c => c.name === $('r-campaign').value);
+  if (c && !$('p-brief').value.trim()) $('p-brief').value = c.brief || '';
+}
+$('btn-personalize').onclick = () => guard($('btn-personalize'), async () => {
+  hide('personalize-msg');
+  await api('personalize', { campaign: $('r-campaign').value, brief: $('p-brief').value, redo: $('p-redo').checked });
+  startPolling();
+}, 'personalize-msg');
+$('btn-personalize-stop').onclick = () => api('stop');
 $('r-status').onchange = loadMessages;
 async function loadMessages() {
   const campaign = $('r-campaign').value;
@@ -416,7 +446,7 @@ async function loadMessages() {
     return `<div class="mcard" data-id="${m.id}" data-contact="${m.contact_id}">
       <div class="mhead"><span class="who">${m.url ? `<a href="${esc(m.url)}" target="_blank" rel="noopener">${esc(m.first_name)} ${esc(m.last_name)}</a>` : esc(m.first_name + ' ' + m.last_name)}</span>
         <span class="sub">${esc([m.position, m.company].filter(Boolean).join(' @ '))}</span>
-        <span class="badge b-${m.status}">${m.status === 'draft' ? 'waiting' : m.status}</span></div>
+        <span class="badge b-${m.status}">${m.status === 'draft' ? 'waiting' : m.status}</span>${m.ai_at ? '<span class="badge b-draft" title="Rewritten by Claude from their profile">personalized</span>' : ''}</div>
       ${draft ? `<textarea>${esc(m.body)}</textarea>` : `<pre>${esc(m.body)}</pre>`}
       ${m.error ? `<div class="err-note">${esc(m.error)}</div>` : ''}
       <div class="row">${actions}<button class="btn small danger" data-act="dnc">Never contact</button></div></div>`;
@@ -443,8 +473,7 @@ function updateQueue() {
   const c = state && state.campaigns.find(c => c.name === $('s-campaign').value);
   $('s-queue').textContent = c ? `${c.counts.draft} waiting in this campaign` : '';
 }
-$('btn-login').onclick = () => guard($('btn-login'), async () => { await api('login/start'); startPolling(); }, 'send-msg');
-$('btn-login-done').onclick = () => guard($('btn-login-done'), async () => { await api('login/done'); }, 'send-msg');
+$('btn-login').onclick = (e) => { e.preventDefault(); guard($('btn-login'), async () => { await api('login/start'); startPolling(); }, 'send-msg'); };
 function sendBody(dry) {
   return { campaign: $('s-campaign').value, daily_cap: $('s-cap').value, max: dry ? 3 : $('s-max').value,
            min_delay: dry ? 0 : $('s-min').value, max_delay: dry ? 0 : $('s-maxd').value,
@@ -468,10 +497,18 @@ function renderJob() {
   if (j) { const log = $('log'), atEnd = log.scrollTop + log.clientHeight >= log.scrollHeight - 30;
            log.textContent = (j.log || '...').replace(/Failed messages are marked[^\n]*/,
              'Failed messages are on the Review tab (Show: Failed), where you can put them back in the queue.'); if (atEnd) log.scrollTop = log.scrollHeight; }
-  $('btn-stop').style.display = running && j.kind !== 'login' ? '' : 'none';
-  $('btn-login-done').style.display = running && j.kind === 'login' ? '' : 'none';
-  ['btn-test', 'btn-send', 'btn-login'].forEach(id => $(id).disabled = !!running);
-  if (!running && polling) { clearInterval(polling); polling = null; if (store.get('tab') === 'review') loadMessages(); }
+  const importing = j && j.kind === 'LinkedIn import', personalizing = j && j.kind === 'personalizing';
+  for (const [flag, logId] of [[importing, 'import-log'], [personalizing, 'personalize-log']]) {
+    $(logId).style.display = flag ? '' : 'none';
+    if (flag) { $(logId).textContent = j.log || '...'; $(logId).scrollTop = $(logId).scrollHeight; }
+  }
+  $('btn-stop').style.display = running && !importing && !personalizing ? '' : 'none';
+  $('btn-import-li-stop').style.display = running && importing ? '' : 'none';
+  $('btn-personalize-stop').style.display = running && personalizing ? '' : 'none';
+  ['btn-test', 'btn-send', 'btn-import-li', 'btn-personalize'].forEach(id => $(id).disabled = !!running);
+  $('ai-status').textContent = state.ai ? `Using ${state.ai}.` : 'Claude isn\'t reachable yet: set ANTHROPIC_API_KEY, or install Claude Code and run `claude login`.';
+  if (!running && polling) { clearInterval(polling); polling = null;
+    if (store.get('tab') === 'review') loadMessages(); if (importing) search().catch(() => {}); }
 }
 function startPolling() { if (!polling) polling = setInterval(() => refresh().catch(() => {}), 1500); refresh(); }
 

@@ -19,6 +19,7 @@ Run `python outreach.py --help` for usage.
 from __future__ import annotations
 
 import argparse
+import contextlib
 import csv
 import datetime as dt
 import io
@@ -26,13 +27,32 @@ import os
 import random
 import re
 import shutil
+import signal
 import sqlite3
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 import webbrowser
 from pathlib import Path
+
+def load_env_file(path: Path = Path(__file__).resolve().parent / ".env"):
+    """Read KEY=VALUE lines from a .env next to this file (gitignored), without overriding
+    the real environment. Keeps the API key out of shell history and the web app's command."""
+    if not path.is_file():
+        return
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, v = line.partition("=")[::2]
+        k, v = k.strip(), v.strip().strip("'\"")
+        if v and (not os.environ.get(k) or os.environ[k].endswith("...")):  # "..." = unfilled placeholder
+            os.environ[k] = v
+
+
+load_env_file()
 
 DEFAULT_DB = os.environ.get("OUTREACH_DB", "outreach.db")
 DEFAULT_DAILY_CAP = 25
@@ -65,6 +85,11 @@ CREATE TABLE IF NOT EXISTS messages (
     updated_at TEXT NOT NULL,
     UNIQUE (campaign_id, contact_id)
 );
+CREATE TABLE IF NOT EXISTS profiles (  -- what `enrich` read from each person's LinkedIn profile
+    contact_id INTEGER PRIMARY KEY REFERENCES contacts(id),
+    headline TEXT, location TEXT, about TEXT, experience TEXT, education TEXT,
+    fetched_at TEXT NOT NULL
+);
 """
 
 STATUSES = ("draft", "sent", "skipped", "replied", "failed")
@@ -81,7 +106,21 @@ def connect(path: str) -> sqlite3.Connection:
     cols = {r[1] for r in db.execute("PRAGMA table_info(messages)")}
     if "error" not in cols:  # databases created before autosend existed
         db.execute("ALTER TABLE messages ADD COLUMN error TEXT")
+    if "ai_at" not in cols:  # ...and before `personalize`
+        db.execute("ALTER TABLE messages ADD COLUMN ai_at TEXT")
+    if "base_body" not in cols:  # the template text, before Claude rewrote it
+        db.execute("ALTER TABLE messages ADD COLUMN base_body TEXT")
+        db.execute("UPDATE messages SET base_body=body")
     return db
+
+
+def stop_flag() -> threading.Event:
+    """Set when webapp.py stops this process with SIGTERM. Only a flag: interrupting a
+    browser call mid-flight can leave Playwright unable to close the browser cleanly."""
+    stop = threading.Event()
+    with contextlib.suppress(ValueError):  # only possible from the main thread
+        signal.signal(signal.SIGTERM, lambda *_: stop.set())
+    return stop
 
 
 # --------------------------------------------------------------------------
@@ -90,7 +129,7 @@ def connect(path: str) -> sqlite3.Connection:
 
 def parse_date(value: str) -> str | None:
     value = (value or "").strip()
-    for fmt in ("%d %b %Y", "%d %B %Y", "%Y-%m-%d", "%m/%d/%Y", "%b %d, %Y"):
+    for fmt in ("%d %b %Y", "%d %B %Y", "%Y-%m-%d", "%m/%d/%Y", "%b %d, %Y", "%B %d, %Y"):
         try:
             return dt.datetime.strptime(value, fmt).date().isoformat()
         except ValueError:
@@ -122,25 +161,68 @@ def read_connections_csv(path: str) -> list[dict]:
     return rows
 
 
-def cmd_import(db, args):
-    rows = read_connections_csv(args.csv)
+CONTACT_FIELDS = ("first_name", "last_name", "url", "email", "company", "position", "connected_on")
+
+
+def save_contacts(db, rows, fill_blanks_only=False) -> tuple[int, int]:
+    """Insert or update contacts by profile URL. fill_blanks_only keeps existing values
+    (used for the scraped list, which is less complete than LinkedIn's CSV export)."""
+    if fill_blanks_only:
+        sets = ", ".join(f"{c}=COALESCE(NULLIF({c}, ''), excluded.{c})" for c in CONTACT_FIELDS)
+    else:
+        sets = ", ".join(f"{c}=excluded.{c}" for c in CONTACT_FIELDS)
     added = updated = 0
     for r in rows:
         key = r["url"].rstrip("/").lower() or f"name:{r['first_name']} {r['last_name']}".lower()
         exists = db.execute("SELECT 1 FROM contacts WHERE key=?", (key,)).fetchone()
         db.execute(
-            """INSERT INTO contacts (key, first_name, last_name, url, email, company, position, connected_on)
-               VALUES (?,?,?,?,?,?,?,?)
-               ON CONFLICT(key) DO UPDATE SET first_name=excluded.first_name, last_name=excluded.last_name,
-                 url=excluded.url, email=excluded.email, company=excluded.company,
-                 position=excluded.position, connected_on=excluded.connected_on""",
-            (key, r["first_name"], r["last_name"], r["url"], r["email"],
-             r["company"], r["position"], r["connected_on"]),
+            f"""INSERT INTO contacts (key, {", ".join(CONTACT_FIELDS)}) VALUES (?,?,?,?,?,?,?,?)
+                ON CONFLICT(key) DO UPDATE SET {sets}""",
+            (key, *(r[c] for c in CONTACT_FIELDS)),
         )
         updated += bool(exists)
         added += not exists
     db.commit()
+    return added, updated
+
+
+def cmd_import(db, args):
+    rows = read_connections_csv(args.csv)
+    added, updated = save_contacts(db, rows)
     print(f"Imported {len(rows)} connections ({added} new, {updated} updated).")
+
+
+def cmd_import_linkedin(db, args, page_factory=None, should_stop=lambda: False, sleep=time.sleep):
+    import linkedin_browser as lb
+    if page_factory is None:
+        def page_factory():
+            return lb.browser(args.profile_dir, headless=args.headless, channel=args.channel)
+    # Each batch is saved as soon as it's read, so a stop, a crash or a kill loses nothing.
+    stats = {"n": 0, "added": 0, "updated": 0}
+
+    def save(batch):
+        rows = [{**{k: c[k] for k in ("first_name", "last_name", "url", "company", "position")},
+                 "email": "", "connected_on": parse_date(c["connected_on"])} for c in batch]
+        added, updated = save_contacts(db, rows, fill_blanks_only=True)
+        stats["n"] += len(rows)
+        stats["added"] += added
+        stats["updated"] += updated
+
+    stop = stop_flag()
+    print("Reading your connections list on LinkedIn (read-only, scrolls through it)...")
+    try:
+        with page_factory() as page:
+            lb.collect_connections(page, url=args.url or lb.CONNECTIONS_URL, max_contacts=args.max,
+                                   sleep=sleep, should_stop=lambda: stop.is_set() or should_stop(), on_batch=save)
+    except KeyboardInterrupt:
+        stop.set()
+    finally:
+        if stop.is_set():
+            print("Stopped.")
+        if stats["n"]:
+            print(f"Imported {stats['n']} connections from LinkedIn ({stats['added']} new, "
+                  f"{stats['updated']} already known). Title and company come from each person's "
+                  "headline, so they're approximate.")
 
 
 # --------------------------------------------------------------------------
@@ -230,33 +312,121 @@ def render(template: str, contact, sender: dict) -> str:
     return PLACEHOLDER.sub(sub, template).strip()
 
 
-def personalize_with_claude(client, base: str, contact, brief: str) -> str:
-    """Ask Claude to lightly tailor the rendered message. Returns base on any refusal."""
-    profile = (f"Name: {contact['first_name']} {contact['last_name']}\n"
-               f"Position: {contact['position'] or 'unknown'}\n"
-               f"Company: {contact['company'] or 'unknown'}")
-    prompt = (
+# --- AI personalization ------------------------------------------------------------
+# Two ways to reach Claude: the API (ANTHROPIC_API_KEY + `pip install anthropic`, billed per
+# token) or the Claude Code CLI already logged in on this computer (uses that plan's usage).
+
+class ClaudeAPI:
+    name = "the Claude API"
+
+    def __init__(self):
+        import anthropic  # ImportError if not installed
+        self.client = anthropic.Anthropic()
+
+    def generate(self, prompt: str) -> str | None:
+        resp = self.client.beta.messages.create(
+            model=AI_MODEL,
+            max_tokens=2048,
+            output_config={"effort": "low"},
+            betas=["server-side-fallback-2026-07-01"],
+            fallbacks="default",
+            messages=[{"role": "user", "content": prompt}],
+        )
+        if resp.stop_reason == "refusal":
+            return None
+        return "".join(b.text for b in resp.content if b.type == "text").strip()
+
+
+class ClaudeCLI:
+    name = "Claude Code"
+
+    def __init__(self):
+        self.exe = shutil.which("claude")
+        if not self.exe:
+            raise FileNotFoundError("claude")
+
+    def generate(self, prompt: str) -> str | None:
+        r = subprocess.run([self.exe, "-p", "Follow the instructions in the input.", "--output-format", "text",
+                            "--model", AI_MODEL, "--bare", "--no-session-persistence"],
+                           input=prompt, capture_output=True, text=True, timeout=240, cwd=tempfile.gettempdir())
+        if r.returncode:
+            detail = (r.stderr or r.stdout).strip().splitlines()
+            raise RuntimeError(detail[-1] if detail else f"claude exited with {r.returncode}")
+        return r.stdout.strip()
+
+
+def ai_backend():
+    """The Claude API when ANTHROPIC_API_KEY is set, else the Claude Code CLI if installed."""
+    if os.environ.get("ANTHROPIC_API_KEY"):
+        try:
+            return ClaudeAPI()
+        except ImportError:
+            raise SystemExit("ANTHROPIC_API_KEY is set but the SDK is missing: pip install anthropic")
+    if shutil.which("claude"):
+        return ClaudeCLI()
+    raise SystemExit("Personalizing needs Claude. Either set ANTHROPIC_API_KEY (and pip install anthropic), "
+                     "or install Claude Code (https://claude.com/claude-code) and run `claude login`.")
+
+
+def ai_backend_name() -> str | None:
+    try:
+        return ai_backend().name
+    except SystemExit:
+        return None
+
+
+def personalization_prompt(base: str, contact, brief: str, profile=None) -> str:
+    facts = [f"Name: {contact['first_name']} {contact['last_name']}",
+             f"Headline: {(profile and profile['headline']) or contact['position'] or 'unknown'}",
+             f"Company: {contact['company'] or 'unknown'}"]
+    if profile:
+        for label, key in (("Location", "location"), ("About (their own words)", "about"),
+                           ("Experience", "experience"), ("Education", "education")):
+            if profile[key]:
+                facts.append(f"{label}:\n{profile[key]}")
+    return (
         "You help someone send a short LinkedIn message to one of their existing connections.\n\n"
         f"Campaign goal:\n{brief}\n\n"
-        f"Recipient (from LinkedIn - this is everything known about them):\n{profile}\n\n"
+        "Recipient, from their LinkedIn profile. This is everything known about them:\n"
+        + "\n".join(facts) + "\n\n"
         f"Draft message:\n{base}\n\n"
-        "Rewrite the draft so it reads as written for this person: tie the ask to their role or "
-        "company where that is natural, keep the sender's voice, the core ask and any links, and "
-        "keep it under 120 words. Use only the facts above - never invent shared history, mutual "
-        "contacts or details about the recipient. Reply with the message text only."
+        "Rewrite the draft so it reads as written for this person:\n"
+        "- Keep the draft's structure, voice, core ask, links and sign-off.\n"
+        f"- Keep the length: the draft is {len(base.split())} words, and the result must not be longer. "
+        "If you add a personal sentence, cut or shorten another one.\n"
+        "- Change only what makes it personal: open on something specific from their experience, "
+        "about text or education, and tie the ask to it where that is natural. One or two concrete "
+        "details beat a list.\n"
+        "- Use only the facts above. Never invent shared history, mutual contacts or anything not "
+        "stated. If the profile says little, change little.\n"
+        "- Don't copy the headline or string job titles together; turn profile text into natural phrases.\n"
+        "- No compliments that could apply to anyone, nothing that sounds automated.\n"
+        "Reply with the message text only: no preamble, labels or quotes."
     )
-    resp = client.beta.messages.create(
-        model=AI_MODEL,
-        max_tokens=2048,
-        output_config={"effort": "low"},
-        betas=["server-side-fallback-2026-07-01"],
-        fallbacks="default",
-        messages=[{"role": "user", "content": prompt}],
-    )
-    if resp.stop_reason == "refusal":
+
+
+MAX_GROWTH = 1.15  # a personalized message may be at most this much longer than the template
+
+
+def personalize(ai, base: str, contact, brief: str, profile=None) -> str:
+    """Have Claude tailor the rendered draft. Returns the draft unchanged on a refusal.
+
+    Models don't count words well, so an over-long result gets one more pass asking
+    for a cut; if that's still too long, the shorter of the two is kept.
+    """
+    prompt = personalization_prompt(base, contact, brief, profile)
+    text = (ai.generate(prompt) or "").strip()
+    if not text:
         return base
-    text = "".join(b.text for b in resp.content if b.type == "text").strip()
-    return text or base
+    limit = int(len(base.split()) * MAX_GROWTH)
+    if len(text.split()) > limit:
+        shorter = (ai.generate(
+            f"{prompt}\n\nYour previous version is below. It is {len(text.split())} words; the limit is {limit}. "
+            f"Rewrite it to at most {limit} words: keep the single best personal detail and the ask, cut the rest.\n\n"
+            f"{text}") or "").strip()
+        if shorter and len(shorter.split()) < len(text.split()):
+            text = shorter
+    return text
 
 
 def draft_candidates(db, args):
@@ -298,13 +468,9 @@ def cmd_draft(db, args):
 
     client = None
     if args.ai:
-        try:
-            import anthropic
-        except ImportError:
-            raise SystemExit("--ai needs the Anthropic SDK: pip install anthropic")
-        client = anthropic.Anthropic()
         if not brief:
             raise SystemExit("--ai needs --brief describing the goal of the campaign.")
+        client = ai_backend()
 
     sender = sender_values(args)
     shown = 0
@@ -314,9 +480,11 @@ def cmd_draft(db, args):
         except KeyError as e:
             raise SystemExit(f"{e.args[0]} - pass it with --var name=value (sender_* placeholders) "
                              "or give it a fallback like {name|default}.")
+        base = body
         if client is not None:
             try:
-                body = personalize_with_claude(client, body, c, brief)
+                profile = db.execute("SELECT * FROM profiles WHERE contact_id=?", (c["id"],)).fetchone()
+                body = personalize(client, body, c, brief, profile)
             except Exception as e:  # keep the template draft rather than abort the batch
                 print(f"  ! AI personalization failed for #{c['id']} ({type(e).__name__}: {e}); using template.")
         if len(body) > LINKEDIN_MAX_CHARS:
@@ -326,8 +494,8 @@ def cmd_draft(db, args):
                 print(f"--- #{c['id']} {c['first_name']} {c['last_name']} ---\n{body}\n")
                 shown += 1
             continue
-        db.execute("INSERT OR IGNORE INTO messages (campaign_id, contact_id, body, updated_at) VALUES (?,?,?,?)",
-                   (camp["id"], c["id"], body, now()))
+        db.execute("INSERT OR IGNORE INTO messages (campaign_id, contact_id, body, base_body, ai_at, updated_at) "
+                   "VALUES (?,?,?,?,?,?)", (camp["id"], c["id"], body, base, now() if client is not None else None, now()))
         if client is not None:
             print(f"  drafted {i}/{len(contacts)}", end="\r")
     if args.dry_run:
@@ -336,6 +504,111 @@ def cmd_draft(db, args):
     db.commit()
     print(f"Drafted {len(contacts)} message(s) in campaign '{args.campaign}'. "
           f"Review with: outreach.py review {args.campaign}")
+
+
+# --------------------------------------------------------------------------
+# Making messages personal: read each profile, then have Claude rewrite the draft
+# --------------------------------------------------------------------------
+
+def enrich_targets(db, args):
+    """Contacts to read profiles for: a campaign's waiting messages, or the filters."""
+    if getattr(args, "campaign", None):
+        ids = [r["contact_id"] for r in campaign_messages(db, args.campaign, "draft")]
+        return [db.execute("SELECT * FROM contacts WHERE id=?", (i,)).fetchone() for i in ids]
+    return select_contacts(db, args)
+
+
+def cmd_enrich(db, args, page_factory=None, should_stop=lambda: False, sleep=time.sleep):
+    import linkedin_browser as lb
+    if page_factory is None:
+        def page_factory():
+            return lb.browser(args.profile_dir, headless=args.headless, channel=args.channel)
+    cutoff = (dt.datetime.now() - dt.timedelta(days=args.max_age_days)).isoformat(timespec="seconds")
+    targets = []
+    for c in enrich_targets(db, args):
+        have = db.execute("SELECT fetched_at FROM profiles WHERE contact_id=?", (c["id"],)).fetchone()
+        if have and have[0] >= cutoff and not args.refresh:
+            continue
+        targets.append(c)
+    if not targets:
+        print("Every profile is already read (use --refresh to read them again).")
+        return 0
+    stop = stop_flag()
+    print(f"Reading {len(targets)} profile(s) on LinkedIn (3 pages each, paced)...")
+    done = 0
+    with page_factory() as page:
+        for i, c in enumerate(targets, 1):
+            if stop.is_set() or should_stop():
+                print("Stopped.")
+                break
+            who = f"{c['first_name']} {c['last_name']}"
+            if not c["url"]:
+                print(f"  x {who}: no profile URL")
+                continue
+            if not done:
+                lb.ensure_logged_in(page, lb.feed_url_for(c["url"]), cancelled=lambda: stop.is_set() or should_stop())
+            try:
+                p = lb.read_profile(page, c["url"], sleep=sleep)
+            except lb.StopRun as e:
+                print(f"STOPPED: {e}")
+                break
+            except Exception as e:
+                print(f"  x {who}: {type(e).__name__}: {e}")
+                continue
+            db.execute("INSERT OR REPLACE INTO profiles (contact_id, headline, location, about, experience, "
+                       "education, fetched_at) VALUES (?,?,?,?,?,?,?)",
+                       (c["id"], p["headline"], p["location"], p["about"], p["experience"], p["education"], now()))
+            db.commit()
+            done += 1
+            print(f"  {i}/{len(targets)} {who}: {len(p['about']) + len(p['experience']) + len(p['education'])} "
+                  "characters of profile text")
+            if i < len(targets):
+                sleep(random.uniform(args.min_delay, args.max_delay))
+    print(f"Read {done} profile(s).")
+    return done
+
+
+def cmd_personalize(db, args, ai=None, page_factory=None, should_stop=lambda: False, sleep=time.sleep):
+    camp = db.execute("SELECT * FROM campaigns WHERE name=?", (args.campaign,)).fetchone()
+    if camp is None:
+        raise SystemExit(f"No campaign named '{args.campaign}'.")
+    brief = (args.brief or camp["brief"] or "").strip()
+    if not brief:
+        raise SystemExit("Pass --brief 'what this campaign is for' (it's saved on the campaign for next time).")
+    if brief != (camp["brief"] or ""):
+        db.execute("UPDATE campaigns SET brief=? WHERE id=?", (brief, camp["id"]))
+        db.commit()
+    msgs = [m for m in campaign_messages(db, args.campaign, "draft") if args.redo or not m["ai_at"]]
+    if not msgs:
+        print("Nothing to personalize: every waiting message is done (use --redo to do them again).")
+        return
+    ai = ai or ai_backend()  # fail before touching the browser if Claude isn't reachable
+    if args.enrich:
+        cmd_enrich(db, args, page_factory=page_factory, should_stop=should_stop, sleep=sleep)
+    stop = stop_flag()
+    print(f"Personalizing {len(msgs)} message(s) with {ai.name}...")
+    done = 0
+    for m in msgs:
+        if stop.is_set() or should_stop():
+            print("Stopped.")
+            break
+        who = f"{m['first_name']} {m['last_name']}"
+        profile = db.execute("SELECT * FROM profiles WHERE contact_id=?", (m["contact_id"],)).fetchone()
+        try:  # always start from the template text, so a redo doesn't build on the last rewrite
+            body = personalize(ai, m["base_body"] or m["body"], m, brief, profile)
+        except Exception as e:  # keep the template draft rather than abort the batch
+            print(f"  x {who}: {type(e).__name__}: {e}")
+            if "authentication" in type(e).__name__.lower() or "401" in str(e):
+                print("STOPPED: Claude rejected the API key. Check ANTHROPIC_API_KEY (an `export` in the "
+                      "terminal takes precedence over the .env file).")
+                break
+            continue
+        db.execute("UPDATE messages SET body=?, ai_at=?, updated_at=? WHERE id=?", (body, now(), now(), m["id"]))
+        db.commit()
+        done += 1
+        print(f"  ok {who}" + ("" if profile else " (profile not read yet: used name and headline only)"))
+    print(f"Personalized {done} of {len(msgs)} message(s). Read them before sending: "
+          f"outreach.py review {args.campaign}")
 
 
 # --------------------------------------------------------------------------
@@ -511,7 +784,7 @@ def cmd_login(db, args):
     lb.interactive_login(args.profile_dir, channel=args.channel)
 
 
-def cmd_autosend(db, args, sender_factory=None, sleep=time.sleep, prompt=input):
+def cmd_autosend(db, args, sender_factory=None, sleep=time.sleep, prompt=input, cancelled=lambda: False):
     import linkedin_browser as lb
     if args.min_delay > args.max_delay:
         raise SystemExit("--min-delay must be <= --max-delay")
@@ -545,6 +818,9 @@ def cmd_autosend(db, args, sender_factory=None, sleep=time.sleep, prompt=input):
     shots = Path(args.screenshots)
     with sender_factory() as page:
         sender = lb.LinkedInSender(page)
+        first_url = next((m["url"] for m in batch if m["url"]), None)
+        if first_url:  # logged out? wait for you to log in before touching the queue
+            lb.ensure_logged_in(page, lb.feed_url_for(first_url), cancelled=cancelled)
         for i, m in enumerate(batch):
             if i:
                 delay = random.uniform(args.min_delay, args.max_delay)
@@ -649,9 +925,44 @@ def build_parser():
         sp.add_argument("--channel", choices=["chrome", "msedge"],
                         help="use your installed Chrome/Edge instead of Playwright's Chromium")
 
-    s = sub.add_parser("login", help="log in to LinkedIn once in the automation browser")
+    s = sub.add_parser("login", help="log in to LinkedIn in the automation browser (import-linkedin and "
+                                     "autosend also ask when needed)")
     browser_args(s)
     s.set_defaults(func=cmd_login)
+
+    s = sub.add_parser("import-linkedin", help="import connections by reading your LinkedIn connections page "
+                                                "(after `login`; the CSV export has more detail)")
+    browser_args(s)
+    s.add_argument("--max", type=int, help="stop after this many connections")
+    s.add_argument("--headless", action="store_true", help="hide the browser window")
+    s.add_argument("--url", default=None, help=argparse.SUPPRESS)  # for tests
+    s.set_defaults(func=cmd_import_linkedin)
+
+    def pacing_args(sp, lo, hi):
+        sp.add_argument("--min-delay", type=float, default=lo, help=f"min seconds between people (default {lo:.0f})")
+        sp.add_argument("--max-delay", type=float, default=hi, help=f"max seconds between people (default {hi:.0f})")
+
+    s = sub.add_parser("enrich", help="read About/Experience/Education from LinkedIn profiles (for personalize)")
+    s.add_argument("--campaign", help="the people with waiting messages in this campaign (else: the filters)")
+    add_filter_args(s)
+    s.add_argument("--max-age-days", type=int, default=30, help="skip profiles read within N days (default 30)")
+    s.add_argument("--refresh", action="store_true", help="read profiles again even if recent")
+    browser_args(s)
+    pacing_args(s, 3, 6)
+    s.add_argument("--headless", action="store_true", help="hide the browser window")
+    s.set_defaults(func=cmd_enrich)
+
+    s = sub.add_parser("personalize", help="have Claude rewrite a campaign's waiting drafts for each person")
+    s.add_argument("campaign")
+    s.add_argument("--brief", help="what this campaign is for (saved on the campaign)")
+    s.add_argument("--enrich", action="store_true", help="read profiles first (opens the browser)")
+    s.add_argument("--redo", action="store_true", help="also redo messages already personalized")
+    s.add_argument("--max-age-days", type=int, default=30, help=argparse.SUPPRESS)
+    s.add_argument("--refresh", action="store_true", help=argparse.SUPPRESS)
+    browser_args(s)
+    pacing_args(s, 3, 6)
+    s.add_argument("--headless", action="store_true", help="hide the browser window")
+    s.set_defaults(func=cmd_personalize)
 
     s = sub.add_parser("autosend", help="FULLY AUTOMATED: send drafts from your browser session")
     s.add_argument("campaign")

@@ -13,9 +13,11 @@ from __future__ import annotations
 import argparse
 import io
 import json
+import subprocess
 import sys
 import tempfile
 import threading
+import time
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -25,6 +27,7 @@ sys.path.insert(0, str(HERE))
 import outreach  # noqa: E402
 
 MAX_BODY = 50 * 1024 * 1024  # Connections.csv for ~30k connections is a few MB
+STALL_KILL_S = 180  # kill a LinkedIn import that has printed nothing for this long
 
 
 class ApiError(Exception):
@@ -82,7 +85,6 @@ class Job:
         self.log: list = []
         self.running = True
         self.stop = threading.Event()
-        self.login_done = threading.Event()
         self.thread: threading.Thread | None = None
 
     def text(self, limit=40000):
@@ -169,7 +171,7 @@ class App:
         for k in db.execute("SELECT * FROM campaigns ORDER BY id DESC"):
             counts = dict(db.execute("SELECT status, COUNT(*) FROM messages WHERE campaign_id=? "
                                      "GROUP BY status", (k["id"],)).fetchall())
-            camps.append({"name": k["name"], "template": k["template"],
+            camps.append({"name": k["name"], "template": k["template"], "brief": k["brief"] or "",
                           "counts": {s: counts.get(s, 0) for s in outreach.STATUSES}})
         templates = {p.stem: p.read_text(encoding="utf-8")
                      for p in sorted((HERE / "templates").glob("*.txt"))}
@@ -181,6 +183,7 @@ class App:
             "campaigns": camps,
             "templates": templates,
             "logged_in_before": Path(self.profile_dir).exists(),
+            "ai": outreach.ai_backend_name(),
             "job": {"kind": job.kind, "running": job.running, "log": job.text()} if job else None,
         }
 
@@ -196,6 +199,71 @@ class App:
         finally:
             Path(path).unlink(missing_ok=True)
         return {"message": out}
+
+    def outreach_cmd(self, *args):
+        return [sys.executable, "-u", str(HERE / "outreach.py"), "--db", str(Path(self.db_path).resolve()), *args]
+
+    def browser_opts(self):
+        return ["--profile-dir", self.profile_dir] + (["--channel", self.channel] if self.channel else [])
+
+    def api_import_linkedin(self, b):
+        cmd = self.outreach_cmd("import-linkedin", *self.browser_opts())
+        if b.get("max"):
+            cmd += ["--max", str(int(b["max"]))]
+        self.start_process_job("LinkedIn import", cmd)
+        return {"ok": True}
+
+    def api_personalize(self, b):
+        campaign = (b.get("campaign") or "").strip()
+        brief = (b.get("brief") or "").strip()
+        if not campaign:
+            raise ApiError("Pick a campaign.")
+        if not brief:
+            raise ApiError("Say what this campaign is for first - Claude needs it to adapt each message.")
+        if not outreach.ai_backend_name():
+            raise ApiError("Claude isn't reachable: set ANTHROPIC_API_KEY, or install Claude Code and run `claude login`.")
+        cmd = self.outreach_cmd("personalize", campaign, "--brief", brief, *self.browser_opts())
+        if b.get("enrich", True):
+            cmd.append("--enrich")
+        if b.get("redo"):
+            cmd.append("--redo")
+        self.start_process_job("personalizing", cmd)
+        return {"ok": True}
+
+    def start_process_job(self, kind, cmd):
+        # Browser work runs as a separate process: a browser call can hang for good if LinkedIn's
+        # page dies, and a process can be killed where a thread can't. These commands save to the
+        # database as they go, so killing one loses nothing.
+        def run(job):
+            proc = subprocess.Popen(cmd, cwd=HERE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+            last = [time.monotonic()]
+
+            def relay():
+                for line in proc.stdout:
+                    job.log.append(line)
+                    last[0] = time.monotonic()
+            threading.Thread(target=relay, daemon=True).start()
+            while proc.poll() is None:
+                if job.stop.is_set():
+                    proc.terminate()
+                    break
+                if time.monotonic() - last[0] > STALL_KILL_S:
+                    job.log.append(f"\nNothing happened for {STALL_KILL_S // 60} minutes - the browser looks stuck, "
+                                   f"so {kind} was stopped. What it did so far is saved; run it again to continue.\n")
+                    proc.terminate()
+                    break
+                time.sleep(0.5)
+            try:
+                proc.wait(20)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+                proc.wait()
+            if job.stop.is_set():
+                raise Cancelled()
+            if proc.returncode:
+                raise SystemExit(f"Ended with an error (exit code {proc.returncode}).")
+
+        return self.start_job(kind, run)
 
     def api_contacts(self, b):
         rows = outreach.select_contacts(self.db(), self.filters(b.get("filters")))
@@ -233,7 +301,7 @@ class App:
         rows = outreach.campaign_messages(self.db(), b.get("campaign") or "", b.get("status") or None)
         return {"messages": [{k: r[k] for k in ("id", "contact_id", "first_name", "last_name", "url",
                                                  "company", "position", "status", "body", "error",
-                                                 "sent_at")} for r in rows]}
+                                                 "sent_at", "ai_at")} for r in rows]}
 
     def api_update_message(self, b):
         db = self.db()
@@ -263,27 +331,17 @@ class App:
         import linkedin_browser as lb
 
         def run(job):
-            def wait(msg):
-                print("A browser window has opened. Log in to LinkedIn there (including any 2FA), "
-                      "then click \"I'm logged in\" on this page.")
-                job.login_done.wait()
-                return ""
-            lb.interactive_login(self.profile_dir, channel=self.channel, prompt=wait)
+            lb.interactive_login(self.profile_dir, channel=self.channel, cancelled=job.stop.is_set)
 
         self.start_job("login", run)
-        return {"ok": True}
-
-    def api_login_done(self, b):
-        if self.job and self.job.kind == "login":
-            self.job.login_done.set()
         return {"ok": True}
 
     def api_autosend(self, b):
         campaign = b.get("campaign") or ""
         argv = ["--db", self.db_path, "autosend", campaign, "--yes",
                 "--daily-cap", str(int(b.get("daily_cap") or 20)),
-                "--min-delay", str(float(b.get("min_delay") or 60)),
-                "--max-delay", str(float(b.get("max_delay") or 180)),
+                "--min-delay", str(float(b["min_delay"] if b.get("min_delay") not in (None, "") else 60)),
+                "--max-delay", str(float(b["max_delay"] if b.get("max_delay") not in (None, "") else 180)),
                 "--profile-dir", self.profile_dir,
                 "--screenshots", str(HERE / "failures")]
         if b.get("max"):
@@ -304,7 +362,8 @@ class App:
                     raise Cancelled()
             if job.stop.is_set():
                 raise Cancelled()
-            outreach.cmd_autosend(outreach.connect(self.db_path), ns, sleep=sleep, prompt=lambda _: "send")
+            outreach.cmd_autosend(outreach.connect(self.db_path), ns, sleep=sleep, prompt=lambda _: "send",
+                                  cancelled=job.stop.is_set)
 
         self.start_job("test run" if b.get("dry_run") else "sending", run)
         return {"ok": True}
@@ -312,15 +371,15 @@ class App:
     def api_stop(self, b):
         if self.job and self.job.running:
             self.job.stop.set()
-            self.job.login_done.set()
-            self.job.log.append("\nStopping after the current message...\n")
+            self.job.log.append("\nStopping...\n")
         return {"ok": True}
 
     ROUTES = {
-        "state": api_state, "import": api_import, "contacts": api_contacts,
+        "state": api_state, "import": api_import, "import/linkedin": api_import_linkedin, "contacts": api_contacts,
+        "personalize": api_personalize,
         "preview": api_preview, "draft": api_draft, "messages": api_messages,
         "message": api_update_message, "dnc": api_dnc, "login/start": api_login_start,
-        "login/done": api_login_done, "autosend": api_autosend, "stop": api_stop,
+        "autosend": api_autosend, "stop": api_stop,
     }
 
 

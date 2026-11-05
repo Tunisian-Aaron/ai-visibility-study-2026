@@ -35,13 +35,17 @@ python webapp.py
 
 This opens a page in your browser at http://127.0.0.1:8765 with four tabs:
 
-1. **Contacts:** import `Connections.csv` and filter who to message.
+1. **Contacts:** import your connections straight from LinkedIn (or from
+   `Connections.csv`) and filter who to message.
 2. **Write:** write or pick a template, fill in your details, preview, and
    create the drafts.
 3. **Review:** edit or skip individual messages, mark replies, and requeue
    failures.
-4. **Send:** log in to LinkedIn once, do a test run, then **Start sending**.
-   You can watch progress live and press Stop at any time.
+4. **Send:** do a test run, then **Start sending**. You can watch progress live
+   and press Stop at any time.
+
+The first time a browser window opens on LinkedIn's login page, log in there
+(the tool never sees your password); everything carries on by itself after that.
 
 The page and everything it stores stay on your computer. The server only
 listens on 127.0.0.1, rejects requests coming from other websites, and uses the
@@ -63,6 +67,26 @@ python outreach.py import ~/Downloads/Connections.csv
 The file has names, profile URLs, company, title and connection date. Emails
 appear only for people who allow it. Run `import` again any time to refresh;
 contacts already in the database are updated in place.
+
+**Without waiting for the export:** read the list straight from your
+connections page:
+
+```bash
+python outreach.py import-linkedin            # --max 200 to stop early
+```
+
+It opens the page in the automation browser (if LinkedIn asks you to log in, do
+it in that window and the import carries on by itself), then asks for the list
+the same way the page does as you scroll, 10 people per request, about one
+request a second, so a few thousand connections take minutes. If that request
+can't be seen it falls back to scrolling the page. It never clicks anything
+except *Show more results*, stops on a security check, saves as it goes, and
+keeps what it found if you Ctrl-C. You get name, profile URL and connection
+date. Title and company come from each person's headline ("Head of
+Growth at Bloom" → *Head of Growth*, *Bloom*), so they're rougher than the
+CSV's. Importing the CSV later overwrites them, while `import-linkedin` only
+fills fields that are still empty. This is automated browsing of LinkedIn too,
+with the same account risk as `autosend` below.
 
 ## 2. Pick an audience
 
@@ -110,28 +134,45 @@ python outreach.py import-drafts beta-oct exports/beta-oct.csv  # ...and load th
 
 ### Making each message personal
 
-Template messages read like templates. There are two ways to make each one
-specific to the person:
+Template messages read like templates. `personalize` fixes that in two steps:
+it reads each person's LinkedIn profile (About, Experience, Education; three
+page loads per person, paced), then has Claude rewrite their draft around one
+or two real details from it, keeping the structure, the ask, the links and the
+sign-off, and using only facts from the profile.
 
-- **In a Claude Code / Claude session, with no API key.** Export the campaign
-  and ask Claude to rewrite the `message` column for each row, based on that
-  person's title and company. Then load the result back with `import-drafts`.
-  This counts toward your Claude plan usage, not API credits.
-- **With `--ai` on `draft`.** Each draft is rewritten by the Claude API
-  (`claude-opus-5-5`, low effort, with server-side refusal fallback on). This
-  needs `pip install anthropic` and an `ANTHROPIC_API_KEY` (or `ant auth login`)
-  and is billed to that API account. Also pass `--brief "what this campaign is
-  for"`. Claude only sees name, title and company, never email. It is told not
-  to invent shared history.
+```bash
+python outreach.py personalize beta-oct --enrich \
+  --brief "Get honest product feedback on Acme from founders, and open the door to a call"
+python outreach.py review beta-oct          # read every message before sending
+```
+
+`--enrich` opens the browser (log in if asked). Profiles are kept for 30 days
+in the database, so running again only reads new people. Messages already
+personalized are left alone unless you pass `--redo`. If Claude fails on one
+message, that draft keeps its template text and the rest continue.
+
+Claude is reached one of two ways, whichever is available:
+
+- **Claude Code** already installed and logged in on this computer (`claude
+  login`). Generation counts toward that plan's usage, no API key needed.
+- **The Claude API**, when `ANTHROPIC_API_KEY` is set and `pip install
+  anthropic` is done. Billed to that account. Put the key in a `.env` file
+  next to `outreach.py` (`ANTHROPIC_API_KEY=sk-ant-...`; the file is
+  gitignored) and both the command line and the web page pick it up.
+
+Claude sees the campaign brief, the draft, and the profile text; never emails.
+`draft --ai` does the same rewrite at drafting time, using whatever profiles
+have been read (`enrich --title founder` reads profiles for a filter).
 
 ## 4. Send
 
 ### Fully automated: `autosend`
 
-One-time setup. This opens a browser window; log in to LinkedIn yourself,
-including 2FA. The session is saved in `~/.outreach-linkedin-profile`. The tool
-never sees your password. Keep that folder private, because anyone who has it
-can use your LinkedIn session.
+The first time, a browser window opens on LinkedIn's login page: log in
+yourself, including 2FA, and the run carries on once you're in. The session is
+saved in `~/.outreach-linkedin-profile`. The tool never sees your password. Keep
+that folder private, because anyone who has it can use your LinkedIn session.
+To log in again on its own (for example after LinkedIn logs you out):
 
 ```bash
 python outreach.py login                 # add --channel chrome to use your installed Chrome
