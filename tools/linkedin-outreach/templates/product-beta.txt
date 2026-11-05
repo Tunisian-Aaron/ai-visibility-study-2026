@@ -1,9 +1,0 @@
-Hi {first_name},
-
-Hope all is well at {company|work}. I've been building {sender_product} - it helps {sender_audience} with {sender_problem}.
-
-We're opening it to a small group of early users, and given your work as {position|someone in the field}, I'd really value your take. Would you be up for trying it and giving me 15 minutes of honest feedback?
-
-No pressure at all if the timing's wrong.
-
-{sender_name}

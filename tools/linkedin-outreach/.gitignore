@@ -1,5 +1,0 @@
-*.db
-.env
-Connections.csv
-exports/
-failures/
