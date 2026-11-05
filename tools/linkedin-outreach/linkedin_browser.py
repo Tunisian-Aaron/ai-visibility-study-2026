@@ -181,9 +181,16 @@ class LinkedInSender:
         self.page.goto(profile_url, wait_until="domcontentloaded")
         self.check_blocked()
         self._close_overlays()
+        self._check_first_degree()
 
-        self._first_visible(MESSAGE_BUTTON, "Message button (not a 1st-degree connection, "
-                            "or messaging is off)").click()
+        btn = self._first_visible(MESSAGE_BUTTON, "Message button (not a 1st-degree connection, "
+                                  "or messaging is off)")
+        href = btn.get_attribute("href") or ""
+        if "/messaging/" in href:
+            self.page.goto(urljoin(self.page.url, href), wait_until="domcontentloaded")
+            self.check_blocked()
+        else:
+            btn.click()
         box = self._first_visible(COMPOSER, "message box")
         box.click()
         self._clear_focused()

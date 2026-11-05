@@ -22,13 +22,11 @@ try:
 except ImportError:
     HAVE_PW = False
 
-PROFILE = """<!doctype html><html><body><main>
-<h1>{name}</h1>{button}
-</main>
-<div id="overlay" hidden>
+# The composer, as on LinkedIn's /messaging/compose page and in the older overlay.
+COMPOSER = """<div id="overlay" {hidden}>
   <div class="msg-form__contenteditable" contenteditable="true" role="textbox"
-       aria-label="Write a message..." style="min-height:40px;border:1px solid"></div>
-  <button class="msg-form__send-button">Send</button>
+       aria-label="Write a message…" style="min-height:40px;border:1px solid"></div>
+  <button class="msg-form__send-button" type="submit">Send</button>
   <button aria-label="Close your conversation with {name}">x</button>
 </div>
 <script>
@@ -42,14 +40,39 @@ document.querySelector('.msg-form__send-button').onclick = async () => {{
   await fetch('/sent', {{method: 'POST', body: JSON.stringify({{who: '{slug}', text: box.innerText}})}});
   box.innerText = '';
 }};
-</script></body></html>"""
+</script>"""
+
+# A profile. Like the real page: name with a degree badge, the Message control, and a
+# "More profiles" sidebar whose other people are 2nd degree.
+PROFILE = """<!doctype html><html><body><main>
+<section><div><div><h1>{name}</h1><span>· {degree}</span></div>
+<p>Some headline</p>{button}</div></section>
+<aside><h2>More profiles for you</h2><p>Someone Else · 2nd</p><button>Follow</button></aside>
+</main>
+{composer}</body></html>"""
+
+COMPOSE_PAGE = """<!doctype html><html><body><main><h2>New message</h2>{composer}</main></body></html>"""
+
+# New layout: Message is a link to the compose page. Old layout: a button opening an overlay.
+LINK = '<a href="/messaging/compose/?recipient={slug}&interop=msgOverlay">Message</a>'
+BUTTON = '<button aria-label="Message {name}">Message</button>'
+PREMIUM = '<a href="/messaging/compose/?recipient={slug}&premium=1" aria-label="Message with Premium">Say hello</a>'
 
 PAGES = {
-    "ok1": dict(name="Jane Doe", button='<button aria-label="Message Jane Doe">Message</button>', stuck="false"),
-    "ok2": dict(name="Raj Patel", button='<button aria-label="Message Raj Patel">Message</button>', stuck="false"),
-    "nomsg": dict(name="Maria Gomez", button='<button>Follow</button>', stuck="false"),
-    "stuck": dict(name="Tom Lee", button='<button aria-label="Message Tom Lee">Message</button>', stuck="true"),
+    "ok1": dict(name="Jane Doe", degree="1st", button=LINK, stuck="false"),
+    "ok2": dict(name="Raj Patel", degree="1st", button=BUTTON, stuck="false"),
+    "nomsg": dict(name="Maria Gomez", degree="1st", button='<button>Follow</button>', stuck="false"),
+    "stuck": dict(name="Tom Lee", degree="1st", button=LINK, stuck="true"),
+    "second": dict(name="Ava Second", degree="2nd", button=PREMIUM, stuck="false"),
 }
+
+
+def profile_html(slug):
+    p = dict(PAGES[slug], slug=slug)
+    p["button"] = p["button"].format(**p)
+    # the overlay composer only exists in the old (button) layout
+    p["composer"] = COMPOSER.format(hidden="hidden", **p) if p["button"].startswith("<button aria") else ""
+    return PROFILE.format(**p)
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -60,10 +83,17 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         slug = self.path.strip("/").split("/")[-1]
-        if slug == "restricted":
+        if self.path.startswith("/messaging/compose/"):
+            q = dict(p.split("=") for p in self.path.split("?")[1].split("&"))
+            if "premium" in q:
+                html = "<html><body><main><h2>InMail</h2><p>Buy Premium to send InMail.</p></main></body></html>"
+            else:
+                slug = q["recipient"]
+                html = COMPOSE_PAGE.format(composer=COMPOSER.format(hidden="", slug=slug, **PAGES[slug]))
+        elif slug == "restricted":
             html = "<html><body><main>We've detected unusual activity on your account.</main></body></html>"
         elif slug in PAGES:
-            html = PROFILE.format(slug=slug, **PAGES[slug])
+            html = profile_html(slug)
         else:
             self.send_response(404)
             self.end_headers()
@@ -125,7 +155,9 @@ class AutosendTest(unittest.TestCase):
         return {r["contact_id"]: r["status"] for r in db.execute("SELECT contact_id, status FROM messages")}
 
     def test_sends_and_records(self):
-        db, ids = self.point_contacts(["ok1", "nomsg", "ok2"])
+        # ok1: Message is a link to the compose page (current layout); ok2: a button + overlay (old);
+        # nomsg: no Message control; second: a 2nd-degree profile whose only link is paid InMail.
+        db, ids = self.point_contacts(["ok1", "nomsg", "ok2", "second"])
         self.autosend(db)
         self.assertEqual([s["who"] for s in Handler.sent], ["ok1", "ok2"])
         self.assertIn("Hi ", Handler.sent[0]["text"])
@@ -133,9 +165,10 @@ class AutosendTest(unittest.TestCase):
         expected = outreach.campaign_messages(db, "c", "sent")[0]["body"]
         self.assertEqual(Handler.sent[0]["text"], expected)
         st = self.statuses(db)
-        self.assertEqual([st[i] for i in ids[:3]], ["sent", "failed", "sent"])
-        err = db.execute("SELECT error FROM messages WHERE contact_id=?", (ids[1],)).fetchone()[0]
-        self.assertIn("Message button", err)
+        self.assertEqual([st[i] for i in ids[:4]], ["sent", "failed", "sent", "failed"])
+        errs = {cid: db.execute("SELECT error FROM messages WHERE contact_id=?", (cid,)).fetchone()[0] for cid in ids[:4]}
+        self.assertIn("Message button", errs[ids[1]])
+        self.assertIn("1st-degree", errs[ids[3]])
         self.assertTrue(any(Path(self.tmp.name, "shots").glob("failed-*.png")))
 
     def test_unconfirmed_send_is_not_retried(self):
